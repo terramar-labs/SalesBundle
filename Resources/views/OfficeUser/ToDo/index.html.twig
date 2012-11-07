@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="columns">
+        <h3><i class="icon-header icon-calendar"></i> To Do</h3>
+    </div>
+    <a href="{{ path('user_new_todo', { id : entity.id }) }}" class="fancyajax btn btn-primary pull-right"><i class="icon icon-add"></i> Add To Do</a>
+</div>
+<div class="spacer"></div>
+{% if entities|length > 0 %}
+<table class="table records_list">
+    <thead>
+        <tr>
+            <th>Priority</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Assigned By</th>
+            <th>Date Due</th>
+            <th style="width: 100px"> </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.alert.priority }}</td>
+            <td><b>{{ entity.alert.name }}</b></td>
+            <td>{{ entity.alert.description|raw }}</td>
+            <td>{{ entity.alert.status }}</td>
+            <td>{{ entity.assignedBy.user }}</td>
+            <td>{{ entity.alert.dateDue.format('m/d/y') }}</td>
+            <td>
+                <div class="btn-group pull-right">
+                <a class="btn btn-small dropdown-toggle" href="#" data-toggle="dropdown"> Mark As <span class="caret"></span>  </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="javascript:;" class="update" data-id="{{ entity.id }}" data-status="InProgress">In-Progress</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="update" data-id="{{ entity.id }}" data-status="Completed">Complete</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <h4>No to-dos.</h4>
+    <div class="spacer"></div>
+{% endif %}
+
+<script type="text/javascript">
+    $(function() {
+        var url = '{{ path('user_update_todo', {id : '_id_', status : '_status_'}) }}';
+        var status = $(this).data('status');
+        $('.update').click(function() {
+            var id = $(this).data('id'),
+                    self = this,
+                    status = $(this).data('status');
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: getRoute(url, {'_id_': id, '_status_': status}),
+                success: handleJsonResponse
+            });
+        });
+    });
+</script>

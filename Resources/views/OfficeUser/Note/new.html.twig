@@ -1,0 +1,31 @@
+<div id="officeuser_note_create_alert" class="alert-box error"></div>
+<div class="row popup-header">
+    <div class="columns">
+        <h3>Add New Note</h3>
+    </div>
+</div>
+<form id="officeuser_note_create" action="{{ path('officeuser_note_create', { id : entity.id }) }}" method="post" {{ form_enctype(form) }}>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.summary, { 'attr' : { 'class' : 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.body, { 'attr' : { 'class' : 'input-xlarge' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        {{ form_rest(form) }}
+        <div class="columns">
+            <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function() {
+        $('#officeuser_note_create').validate({
+            errorLabelContainer: '#officeuser_note_create_alert'
+        });
+    });
+</script>

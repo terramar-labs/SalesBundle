@@ -1,0 +1,75 @@
+parameters:
+  terramar.sales.factory.invoice.class:                    TerraMar\Bundle\SalesBundle\Factory\InvoiceFactory
+  terramar.sales.factory.payment_account.class:            TerraMar\Bundle\SalesBundle\Factory\PaymentAccountFactory
+  terramar.sales.factory.office_configuration.class:       TerraMar\Bundle\SalesBundle\Factory\OfficeConfigurationFactory
+  terramar.sales.factory.office.class:                     TerraMar\Bundle\SalesBundle\Factory\OfficeFactory
+  terramar.sales.factory.alert.class:                      TerraMar\Bundle\SalesBundle\Factory\AlertFactory
+  terramar.sales.factory.assigned_alert.office_user.class: TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\OfficeUserAlertFactory
+  terramar.sales.factory.assigned_alert.customer.class:    TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\CustomerAlertFactory
+  terramar.sales.helper.invoice.class:                     TerraMar\Bundle\SalesBundle\Helper\InvoiceHelper
+  terramar.sales.helper.account.class:                     TerraMar\Bundle\SalesBundle\Helper\AccountHelper
+  terramar.sales.helper.file.class:                        TerraMar\Bundle\SalesBundle\Helper\FileHelper
+  terramar.sales.helper.customer_user.class:               TerraMar\Bundle\SalesBundle\Helper\CustomerUserHelper
+  terramar.sales.listener.logout.class:                    TerraMar\Bundle\SalesBundle\Listener\LogoutListener
+
+services:
+  # Repository services
+  terramar.sales.repository.office:
+    class: TerraMar\Bundle\SalesBundle\Repository\OfficeRepository
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: [ TerraMar\Bundle\SalesBundle\Entity\Office ]
+  terramar.sales.repository.office_configuration:
+    class: TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: [ TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration ]
+  terramar.sales.repository.office_user_alert:
+    class: TerraMar\Bundle\SalesBundle\Repository\OfficeUserAlertRepository
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: [ TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert ]
+
+  # Factories
+  terramar.sales.factory.invoice:
+    class: %terramar.sales.factory.invoice.class%
+  terramar.sales.factory.payment_account:
+    class: %terramar.sales.factory.payment_account.class%
+  terramar.sales.factory.office_configuration:
+    class: %terramar.sales.factory.office_configuration.class%
+  terramar.sales.factory.office:
+    class: %terramar.sales.factory.office.class%
+  terramar.sales.factory.alert:
+    class: %terramar.sales.factory.alert.class%
+  terramar.sales.factory.assigned_alert.office_user:
+    class: %terramar.sales.factory.assigned_alert.office_user.class%
+    tags:
+      - { name: terramar.assigned_alert_factory }
+  terramar.sales.factory.assigned_alert.customer:
+    class: %terramar.sales.factory.assigned_alert.customer.class%
+    tags:
+      - { name: terramar.assigned_alert_factory }
+
+  # Helpers
+  terramar.sales.helper.invoice:
+    class: %terramar.sales.helper.invoice.class%
+    arguments: [ @terramar.sales.repository.office_configuration, @orkestra.transactor_factory, @orkestra.transactor.repository.account ]
+  terramar.sales.helper.account:
+    class: %terramar.sales.helper.account.class%
+    arguments: [ @orkestra.transactor_factory, @terramar.sales.repository.office_configuration ]
+  terramar.sales.helper.file:
+    class: %terramar.sales.helper.file.class%
+    arguments: [ %orkestra.file_manager.base_path% ]
+  terramar.sales.helper.customer_user:
+    class: %terramar.sales.helper.customer_user.class%
+    arguments: [ @security.encoder_factory, @doctrine.orm.entity_manager ]
+
+  # Miscellaenous
+  terramar.sales.listener.logout:
+    class: %terramar.sales.listener.logout.class%
+
+  # PDF Generators
+  terramar.sales.generator.agreement:
+    class: TerraMar\Bundle\SalesBundle\Generator\AgreementGenerator
+    public: true
+    parent: orkestra.pdf.abstract_generator

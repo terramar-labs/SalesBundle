@@ -1,0 +1,6 @@
+{% block subnav %}
+    {% include '::subnav.html.twig' with { 'pages' : [
+    { route : 'orkestra_user_show', params: { id : entity.id }, name : 'Employee Tackboard' },
+    { route : 'orkestra_user_edit', params: { id: entity.id } , name : 'Edit User', anchor_class : 'fancyajax' }
+    ] } %}
+{% endblock %}

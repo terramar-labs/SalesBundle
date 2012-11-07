@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% use 'PocomosPestManagementBundle:Settings:_subnav.html.twig' %}
+
+{% block title %}Appearance{% endblock %}
+
+{% block mainstage %}
+<div class="alert-box error" id="officeconfiguration_theme_update_alert"></div>
+<form id="officeconfiguration_theme_update" action="{{ path('officeconfiguration_theme_update') }}" method="post">
+    {% for theme in themes %}
+        <div class="thumbnail six columns">
+            <label>
+                <img src="{{ asset('img/themes/terramar-' ~ theme ~ '.jpg') }}" alt="{{ theme|title }} Theme Screenshot" /><br /><br />
+                <input style="margin-top: -2px" type="radio" name="theme" id="theme" {% if entity.theme == theme %}checked="checked" {% endif %}value="{{ theme }}" /> &nbsp;
+                {{ theme|title }}
+            </label>
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="columns">
+            <button class="btn btn-primary">Save Changes</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+{% block additional_javascripts %}
+<script type="text/javascript">
+    $(function() {
+        $('#officeconfiguration_theme_update').validate({
+            errorLabelContainer: '#officeconfiguration_theme_update_alert'
+        });
+    });
+</script>
+{% endblock %}

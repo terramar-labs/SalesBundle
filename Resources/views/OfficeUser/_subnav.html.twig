@@ -1,0 +1,6 @@
+{% block subnav %}
+    {% include '::subnav.html.twig' with { 'pages' : [
+        { route : 'tackboard', name : 'My Tackboard' },
+        { route : 'tack_user_new', name : 'Tack Someone', anchor_class : 'fancyajax' }
+    ] } %}
+{% endblock %}

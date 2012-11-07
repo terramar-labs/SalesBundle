@@ -1,0 +1,103 @@
+<div class="alert-box error" id="officeconfiguration_update_alert"></div>
+<div class="row popup-header">
+    <div class="columns">
+        <h3>Edit Payment Settings</h3>
+    </div>
+</div>
+<form id="officeconfiguration_update" action="{{ path('officeconfiguration_update') }}" method="post" {{ form_enctype(form) }}>
+    <div class="container" style="width: 800px">
+    <div class="row">
+        <div class="columns">
+            <h4>Credit Card Processing</h4>
+        </div>
+    </div>
+    <div class="row card-fields">
+        {% for child in form.cardCredentials %}
+        <div class="three columns">
+            {{ form_row(child, { attr: { class: 'input-medium' } }) }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="columns">
+            <h4>ACH Processing</h4>
+        </div>
+    </div>
+    <div class="row ach-fields">
+        {% for child in form.achCredentials %}
+            <div class="three columns">
+            {{ form_row(child, { attr: { class: 'input-medium' } }) }}
+        </div>
+        {% endfor %}
+    </div>
+    {{ form_rest(form) }}
+    <div class="row break">
+        <div class="columns">
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+        </div>
+    </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(function() {
+
+        function _bindCardForm() {
+            $('#{{ form.cardCredentials.transactor.get('id') }}').change(function() {
+                $.ajax({
+                    url: '{{ path('officeconfiguration_edit') }}',
+                    data: {
+                        'card-transactor': $(this).val()
+                    },
+                    success: function(response) {
+                        $('.card-fields').html($('.card-fields', response).html());
+                        _bindCardForm();
+                    }
+                });
+            });
+        }
+
+        function _bindAchForm() {
+            $('#{{ form.achCredentials.transactor.get('id') }}').change(function() {
+                $.ajax({
+                    url: '{{ path('officeconfiguration_edit') }}',
+                    data: {
+                        'ach-transactor': $(this).val()
+                    },
+                    success: function(response) {
+                        $('.ach-fields').html($('.ach-fields', response).html());
+                        _bindAchForm();
+                    }
+                });
+            });
+        }
+
+        _bindCardForm();
+        _bindAchForm();
+
+        $('#officeconfiguration_update').validate({
+            errorLabelContainer: '#officeconfiguration_update_alert',
+            submitHandler: function(form) {
+                $(form).ajaxSubmit({
+                    dataType: 'json',
+                    data: {
+                        'card-transactor': $('#{{ form.cardCredentials.transactor.get('id') }}').val(),
+                        'ach-transactor': $('#{{ form.achCredentials.transactor.get('id') }}').val()
+                    },
+                    success: function(response) {
+                        response.location = '#' + $(form).attr('id') + '_alert';
+                        handleJsonResponse(response);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        handleJsonResponse({
+                            type: 'error',
+                            location: '#' + $(form).attr('id') + '_alert',
+                            message: 'An error occurred. Please try again later.'
+                        });
+                    }
+                });
+            }
+        });
+
+    });
+</script>

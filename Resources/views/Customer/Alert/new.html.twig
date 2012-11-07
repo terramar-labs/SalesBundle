@@ -1,0 +1,36 @@
+<div id="customer_alert_create_alert" class="alert-box error"></div>
+<div class="row popup-header">
+    <div class="columns">
+        <h3>Add New Alert</h3>
+    </div>
+</div>
+<form id="customer_alert_create" action="{{ path('customer_alert_create', { id: entity.id }) }}" method="post" {{ form_enctype(form) }}>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.name, { 'attr' : { 'class' : 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.description, { 'attr' : { 'class' : 'input-xlarge' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.priority, { 'attr' : { 'class' : 'input-small' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        {{ form_rest(form) }}
+        <div class="columns">
+            <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function() {
+        $('#customer_alert_create').validate({
+            errorLabelContainer: '#customer_alert_create_alert'
+        });
+    });
+</script>

@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% use 'TerraMarSalesBundle:OfficeUser:_subnav.html.twig' %}
+
+{% block title %}Tackboard{% endblock %}
+
+{% block mainstage %}
+    {% render 'TerraMarSalesBundle:OfficeUser/Alert:index' with { id : entity.id } %}
+    <hr />
+    {% render 'TerraMarSalesBundle:OfficeUser/ToDo:index'  with { id : entity.id } %}
+    <hr />
+    {% render 'TerraMarSalesBundle:OfficeUser/Note:index' with { id : entity.id } %}
+    <hr />
+    {% render 'TerraMarSalesBundle:OfficeUser/AlertHistory:index' with { id : entity.id } %}
+{% endblock %}
+
+{% block additional_javascripts %}
+
+{% endblock %}

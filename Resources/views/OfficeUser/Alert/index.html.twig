@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="columns">
+        <h3><i class="icon-header icon-alert"></i> Alerts</h3>
+    </div>
+    <a href="{{ path('user_new_alert', { id : entity.id }) }}" class="fancyajax btn btn-primary pull-right"><i class="icon icon-add"></i> Add Alert</a>
+</div>
+<div class="spacer"></div>
+{% if entities|length > 0 %}
+{% for alert in entities %}
+        <div class="alert {% if alert.alert.priority == 'High' %} error {% elseif alert.alert.priority == 'Low' %} info {% endif %}">
+            <button class="close" data-id="{{ alert.id }}" type="button">×</button>
+            <div class="pull-right">Assigned by <strong>{{ alert.assignedBy.user }}</strong> on {{ alert.dateCreated.format('m/d/y') }}</div>
+            <strong>{{ alert.alert.name }}</strong><br />
+            {{ alert.alert.description|raw }}
+        </div>
+{% endfor %}
+{% else %}
+    <h4>No alerts.</h4>
+    <div class="spacer"></div>
+{% endif %}
+
+<script type="text/javascript">
+    $(function() {
+        var url = '{{ path('user_update_alert', { id : '_id_' }) }}';
+        $('.close').click(function() {
+            var id = $(this).data('id'),
+                self = this;
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: getRoute(url, { '_id_': id }),
+                success: function() {
+                    $(self).parent('.alert').fadeOut();
+                }
+            });
+        });
+    });
+</script>

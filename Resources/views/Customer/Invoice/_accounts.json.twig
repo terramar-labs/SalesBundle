@@ -1,0 +1,3 @@
+{ {% for account in accounts %}
+    {{ account.id|json_encode|raw }}: {{ account.alias|json_encode|raw }}{% if not loop.last %},{% endif %}
+{% endfor %}}

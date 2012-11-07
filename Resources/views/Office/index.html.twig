@@ -1,0 +1,43 @@
+{% extends "::base.html.twig" %}
+
+{% use 'TerraMarSalesBundle:Office:_subnav.html.twig' %}
+
+{% block title %}Companies{% endblock %}
+
+{% block mainstage %}
+<a href="{{ path('company_new') }}" class="fancyajax btn btn-primary pull-right"><i class="icon icon-add"></i> Add Company</a>
+<br /><br />
+<table class="table records_list">
+    <thead>
+        <tr>
+            <th>Company Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Children</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr class="clickable" entity-id="{{ entity.id }}">
+            <td>{{ entity.id }}</td>
+            <td>{{ entity.name }}</td>
+            <td>{{ entity.contactAddress }}</td>
+            <td>{{ entity.contactAddress.phone }}</td>
+            <td><a class="view-branch" href="{{ path('companies_offices', { 'id' : entity.id }) }}">View Branches</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block additional_javascripts %}
+<script type="text/javascript">
+    $(function() {
+        $('.view-branch').click(function(e) {
+            e.stopPropagation();
+        });
+        bindClickableTable('.table', '{{ path('company_edit', { 'id' : '_id_' }) }}');
+    });
+</script>
+{% endblock %}

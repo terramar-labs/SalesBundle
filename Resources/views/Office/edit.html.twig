@@ -1,0 +1,67 @@
+<div class="row popup-header">
+    <div class="columns">
+        <h3>Edit Company</h3>
+    </div>
+</div>
+<div id="company_update_alert" class="alert-box error"></div>
+<form id="company_update" action="{{ path('company_update', { 'id' : entity.id }) }}" method="post" {{ form_enctype(form) }}>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="columns">
+            {{ form_row(form.contactAddress.phone, { 'attr' : { 'class' : 'input-medium' } }) }}
+        </div>
+        <div class="columns">
+            {{ form_row(form.contactAddress.altPhone, { 'attr' : { 'class' : 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.contactName) }}
+        </div>
+        <div class="columns">
+            {{ form_row(form.fax, { 'attr' : { 'class' : 'input-medium' } }) }}
+        </div>
+        <div class="columns">
+            {{ form_row(form.url, { 'attr' : { 'class' : 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.contactAddress.street) }}
+        </div>
+         <div class="columns">
+            {{ form_row(form.contactAddress.suite, { 'attr' : { 'class' : 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.contactAddress.city) }}
+        </div>
+         <div class="columns">
+            {{ form_row(form.contactAddress.region, { 'attr' : { 'class' : 'input-small' } }) }}
+        </div>
+        <div class="columns">
+            {{ form_row(form.contactAddress.postalCode, { 'attr' : { 'class' : 'input-small' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns">
+            {{ form_row(form.logo) }}
+        </div>
+    </div>
+    {{ form_rest(form) }}
+    <div class="spacer"></div>
+    <div class="row">
+        <div class="columns">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $('input[type="tel"]').formatPhonenumber();
+    $('#company_update').validate({
+        errorLabelContainer: '#company_update_alert'
+    });
+</script>
