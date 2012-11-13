@@ -3,8 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Controller\OfficeUser;
 
 use Symfony\Component\HttpFoundation\Request;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonReloadResponse;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonErrorResponse;
+use TerraMar\Bundle\SalesBundle\Http\JsonReloadResponse;
 use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
 use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
 use TerraMar\Bundle\SalesBundle\Form\OfficeUser\AlertType;
@@ -20,14 +19,13 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 /**
  * Alert controller.
  *
- * @Route("")
+ * @Route("/user")
  */
 class AlertController extends AbstractController
 {
     /**
      * Displays a users alerts.
      *
-     * @Route("/{id}/alerts", name="user_alerts")
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -66,7 +64,7 @@ class AlertController extends AbstractController
     /**
      * Displays a form to make a new Alert.
      *
-     * @Route("/{id}/user-new-alert", name="user_new_alert")
+     * @Route("/{id}/alert/new", name="user_new_alert")
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -92,8 +90,8 @@ class AlertController extends AbstractController
     /**
      * Creates an Alert for a User
      *
-     * @Route("/{id}/user-create-alert", name="user_create_alert", defaults={"_format"="json"})
-     * @Template()
+     * @Route("/{id}/alert/create", name="user_create_alert")
+     * @Template("TerraMarSalesBundle:OfficeUser/Alert:new.html.twig")
      * @Secure(roles="ROLE_USER")
      */
     public function createAction(Request $request, $id)
@@ -123,16 +121,22 @@ class AlertController extends AbstractController
 
             $this->getSession()->getFlashBag()->add('success', 'Alert created successfully.');
 
-            return new JsonReloadResponse();
-        } else {
-            return new JsonErrorResponse($form);
+            if ($this->get('security.context')->isGranted('ROLE_USER_READ')) {
+                return $this->redirect($this->generateUrl('orkestra_user_show', array('id' => $id)));
+            } else {
+                return $this->redirect($this->generateUrl('tackboard'));
+            }
         }
+
+        return array(
+            'form' => $form->createView()
+        );
     }
 
     /**
      * Updates an Alert for a User
      *
-     * @Route("{id}/user-update-alert", name="user_update_alert", defaults={"_format"="json"})
+     * @Route("{id}/alert/close", name="user_update_alert")
      * @Method("POST")
      * @Template()
      * @Secure(roles="ROLE_USER")

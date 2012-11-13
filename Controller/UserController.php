@@ -2,21 +2,15 @@
 
 namespace TerraMar\Bundle\SalesBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
-    Sensio\Bundle\FrameworkExtraBundle\Configuration\Template,
-    JMS\SecurityExtraBundle\Annotation\Secure;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonErrorResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Orkestra\Bundle\ApplicationBundle\Entity\Group;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonReloadResponse;
+use Orkestra\Bundle\ApplicationBundle\Entity\User;
 use TerraMar\Bundle\SalesBundle\Entity\Salesperson;
-use Pocomos\Bundle\PestManagementBundle\Entity\Technician;
 use TerraMar\Bundle\SalesBundle\Form\UserType;
 use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
-
-use Symfony\Component\Form\FormError;
-
-use Orkestra\Bundle\ApplicationBundle\Entity\User;
 
 /**
  * User controller.
@@ -131,8 +125,9 @@ class UserController extends AbstractController
     /**
      * Creates a new User entity.
      *
-     * @Route("/create", name="orkestra_user_create", defaults={"_format"="json"})
+     * @Route("/create", name="orkestra_user_create")
      * @Method("post")
+     * @Template("TerraMarSalesBundle:User:new.html.twig")
      * @Secure(roles="ROLE_USER_WRITE")
      */
     public function createAction()
@@ -160,14 +155,6 @@ class UserController extends AbstractController
                 $em->persist($salesPerson);
             }
 
-            $technician = $form->get('technician')->getData();
-            if ($technician) {
-                $license = $form->get('licensenumber')->getData();
-                $technician = new Technician($license, $officeUser);
-                $user->addGroup($em->getRepository('OrkestraApplicationBundle:Group')->findOneBy(array('role' => 'ROLE_TECHNICIAN')));
-                $em->persist($technician);
-            }
-
             $em->persist($user);
             $em->persist($officeUser);
             $em->flush();
@@ -186,7 +173,7 @@ class UserController extends AbstractController
     /**
      * Reset Password Action
      *
-     * @Route("/{id}/reset-password", name="orkestra_user_password_reset", defaults={"_format"="json"})
+     * @Route("/{id}/reset-password", name="orkestra_user_password_reset")
      * @Template()
      * @Secure(roles="ROLE_USER_WRITE")
      */
@@ -275,8 +262,9 @@ class UserController extends AbstractController
     /**
      * Edits an existing User entity.
      *
-     * @Route("/{id}/update", name="orkestra_user_update", defaults={"_format"="json"})
+     * @Route("/{id}/update", name="orkestra_user_update")
      * @Method("post")
+     * @Template("TerraMarSalesBundle:User:edit.html.twig")
      * @Secure(roles="ROLE_USER_WRITE")
      */
     public function updateAction($id)
@@ -309,13 +297,7 @@ class UserController extends AbstractController
 
             $officeUser = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id));
 
-            $technicianRole = false;
-            $salesPersonRole = false;
-            $groups = $user->getGroups();
-
             $salesPersonChecked = $form->get('salesperson')->getData();
-            $technicianChecked = $form->get('technician')->getData();
-
             if ($salesPersonChecked) {
                 $salesPerson = $em->getRepository('TerraMarSalesBundle:Salesperson')->findOneBy(array('user' => $officeUser->getId()));
                 if (!$salesPerson) {
@@ -331,23 +313,6 @@ class UserController extends AbstractController
                 }
             }
 
-            if ($technicianChecked) {
-                $license = $form->get('licensenumber')->getData();
-                $technician = $em->getRepository('PocomosPestManagementBundle:Technician')->findOneBy(array('user' => $officeUser->getId()));
-                if (!$technician) {
-                    $technician = new Technician($license, $officeUser);
-                }
-                $user->addGroup($em->getRepository('OrkestraApplicationBundle:Group')->findOneBy(array('role' => 'ROLE_TECHNICIAN')));
-                $technician->setLicenseNumber($license);
-                $em->persist($technician);
-            } else {
-                $technician = $em->getRepository('PocomosPestManagementBundle:Technician')->findOneBy(array('user' => $officeUser->getId()));
-                if ($technician) {
-                    $technician->setActive(false);
-                    $em->persist($technician);
-                }
-            }
-
             $em->persist($user);
             $em->persist($officeUser);
             $em->flush();
@@ -355,9 +320,12 @@ class UserController extends AbstractController
             $this->get('session')->setFlash('success', 'The user has been updated.');
 
             return $this->redirect($this->generateUrl('orkestra_users'));
-        } else {
-            return new JsonErrorResponse($form);
         }
+
+        return array(
+            'user' => $user,
+            'form' => $form->createView(),
+        );
     }
 
     /**
@@ -393,13 +361,6 @@ class UserController extends AbstractController
             $form->get('groups')->setData($groups->first());
         } elseif (($groups = $roles->filter($createFilterCallable('ROLE_SECRETARY'))) && !$groups->isEmpty()) {
             $form->get('groups')->setData($groups->first());
-        }
-
-        // Set technician and license
-        $technician = $em->getRepository('PocomosPestManagementBundle:Technician')->findOneBy(array('user' => $officeUser->getId(), 'active' => true));
-        if ($technician && $form->has('technician')) {
-            $form->get('technician')->setData(true);
-            $form->get('licensenumber')->setData($technician->getLicenseNumber());
         }
 
         // Set salesperson

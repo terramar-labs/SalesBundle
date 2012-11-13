@@ -21,7 +21,7 @@ class AlertHistoryController extends AbstractController
     /**
      * Displays a users Historical.
      *
-     * @Route("/{id}/alerts/history", name="customer_alert_history")
+     * @Route("/{id}/alert/history", name="customer_alert_history")
      * @Template()
      * @Secure(roles="ROLE_TACKBOARD_READ")
      */

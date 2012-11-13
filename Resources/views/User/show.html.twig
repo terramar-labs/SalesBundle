@@ -2,9 +2,15 @@
 
 {% use 'TerraMarSalesBundle:User:_subnav.html.twig' %}
 
-{% block title %}Tackboard - {{ entity }} {% endblock %}
+{% block title %}{{ entity }}{% endblock %}
 
-{% block mainstage %}
+{% block subheader %}
+<div class="pull-right">
+    <a class="btn" href="{{ path('orkestra_user_edit', { id: entity.id }) }}"><i class="icon-edit"></i> Edit User</a>
+</div>
+{% endblock %}
+
+{% block content %}
     {% render 'TerraMarSalesBundle:OfficeUser/Alert:index' with { id : entity.id } %}
     <hr>
     {% render 'TerraMarSalesBundle:OfficeUser/ToDo:index' with { id : entity.id } %}

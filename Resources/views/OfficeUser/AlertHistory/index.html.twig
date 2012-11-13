@@ -1,7 +1,6 @@
-
-<div class="row">
-    <div class="columns toggle-subsection">
-        <h3><i class="icon-header icon-clock-history"></i> History
+<div class="row-fluid">
+    <div class="pull-left toggle-subsection">
+        <h3><i class="icon-header icon-time"></i> History
             {% if entities|length > 0 %}
                 <span class="toggle-info" style="font-size: 12px; font-weight: normal; display: inline;">(Click to expand)</span>
                 <span class="toggle-info" style="font-size: 12px; font-weight: normal; display: none;">(Click to hide)</span>
@@ -47,9 +46,9 @@
 <script type="text/javascript">
     (function($) {
         $(function() {
-            $('.toggle-subsection').css('cursor', 'pointer').click(function(){
+            $('.toggle-subsection').css('cursor', 'pointer').click(function() {
                 $('.toggle-info', this).toggle();
-                var $parent = $(this).parents('.row');
+                var $parent = $(this).parents('.row-fluid');
                 $('.subsection',$parent).toggle();
             });
         });

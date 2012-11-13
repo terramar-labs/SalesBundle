@@ -3,8 +3,6 @@
 namespace TerraMar\Bundle\SalesBundle\Controller\OfficeUser;
 
 use Symfony\Component\HttpFoundation\Request;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonReloadResponse;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonErrorResponse;
 use TerraMar\Bundle\SalesBundle\Form\OfficeUser\TackType;
 use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

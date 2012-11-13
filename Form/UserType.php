@@ -3,8 +3,6 @@
 namespace TerraMar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormEvents;
-use TerraMar\Bundle\SalesBundle\Form\User\SetDataListener;
 use Doctrine\ORM\EntityRepository;
 use Orkestra\Bundle\ApplicationBundle\Form\PreferencesType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,13 +19,13 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('username')
-            ->add('email');
+            ->add('email', 'email');
 
         if ($this->includePassword) {
             $builder->add('password', 'repeated', array(
                 'type' => 'password',
-                'first_options' => array('label' => 'New Password'),
-                'second_options' => array('label' => 'Confirm'),
+                'first_options' => array('label' => 'Password'),
+                'second_options' => array('label' => 'Confirm Password'),
                 'invalid_message' => 'The passwords must match'
             ));
         }

@@ -8,5 +8,5 @@ class AlertType extends Enum
 {
     const ALERT = 'Alert';
 
-    const TODO = 'ToDo';
+    const TODO = 'To do';
 }

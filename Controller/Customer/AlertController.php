@@ -72,7 +72,7 @@ class AlertController extends AbstractController
     /**
      * Displays a form to make a new Alert.
      *
-     * @Route("/{id}/alerts/new", name="customer_alert_new")
+     * @Route("/{id}/alert/new", name="customer_alert_new")
      * @Template()
      * @Secure(roles="ROLE_TACKBOARD_READ")
      */
@@ -97,7 +97,7 @@ class AlertController extends AbstractController
     /**
      * Creates an Alert for a User
      *
-     * @Route("/{id}/alerts/create", name="customer_alert_create", defaults={"_format"="json"})
+     * @Route("/{id}/alert/create", name="customer_alert_create", defaults={"_format"="json"})
      * @Template()
      * @Secure(roles="ROLE_TACKBOARD_READ")
      */
@@ -142,7 +142,7 @@ class AlertController extends AbstractController
     /**
      * Updates an Alert for a User
      *
-     * @Route("/{id}/alerts/{alertid}/update", name="customer_alert_update", defaults={"_format"="json"})
+     * @Route("/{id}/alert/{alertid}/update", name="customer_alert_update", defaults={"_format"="json"})
      * @Method("POST")
      * @Template()
      * @Secure(roles="ROLE_TACKBOARD_READ")

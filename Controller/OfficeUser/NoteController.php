@@ -3,8 +3,6 @@
 namespace TerraMar\Bundle\SalesBundle\Controller\OfficeUser;
 
 use Symfony\Component\HttpFoundation\Request;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonErrorResponse;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonReloadResponse;
 use TerraMar\Bundle\CustomerBundle\Entity\Note;
 use TerraMar\Bundle\SalesBundle\Form\NoteType;
 use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
@@ -18,14 +16,13 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 /**
  * Note controller.
  *
- * @Route("")
+ * @Route("/user")
  */
 class NoteController extends AbstractController
 {
     /**
      * Displays a users Historical.
      *
-     * @Route("/{id}/officeuser/notes", name="officeuser_notes")
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -55,7 +52,7 @@ class NoteController extends AbstractController
     /**
      * Displays a users Historical.
      *
-     * @Route("/{id}/officeuser/note/new", name="officeuser_note_new")
+     * @Route("/{id}/note/new", name="officeuser_note_new")
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -81,7 +78,7 @@ class NoteController extends AbstractController
     /**
      * Displays a users Historical.
      *
-     * @Route("/{id}/officeuser/note/create", name="officeuser_note_create", defaults={"_format"="json"})
+     * @Route("/{id}/note/create", name="officeuser_note_create", defaults={"_format"="json"})
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -92,7 +89,6 @@ class NoteController extends AbstractController
         $form->bind($request);
 
         if ($form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
             $office = $this->getCurrentOffice();
 
@@ -109,9 +105,15 @@ class NoteController extends AbstractController
 
             $this->getSession()->getFlashBag()->add('success', 'Note created successfully.');
 
-            return new JsonReloadResponse();
-        } else {
-            return new JsonErrorResponse($form);
+            if ($this->get('security.context')->isGranted('ROLE_USER_READ')) {
+                return $this->redirect($this->generateUrl('orkestra_user_show', array('id' => $id)));
+            } else {
+                return $this->redirect($this->generateUrl('tackboard'));
+            }
         }
+
+        return array(
+            'form' => $form->createView()
+        );
     }
 }

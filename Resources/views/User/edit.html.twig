@@ -1,81 +1,64 @@
-<div id="orkestra_user_update_alert" class="alert-box error"></div>
-<div class="row popup-header">
-    <div class="columns">
-        <h3>Edit Employee</h3>
-    </div>
-</div>
+{% extends '::base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block content %}
 <form id="orkestra_user_update" action="{{ path('orkestra_user_update', { 'id' : user.id }) }}" method="post" {{ form_enctype(form) }}>
-    <div class="row">
-        <div class="columns">
+    <div class="well">
+    <div class="row-fluid">
+        <div class="span2">
             {{ form_row(form.firstName, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
-        <div class="columns">
+        <div class="span2">
             {{ form_row(form.lastName, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
     </div>
-    <div class="row">
-        <div class="columns">
+    <div class="row-fluid">
+        <div class="span2">
             {{ form_row(form.email, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
-        <div class="columns">
+        <div class="span2">
             {{ form_row(form.username, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
     </div>
-    <div class="row">
-        <div class="columns">
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.preferences.timezone, { 'attr' : { 'class' : 'input-large' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
             {{ form_row(form.groups, { 'attr' : { 'class' : 'input-large' } }) }}
         </div>
     </div>
-    <div class="row">
-        <div class="columns">
+    <div class="row-fluid">
+        <div class="span3">
             <p>Does this user need the following roles?</p>
         </div>
     </div>
-    <div class="row">
-        <div class="columns">
-            <div class="inline checkbox">
-                {{ form_widget(form.technician) }}
-                {{ form_label(form.technician) }}
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="columns license hidden">
-            {{ form_row(form.licensenumber) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="columns">
+    <div class="row-fluid">
+        <div class="span3">
             <div class="inline checkbox">
                 {{ form_widget(form.salesperson) }}
                 {{ form_label(form.salesperson) }}
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="columns">
-            {{ form_row(form.preferences.timezone, { 'attr' : { 'class' : 'input-large' } }) }}
-        </div>
+    <div class="spacer"></div>
+    <div class="hidden">
+        {{ form_rest(form) }}
     </div>
-    <div class="row">
-        <div class="hidden">
-            {{ form_rest(form) }}
-        </div>
-        <div class="columns">
-            <button class="btn btn-primary" type="submit">Save Changes</button>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>
     </div>
 </form>
+{% endblock %}
+
+{% block additional_javascripts %}
 <script type="text/javascript">
     $(function() {
-        $('#{{ form.technician.get('id') }}').change(function() {
-            if ($(this).is(':checked')) {
-                $('.license').slideDown('fast');
-            } else {
-                $('.license').slideUp('fast');
-            }
-        }).change();
-
         $('#{{ form.groups.get('id') }}').change(function() {
             if ($('option:selected', this).text() == 'Administrator') {
                 $('input[type="checkbox"]').attr('disabled', true);
@@ -83,10 +66,6 @@
                 $('input[type="checkbox"]').attr('disabled', false);
             }
         }).change();
-
-
-        $('#orkestra_user_update').validate({
-            errorLabelContainer: '#orkestra_user_update_alert'
-        });
     });
 </script>
+{% endblock %}

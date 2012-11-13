@@ -1,21 +1,20 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}Employees{% endblock %}
+{% block title %}Users{% endblock %}
 
-{% block mainstage %}
+
+{% block subheader %}
     <form class="form-inline" id="orkestra_users" action="{{ path('orkestra_users') }}" method="post">
-        <div class="row">
-            <input type="text" class="input-medium" name="searchTerms" value="" />
-            <button type="submit" class="btn btn-primary">Search</button>
-            {% if is_granted('ROLE_USER_WRITE') %}
-            <a href="{{ path('orkestra_user_new') }}" id="addemployee" class="fancyajax btn btn-primary pull-right">Add Employee</a>
-            {% endif %}
-        </div>
+        <input type="text" name="searchTerms" placeholder="Search ..." />
+        <button type="submit" class="btn btn-primary">SEARCH</button>
     </form>
-    <table class="table records_list">
+{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
     <thead>
         <tr>
-            <th>Employee Name</th>
+            <th>Name</th>
             <th>Username</th>
             <th>User Type</th>
             <th>Email</th>
@@ -24,23 +23,34 @@
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr class="clickable" entity-id="{{ entity.id }}">
-            <td>{{ entity.firstName ~ ' ' ~ entity.lastName }}</td>
+        <tr>
+            <td><a href="{{ path('orkestra_user_show', { id: entity.id }) }}">{{ entity }}</a></td>
             <td>{{ entity.username }}</td>
             <td>{{ entity.groups.first.name|default('No Privileges')}}</td>
-            <td></td>
+            <td>{{ entity.email }}</td>
             {% if is_granted('ROLE_USER_WRITE') %}
-                <td class="delete-record"><a href="{{ path('orkestra_user_delete', { 'id' : entity.id }) }}">Delete</a></td>
+            <td>
+                <a class="btn btn-mini" href="{{ path('orkestra_user_edit', { 'id' : entity.id }) }}">EDIT</a>
+                <a class="btn btn-mini btn-danger delete-record" href="{{ path('orkestra_user_delete', { 'id' : entity.id }) }}">DELETE</a>
+            </td>
             {% endif %}
         </tr>
     {% endfor %}
     </tbody>
 </table>
+{% if is_granted('ROLE_USER_WRITE') %}
+<a href="{{ path('orkestra_user_new') }}" class="btn btn-primary">New User</a>
+{% endif %}
 {% endblock %}
+
 {% block additional_javascripts %}
 <script type="text/javascript">
     $(function() {
-        bindClickableTable('.table', '{{ path('orkestra_user_show', { 'id' : '_id_' }) }}', '_id_' , false);
+        $('.delete-record').click(function(e) {
+            if (!confirm('Are you sure you want to delete this user?')) {
+                e.preventDefault();
+            }
+        });
     });
 </script>
 {% endblock %}

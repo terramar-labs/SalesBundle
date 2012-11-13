@@ -1,8 +1,10 @@
-<div class="row">
-    <div class="columns">
+<div class="row-fluid">
+    <div class="pull-left">
         <h3><i class="icon-header icon-calendar"></i> To Do</h3>
     </div>
-    <a href="{{ path('user_new_todo', { id : entity.id }) }}" class="fancyajax btn btn-primary pull-right"><i class="icon icon-add"></i> Add To Do</a>
+    <div class="pull-right">
+        <a href="{{ path('user_new_todo', { id : entity.id }) }}" class="fancyajax btn btn-primary pull-right"><i class="icon-white icon-plus"></i> Add To Do</a>
+    </div>
 </div>
 <div class="spacer"></div>
 {% if entities|length > 0 %}
@@ -32,10 +34,10 @@
                 <a class="btn btn-small dropdown-toggle" href="#" data-toggle="dropdown"> Mark As <span class="caret"></span>  </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="javascript:;" class="update" data-id="{{ entity.id }}" data-status="InProgress">In-Progress</a>
+                            <a href="javascript:;" class="update" data-id="{{ entity.id }}" data-status="in-progress">In-Progress</a>
                         </li>
                         <li>
-                            <a href="javascript:;" class="update" data-id="{{ entity.id }}" data-status="Completed">Complete</a>
+                            <a href="javascript:;" class="update" data-id="{{ entity.id }}" data-status="completed">Complete</a>
                         </li>
                     </ul>
                 </div>
@@ -55,14 +57,12 @@
         var status = $(this).data('status');
         $('.update').click(function() {
             var id = $(this).data('id'),
-                    self = this,
-                    status = $(this).data('status');
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: getRoute(url, {'_id_': id, '_status_': status}),
-                success: handleJsonResponse
-            });
+                self = this,
+                status = $(this).data('status');
+
+            terramar.jsonRequest(
+                terramar.getRoute(url, {'_id_': id, '_status_': status})
+            );
         });
     });
 </script>

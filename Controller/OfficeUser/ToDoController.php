@@ -3,8 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Controller\OfficeUser;
 
 use Symfony\Component\HttpFoundation\Request;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonErrorResponse;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonReloadResponse;
+use TerraMar\Bundle\SalesBundle\Http\JsonReloadResponse;
 use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
 use TerraMar\Bundle\SalesBundle\Form\OfficeUser\ToDoType;
 use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
@@ -19,14 +18,13 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 /**
  * ToDo controller.
  *
- * @Route("")
+ * @Route("/user")
  */
 class ToDoController extends AbstractController
 {
     /**
      * Displays all ToDo's
      *
-     * @Route("/{id}/todos", name="user_todos")
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -52,7 +50,7 @@ class ToDoController extends AbstractController
     /**
      * Displays a form to make a new Alert.
      *
-     * @Route("/{id}/user-newtodo", name="user_new_todo")
+     * @Route("/{id}/to-do/new", name="user_new_todo")
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -78,7 +76,7 @@ class ToDoController extends AbstractController
     /**
      * Displays a Tackboard.
      *
-     * @Route("/{id}/user-createtodo", name="user_create_todo", defaults={"_format"="json"})
+     * @Route("/{id}/to-do/create", name="user_create_todo", defaults={"_format"="json"})
      * @Template()
      * @Secure(roles="ROLE_USER")
      */
@@ -109,16 +107,22 @@ class ToDoController extends AbstractController
 
             $this->getSession()->getFlashBag()->add('success', 'The to-do has been created successfully.');
 
-            return new JsonReloadResponse();
-        } else {
-            return new JsonErrorResponse($form);
+            if ($this->get('security.context')->isGranted('ROLE_USER_READ')) {
+                return $this->redirect($this->generateUrl('orkestra_user_show', array('id' => $id)));
+            } else {
+                return $this->redirect($this->generateUrl('tackboard'));
+            }
         }
+
+        return array(
+            'form' => $form->createView()
+        );
     }
 
     /**
      * Updates an Alert for a User
      *
-     * @Route("{id}/user-todoupdate/{status}", name="user_update_todo", defaults={"_format"="json"})
+     * @Route("/{id}/to-dos/mark-as/{status}", name="user_update_todo", defaults={"_format"="json"})
      * @Method("POST")
      * @Template()
      * @Secure(roles="ROLE_USER")
@@ -128,9 +132,9 @@ class ToDoController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $alert = $em->getRepository('TerraMarSalesBundle:Alert\OfficeUserAlert')->find($id);
-        if ($status == 'InProgress') {
+        if ($status == 'in-progress') {
             $status = AlertStatus::IN_PROGRESS;
-        } elseif ($status == 'Completed') {
+        } elseif ($status == 'completed') {
             $status = AlertStatus::COMPLETED;
         }
         $alert->getAlert()->setStatus(new AlertStatus($status));

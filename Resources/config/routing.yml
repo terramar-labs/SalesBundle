@@ -1,0 +1,3 @@
+TerraMarSalesBundle_routes:
+  resource: "@TerraMarSalesBundle/Controller"
+  type:     annotation
