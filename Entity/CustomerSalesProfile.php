@@ -29,13 +29,6 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
     protected $autopay = false;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="balance", type="decimal", precision=10, scale=2)
-     */
-    protected $balance = 0.00;
-
-    /**
      * @var \Orkestra\Transactor\Entity\Account\PointsAccount
      *
      * @ORM\ManyToOne(targetEntity="Orkestra\Transactor\Entity\Account\PointsAccount", cascade={"persist"})
@@ -104,7 +97,7 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
      * @var \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
      *
      * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\OfficeUser", cascade={"persist"})
-     * @ORM\JoinColumn(name="office_user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="office_user_id", referencedColumnName="id", nullable=true)
      */
     protected $user;
 
@@ -229,23 +222,6 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
     public function getUser()
     {
         return $this->user;
-    }
-
-
-    /**
-     * @param float $balance
-     */
-    public function setBalance($balance)
-    {
-        $this->balance = $balance;
-    }
-
-    /**
-     * @return float
-     */
-    public function getBalance()
-    {
-        return $this->balance;
     }
 
     /**

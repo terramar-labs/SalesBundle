@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Advanced Customer Search{% endblock %}
+
+{% block content %}
+<form id="advanced-search" action="{{ path('customer_search_advanced') }}" method="post" {{ form_enctype(form) }}>
+    <div class="well">
+        <div class="row-fluid">
+            <div class="span2">
+                {{ form_row(form.firstName, { 'attr' : { 'class' : 'input-medium' } }) }}
+            </div>
+            <div class="span2">
+                {{ form_row(form.lastName, { 'attr' : { 'class' : 'input-medium' } }) }}
+            </div>
+            <div class="span2">
+                {{ form_row(form.phone, { 'attr' : { 'class' : 'input-medium' } }) }}
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span2">
+                {{ form_row(form.emailAddress, { 'attr' : { 'class' : 'input-medium' } }) }}
+            </div>
+            <div class="span2">
+                {{ form_row(form.streetAddress, { 'attr' : { 'class' : 'input-medium' } }) }}
+            </div>
+            <div class="span2">
+                {{ form_row(form.city, { 'attr' : { 'class' : 'input-medium' } }) }}
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span2">
+                {{ form_row(form.state, { 'attr' : { 'class' : 'input-small'  } }) }}
+            </div>
+            <div class="span2">
+                {{ form_row(form.zip, { 'attr' : { 'class' : 'input-small' } }) }}
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span2">
+                {{ form_row(form.customerStatus, { 'attr' : { 'class' : 'input-medium'  } }) }}
+            </div>
+            <div class="span2">
+                {{ form_row(form.lastModified, { 'attr' : { 'class' : 'input-medium' } }) }}
+            </div>
+        </div>
+        <div class="row-fluid">
+            {{ form_rest(form) }}
+            <button class="btn btn-primary" type="submit">SEARCH</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

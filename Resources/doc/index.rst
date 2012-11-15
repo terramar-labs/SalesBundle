@@ -42,3 +42,12 @@ Roles Reference
 
 *ROLE_TACKBOARD_WRITE*  - Ability to create other users' alerts
 *ROLE_TACKBOARD_READ*   - Ability to view other users' alerts
+
+
+
+Additional Notes
+----------------
+
+This bundle overrides the metadata for the CustomerBundle's Customer entity,
+changing the repositoryClass to
+`TerraMar\Bundle\SalesBundle\Repository\CustomerRepository`.

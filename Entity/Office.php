@@ -9,7 +9,7 @@ use Orkestra\Common\Entity\EntityBase;
  * A physical location of a company
  *
  * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\OfficeRepository")
- * @ORM\Table(name="terramar_company_offices")
+ * @ORM\Table(name="terramar_offices")
  */
 class Office extends EntityBase
 {

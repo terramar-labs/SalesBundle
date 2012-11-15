@@ -3,6 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use TerraMar\Bundle\SalesBundle\Filter\OfficeFilter\FilterByOfficeInterface;
 use TerraMar\Bundle\CustomerBundle\Entity\Note;
 use Doctrine\Common\Collections\ArrayCollection;
 use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
@@ -14,7 +15,7 @@ use Orkestra\Common\Entity\EntityBase;
  * A user associated with an Office
  *
  * @ORM\Entity
- * @ORM\Table(name="terramar_company_office_users")
+ * @ORM\Table(name="terramar_office_users")
  */
 class OfficeUser extends EntityBase implements AssignedByInterface, AssignedToInterface
 {

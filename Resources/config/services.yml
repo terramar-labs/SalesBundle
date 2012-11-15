@@ -3,6 +3,7 @@ parameters:
   terramar.sales.factory.payment_account.class:            TerraMar\Bundle\SalesBundle\Factory\PaymentAccountFactory
   terramar.sales.factory.office_configuration.class:       TerraMar\Bundle\SalesBundle\Factory\OfficeConfigurationFactory
   terramar.sales.factory.office.class:                     TerraMar\Bundle\SalesBundle\Factory\OfficeFactory
+  terramar.sales.factory.sales_profile.class:              TerraMar\Bundle\SalesBundle\Factory\SalesProfileFactory
   terramar.sales.factory.alert.class:                      TerraMar\Bundle\SalesBundle\Factory\AlertFactory
   terramar.sales.factory.assigned_alert.office_user.class: TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\OfficeUserAlertFactory
   terramar.sales.factory.assigned_alert.customer.class:    TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\CustomerAlertFactory
@@ -11,6 +12,7 @@ parameters:
   terramar.sales.helper.file.class:                        TerraMar\Bundle\SalesBundle\Helper\FileHelper
   terramar.sales.helper.customer_user.class:               TerraMar\Bundle\SalesBundle\Helper\CustomerUserHelper
   terramar.sales.listener.logout.class:                    TerraMar\Bundle\SalesBundle\Listener\LogoutListener
+  terramar.sales.subscriber.class_metadata.class:          TerraMar\Bundle\SalesBundle\Subscriber\ClassMetadataSubscriber
 
 services:
   # Repository services
@@ -39,6 +41,8 @@ services:
     class: %terramar.sales.factory.office_configuration.class%
   terramar.sales.factory.office:
     class: %terramar.sales.factory.office.class%
+  terramar.sales.factory.sales_profile:
+    class: %terramar.sales.factory.sales_profile.class%
   terramar.sales.factory.alert:
     class: %terramar.sales.factory.alert.class%
   terramar.sales.factory.assigned_alert.office_user:
@@ -67,6 +71,10 @@ services:
   # Miscellaenous
   terramar.sales.listener.logout:
     class: %terramar.sales.listener.logout.class%
+  terramar.sales.subscriber.class_metadata:
+    class: %terramar.sales.subscriber.class_metadata.class%
+    tags:
+      - { name: doctrine.event_subscriber }
 
   # PDF Generators
   terramar.sales.generator.agreement:

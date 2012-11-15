@@ -3,15 +3,12 @@
 namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonSuccessResponse;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonErrorResponse;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonReloadResponse;
+use TerraMar\Bundle\SalesBundle\Http\JsonReloadResponse;
 use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
 use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
 use TerraMar\Bundle\SalesBundle\Form\Customer\AlertType;
 use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -36,7 +33,7 @@ class AlertController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -80,7 +77,7 @@ class AlertController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -97,15 +94,15 @@ class AlertController extends AbstractController
     /**
      * Creates an Alert for a User
      *
-     * @Route("/{id}/alert/create", name="customer_alert_create", defaults={"_format"="json"})
-     * @Template()
+     * @Route("/{id}/alert/create", name="customer_alert_create")
+     * @Template("TerraMarSalesBundle:Customer/Alert:new.html.twig")
      * @Secure(roles="ROLE_TACKBOARD_READ")
      */
     public function createAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -133,16 +130,19 @@ class AlertController extends AbstractController
 
             $this->getSession()->getFlashBag()->add('success', 'The alert has been created successfully.');
 
-            return new JsonReloadResponse();
-        } else {
-            return new JsonErrorResponse($form);
+            return $this->redirect($this->generateUrl('customer_tackboard', array('id' => $id)));
         }
+
+        return array(
+            'entity' => $customer,
+            'form' => $form->createView(),
+        );
     }
 
     /**
      * Updates an Alert for a User
      *
-     * @Route("/{id}/alert/{alertid}/update", name="customer_alert_update", defaults={"_format"="json"})
+     * @Route("/{id}/alert/{alertid}/close", name="customer_alert_update", defaults={"_format"="json"})
      * @Method("POST")
      * @Template()
      * @Secure(roles="ROLE_TACKBOARD_READ")
@@ -151,7 +151,7 @@ class AlertController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -170,6 +170,6 @@ class AlertController extends AbstractController
 
         $this->getSession()->getFlashBag()->add('success', 'The alert has been updated successfully.');
 
-        return new JsonSuccessResponse();
+        return new JsonReloadResponse();
     }
 }

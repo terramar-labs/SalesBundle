@@ -32,7 +32,7 @@ class PointsController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $office);
+        $entity = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $office);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
@@ -71,7 +71,7 @@ class PointsController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $office);
+        $entity = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $office);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Customer entity.');

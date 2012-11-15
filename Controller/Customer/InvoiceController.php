@@ -55,7 +55,7 @@ class InvoiceController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->find($id);
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->find($id);
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
@@ -113,7 +113,7 @@ class InvoiceController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $currentUser = $this->getCurrentOfficeUser()->getUser();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->find($id);
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->find($id);
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
@@ -197,7 +197,7 @@ class InvoiceController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $currentUser = $this->getCurrentOfficeUser()->getUser();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->find($id);
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->find($id);
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');

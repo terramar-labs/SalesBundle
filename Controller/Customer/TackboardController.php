@@ -23,14 +23,13 @@ class TackboardController extends AbstractController
      * Displays a Customer's Tackboard.
      *
      * @Route("/{id}/tackboard", name="customer_tackboard")
+     * @Route("/{id}/show", name="customer_show")
      * @Template()
      * @Secure(roles="ROLE_TACKBOARD_READ")
      */
     public function indexAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $this->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');

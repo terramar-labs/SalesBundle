@@ -1,10 +1,9 @@
-
-<div class="row">
-    <div class="columns toggle-subsection">
-        <h3><i class="icon-header icon-clock-history"></i> History
+<div class="row-fluid">
+    <div class="pull-left toggle-subsection">
+        <h3><i class="icon-header icon-time"></i> History
             {% if entities|length > 0 %}
-            <span class="toggle-info" style="font-size: 12px; font-weight: normal; display: inline;">(Click to expand)</span>
-            <span class="toggle-info" style="font-size: 12px; font-weight: normal; display: none;">(Click to hide)</span>
+                <span class="toggle-info" style="font-size: 12px; font-weight: normal; display: inline;">(Click to expand)</span>
+                <span class="toggle-info" style="font-size: 12px; font-weight: normal; display: none;">(Click to hide)</span>
             {% endif %}
         </h3>
     </div>
@@ -17,6 +16,7 @@
                     <th>Priority</th>
                     <th>Name <abbr title="Hover over the name to see the description"><span class="label label-info">?</span></abbr></th>
                     <th>Date Completed</th>
+                    <th>Assigned By</th>
                     <th>Assigned To</th>
                     <th>Date Due</th>
                     <th>Type</th>
@@ -26,8 +26,9 @@
             {% for entity in entities %}
                 <tr>
                     <td>{{ entity.alert.priority }}</td>
-                    <td><abbr title="{{ entity.alert.description }}">{{ entity.alert.name }}  </abbr></td>
+                    <td><abbr title="{{ entity.alert.description|striptags }}">{{ entity.alert.name }}  </abbr></td>
                     <td>{{ entity.alert.dateModified.format('m/d/y') }}</td>
+                    <td>{{ entity.assignedBy.user }}</td>
                     <td>{{ entity.assignedTo.customer }}</td>
                     <td>{{ entity.alert.dateDue.format('m/d/y') }}</td>
                     <td>{{ entity.alert.type }}</td>
@@ -38,22 +39,18 @@
     </div>
 </div>
 {% else %}
-</div>
-    <h4>This customer has no history.</h4>
+    <h4>No history.</h4>
     <div class="spacer"></div>
 {% endif %}
+
 <script type="text/javascript">
     (function($) {
         $(function() {
-            $('.toggle-subsection').css('cursor', 'pointer').click(function(){
+            $('.toggle-subsection').css('cursor', 'pointer').click(function() {
                 $('.toggle-info', this).toggle();
-                var $parent = $(this).parents('.row');
+                var $parent = $(this).parents('.row-fluid');
                 $('.subsection',$parent).toggle();
             });
         });
     })(jQuery);
 </script>
-
-
-
-

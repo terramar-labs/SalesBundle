@@ -4,7 +4,7 @@
 
 {% block title %}Tackboard{% endblock %}
 
-{% block mainstage %}
+{% block content %}
     {% render 'TerraMarSalesBundle:OfficeUser/Alert:index' with { id : entity.id } %}
     <hr />
     {% render 'TerraMarSalesBundle:OfficeUser/ToDo:index'  with { id : entity.id } %}
@@ -12,8 +12,4 @@
     {% render 'TerraMarSalesBundle:OfficeUser/Note:index' with { id : entity.id } %}
     <hr />
     {% render 'TerraMarSalesBundle:OfficeUser/AlertHistory:index' with { id : entity.id } %}
-{% endblock %}
-
-{% block additional_javascripts %}
-
 {% endblock %}

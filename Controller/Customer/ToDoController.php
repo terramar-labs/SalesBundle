@@ -3,9 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonErrorResponse;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonSuccessResponse;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonReloadResponse;
+use TerraMar\Bundle\SalesBundle\Http\JsonReloadResponse;
 use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
 use TerraMar\Bundle\SalesBundle\Form\Customer\ToDoType;
 use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
@@ -34,7 +32,7 @@ class ToDoController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -65,7 +63,7 @@ class ToDoController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -82,15 +80,15 @@ class ToDoController extends AbstractController
     /**
      * Displays a Tackboard.
      *
-     * @Route("/{id}/to-do/create", name="customer_todo_create", defaults={"_format"="json"})
-     * @Template()
+     * @Route("/{id}/to-do/create", name="customer_todo_create")
+     * @Template("TerraMarSalesBundle:Customer/ToDo:new.html.twig")
      * @Secure(roles="ROLE_CUSTOMER_WRITE")
      */
     public function createAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('PocomosCustomerManagementBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -122,7 +120,7 @@ class ToDoController extends AbstractController
             $userDescription = sprintf(
                 '%s<br /><p>Customer: <a href="%s">%s</a></p>',
                 $data['description'],
-                $this->generateUrl('customer_edit', array('id' => $id)),
+                $this->generateUrl('customer_show', array('id' => $id)),
                 $customer
             );
 
@@ -135,16 +133,19 @@ class ToDoController extends AbstractController
 
             $this->getSession()->getFlashBag()->add('success', 'To do created successfully.');
 
-            return new JsonReloadResponse();
-        } else {
-            return new JsonErrorResponse($form);
+            return $this->redirect($this->generateUrl('customer_tackboard', array('id' => $id)));
         }
+
+        return array(
+            'entity' => $customer,
+            'form' => $form->createView(),
+        );
     }
 
     /**
      * Updates an Alert for a Customer
      *
-     * @Route("/{id}/to-do/{alertid}/update/{status}", name="customer_todo_update", defaults={"_format"="json"})
+     * @Route("/{id}/to-do/{alertid}/mark-as/{status}", name="customer_todo_update", defaults={"_format"="json"})
      * @Method("POST")
      * @Template()
      * @Secure(roles="ROLE_CUSTOMER_WRITE")

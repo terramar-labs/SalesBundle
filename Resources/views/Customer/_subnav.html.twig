@@ -1,0 +1,13 @@
+{% block subheader %}
+    <ul class="nav nav-pills pull-right">
+    <li{% if is_current_route('customer_show') %} class="active"{% endif %}>
+        <a href="{{ path('customer_show', { id: entity.id }) }}">Summary</a>
+    </li>
+    <li{% if is_current_route('customer_tackboard') %} class="active"{% endif %}>
+        <a href="{{ path('customer_tackboard', { id: entity.id }) }}">Notifications</a>
+    </li>
+    <li{% if is_current_route('customer_contracts') %} class="active"{% endif %}>
+        <a href="#">Contracts</a>
+    </li>
+</ul>
+{% endblock %}

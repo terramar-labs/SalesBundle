@@ -1,10 +1,10 @@
 {% extends "::base.html.twig" %}
 
-{% use 'PocomosPestManagementBundle:CustomerDetail:_subnav.html.twig' %}
+{% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
 
 {% block title %}Customer Detail - Tackboard{% endblock %}
 
-{% block mainstage %}
+{% block content %}
     {% render 'TerraMarSalesBundle:Customer/Alert:index' with { id: entity.id } %}
     <hr />
     {% render 'TerraMarSalesBundle:Customer/ToDo:index' with { id: entity.id } %}

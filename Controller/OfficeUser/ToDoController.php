@@ -76,8 +76,8 @@ class ToDoController extends AbstractController
     /**
      * Displays a Tackboard.
      *
-     * @Route("/{id}/to-do/create", name="user_create_todo", defaults={"_format"="json"})
-     * @Template()
+     * @Route("/{id}/to-do/create", name="user_create_todo")
+     * @Template("TerraMarSalesBundle:OfficeUser/ToDo:new.html.twig")
      * @Secure(roles="ROLE_USER")
      */
     public function createAction(Request $request, $id)

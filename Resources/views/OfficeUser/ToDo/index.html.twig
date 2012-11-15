@@ -54,7 +54,7 @@
 <script type="text/javascript">
     $(function() {
         var url = '{{ path('user_update_todo', {id : '_id_', status : '_status_'}) }}';
-        var status = $(this).data('status');
+
         $('.update').click(function() {
             var id = $(this).data('id'),
                 self = this,

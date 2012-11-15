@@ -1,0 +1,5 @@
+{
+    "query": {{ query|json_encode|raw }},
+    "suggestions": [ {% for entity in entities %}{{ entity.__toString()|json_encode|raw }}{% if not loop.last %},{% endif %}{% endfor %} ],
+    "data":        [ {% for entity in entities %}{{ entity.id|json_encode|raw }}{% if not loop.last %},{% endif %}{% endfor %} ]
+}
