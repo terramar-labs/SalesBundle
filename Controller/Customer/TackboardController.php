@@ -22,8 +22,7 @@ class TackboardController extends AbstractController
     /**
      * Displays a Customer's Tackboard.
      *
-     * @Route("/{id}/tackboard", name="customer_tackboard")
-     * @Route("/{id}/show", name="customer_show")
+     * @Route("/{id}/notifications", name="customer_tackboard")
      * @Template()
      * @Secure(roles="ROLE_TACKBOARD_READ")
      */
