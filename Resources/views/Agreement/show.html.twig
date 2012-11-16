@@ -1,0 +1,40 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ entity }}{% endblock %}
+
+{% block content %}
+    <div class="well">
+    <table class="table summary">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ entity.active ? 'Active' : 'In-active' }}</td>
+            </tr>
+            <tr>
+                <th>Last Modified</th>
+                <td>{{ entity.dateModified }}</td>
+            </tr>
+            <tr>
+                <th>Date Created</th>
+                <td>{{ entity.dateCreated }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="spacer"></div>
+    <div class="form-buttons">
+        <a class="btn" href="{{ path('agreement_edit', { 'id': entity.id }) }}">Edit Agreement</a>
+    </div>
+</div>
+{% endblock %}

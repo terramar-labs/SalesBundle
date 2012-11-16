@@ -28,7 +28,7 @@ class AgreementType extends AbstractType
             ))
             ->add('billingFrequencies', 'choice', array(
                 'multiple' => true,
-                'label' => 'Service Frequencies',
+                'label' => 'Billing Frequencies',
                 'expanded' => true,
                 'choices' => array_combine($frequencies, $frequencies)
             ))

@@ -1,0 +1,58 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Edit Agreement{% endblock %}
+
+{% block content %}
+    <form id="agreement_update" action="{{ path('agreement_update', { id: entity.id }) }}" method="post" {{ form_enctype(form) }}>
+<div class="well">
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.name, { 'attr' : { 'class' : 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.description, { 'attr' : { 'class' : 'input-xlarge' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="inline checkbox">
+                {{ form_widget(form.active) }}
+                {{ form_label(form.active) }}
+            </div>
+        </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.length, { 'attr' : { 'class' : 'input-small' } }) }}
+        </div>
+    </div>
+    {{ form_row(form.billingFrequencies, { attr: { class: 'inline checkbox' } }) }}
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.agreementBody, { 'attr' : { 'class' : 'input-xxlarge' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.welcomeLetter, { 'attr' : { 'class' : 'input-xxlarge' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.invoiceIntro, { 'attr' : { 'class' : 'input-xxlarge' } }) }}
+        </div>
+    </div>
+    <div class="hidden">
+        {{ form_rest(form) }}
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}

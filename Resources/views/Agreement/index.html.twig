@@ -1,0 +1,32 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Agreements{% endblock %}
+
+{% block content %}
+    {% if entities|length > 0 %}
+        <table class="table records_list">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('agreement_show', { id: entity.id }) }}">{{ entity }}</a></td>
+            <td>{{ entity.description }}</td>
+            <td>
+                <a class="btn btn-mini" href="{{ path('agreement_edit', { 'id': entity.id }) }}">EDIT</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    {% else %}
+<h4>No agreements.</h4>
+<div class="spacer"></div>
+    {% endif %}
+    <a href="{{ path('agreement_new') }}" class="btn btn-primary">New Agreement</a>
+{% endblock %}
