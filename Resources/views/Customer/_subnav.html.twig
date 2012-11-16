@@ -3,11 +3,11 @@
     <li{% if is_current_route('customer_show') %} class="active"{% endif %}>
         <a href="{{ path('customer_show', { id: entity.id }) }}">Summary</a>
     </li>
-    <li{% if is_current_route('customer_tackboard') %} class="active"{% endif %}>
+    <li{% if is_currently_on([ 'Customer\\Tackboard', 'Customer\\Alert', 'Customer\\ToDo' ]) %} class="active"{% endif %}>
         <a href="{{ path('customer_tackboard', { id: entity.id }) }}">Notifications</a>
     </li>
-    <li{% if is_current_route('customer_contracts') %} class="active"{% endif %}>
-        <a href="#">Contracts</a>
+    <li{% if is_currently_on('Customer\\Contract') %} class="active"{% endif %}>
+        <a href="{{ path('customer_contracts', { id: entity.id }) }}">Contracts</a>
     </li>
 </ul>
 {% endblock %}

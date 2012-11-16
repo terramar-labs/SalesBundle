@@ -40,9 +40,9 @@ class AgreementController extends AbstractController
     /**
      * Shows a Agreement
      *
-     * @Route("/{id}/show", name="agreement_show")
+     * @Route("/{id}/show.{_format}", name="agreement_show", defaults={"_format"="html"})
      * @Template
-     * @Secure(roles="ROLE_AGREEMENT_WRITE")
+     * @Secure(roles="ROLE_AGREEMENT_READ")
      */
     public function showAction($id)
     {

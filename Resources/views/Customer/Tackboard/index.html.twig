@@ -2,7 +2,7 @@
 
 {% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
 
-{% block title %}Customer Detail - Tackboard{% endblock %}
+{% block title %}{{ entity }}{% endblock %}
 
 {% block content %}
     {% render 'TerraMarSalesBundle:Customer/Alert:index' with { id: entity.id } %}
@@ -10,8 +10,4 @@
     {% render 'TerraMarSalesBundle:Customer/ToDo:index' with { id: entity.id } %}
     <hr />
     {% render 'TerraMarSalesBundle:Customer/AlertHistory:index' with { id: entity.id }%}
-{% endblock %}
-
-{% block additional_javascripts %}
-
 {% endblock %}

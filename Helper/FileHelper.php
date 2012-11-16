@@ -118,7 +118,7 @@ class FileHelper
      *
      * @return string
      */
-    private function getSignaturePath(Contract $contract)
+    public function getSignaturePath()
     {
         return $this->ensureDirectoryExists($this->internalPath . '/signatures');
     }
@@ -126,10 +126,40 @@ class FileHelper
     public function getSignatureFilename(Contract $contract)
     {
         if (!$contract->getId()) {
-            return $this->getSignaturePath($contract) . DIRECTORY_SEPARATOR . $this->generateFilename('png');
+            return $this->getSignaturePath() . DIRECTORY_SEPARATOR . $this->generateFilename('png');
         }
 
-        return $this->getSignaturePath($contract) . DIRECTORY_SEPARATOR . $contract->getId() . '.png';
+        return $this->getSignaturePath() . DIRECTORY_SEPARATOR . $contract->getId() . '.png';
+    }
+
+    /**
+     * @param resource $gdResource  A GD image resource
+     * @param string $path          The path (no filename) to save the image
+     * @param string $filename      The filename to save the image as
+     *
+     * @throws \RuntimeException
+     * @return \Orkestra\Bundle\ApplicationBundle\Entity\File
+     */
+    public function saveImageToPng($gdResource, $path = null, $filename = null)
+    {
+        if (null === $path) {
+            $path = $this->internalPath;
+        }
+
+        if (null === $filename) {
+            $filename = md5(uniqid('imagepng', true)) . '.png';
+        }
+
+        $fullPath = $path . '/' . $filename;
+        $result = imagepng($gdResource, $fullPath, 5);
+
+        if (!$result) {
+            throw new \RuntimeException(sprintf('Could not save image to %s', $fullPath));
+        }
+
+        $file = new File($fullPath, $filename, 'image/png', filesize($fullPath));
+
+        return $file;
     }
 
     /**

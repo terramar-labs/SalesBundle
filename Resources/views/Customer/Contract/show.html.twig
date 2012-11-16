@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+
+{% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
+
+{% block title %}{{ entity }}{% endblock %}
+
+{% block content %}
+    <div class="well">
+    <table class="table summary">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ contract.id }}</td>
+            </tr>
+            <tr>
+                <th>Agreement</th>
+                <td>{{ contract.agreement }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ contract.status }}</td>
+            </tr>
+            <tr>
+                <th>Start Date</th>
+                <td>{{ contract.dateStart }}</td>
+            </tr>
+            <tr>
+                <th>End Date</th>
+                <td>{{ contract.dateEnd }}</td>
+            </tr>
+            <tr>
+                <th>Last Modified</th>
+                <td>{{ contract.dateModified }}</td>
+            </tr>
+            <tr>
+                <th>Date Created</th>
+                <td>{{ contract.dateCreated }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="spacer"></div>
+    <div class="form-buttons">
+        <a class="btn" href="{{ path('customer_contract_edit', { id: entity.id, contractid: contract.id }) }}">Edit Contract</a>
+    </div>
+</div>
+{% endblock %}

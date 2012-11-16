@@ -1,0 +1,91 @@
+{% extends '::base.html.twig' %}
+
+{% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
+
+{% block title %}New Contract{% endblock %}
+
+{% block content %}
+<form id="customer_contract_create" action="{{ path('customer_contract_create', { id : entity.id }) }}" method="post" {{ form_enctype(form) }}>
+<div class="well">
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.agreement, { attr: { class: 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid billing-frequency">
+        <div class="span3">
+            {{ form_row(form.billingFrequency, { attr: { class: 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.dateStart, { attr: { class: 'input-small' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.salesperson, { attr: { class: 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span5">
+            <div class="sigNav">
+                <p class="sigLabel">Sign below</p>
+                <a class="clearButton btn pull-right" href="#clear">Clear</a>
+            </div>
+            <div class="sig sigWrapper">
+                <canvas class="pad" width="420"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="hidden">
+        {{ form_widget(form.signature, { 'attr' : { 'class' : 'output' } }) }}
+        {{ form_rest(form) }}
+    </div>
+    <div class="spacer"></div>
+    <div class="row-fluid">
+        <div class="span3">
+            <button class="btn btn-primary" type="submit">Create Contract</button>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}
+
+{% block additional_javascripts %}
+<script type="text/javascript">
+(function($) {
+    var _showPath = '{{ path('agreement_show', { _format: 'json', id: '_id_' }) }}',
+        _$billingFrequencyContainer = $('.billing-frequency'),
+        _$billingFrequency = $('#{{ form.billingFrequency.get('id') }}');
+
+    $(function() {
+        $('#customer_contract_create').signaturePad({ drawOnly: true, lineTop: 140, validateFields: false });
+
+        $('#{{ form.agreement.get('id') }}').change(function() {
+            _$billingFrequencyContainer.slideUp();
+
+            var id = $(this).val();
+
+            if (!id) {
+                return;
+            }
+
+            terramar.jsonRequest(
+                terramar.getRoute(_showPath, { '_id_': id }),
+                {},
+                function(response) {
+                    var html = '';
+                    for (var i in response.billing_frequencies) {
+                        html = html + '<option>' + response.billing_frequencies[i] + '</option>';
+                    }
+
+                    _$billingFrequency.html(html);
+                    _$billingFrequencyContainer.slideDown();
+                }
+            );
+        }).change();
+    });
+})(jQuery);
+</script>
+{% endblock %}

@@ -23,6 +23,23 @@ var terramar = $.extend(terramar || {}, (function($) {
       });
     },
 
+    jsonToSelect: function(target, data, selected) {
+      var $target = $(target),
+        $option = $('<option />');
+
+      $target.html('');
+
+      _.each(data, function(value, index) {
+        var el = $option.clone();
+        el.attr('value', parseInt(index) === index ? value : index).html(value);
+        if (selected == el.attr('value')) {
+          el.attr('selected', true);
+        }
+
+        $target.append(el);
+      });
+    },
+
     handleJsonResponse: function(response) {
       if (response.type == 'success') {
         if (response.reload) {

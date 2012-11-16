@@ -3,6 +3,9 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Orkestra\Bundle\ApplicationBundle\Entity\File;
+use TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType;
+use TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
 use TerraMar\Bundle\SalesBundle\Entity\Contract\ContractStatus;
 use Orkestra\Common\Entity\EntityBase;
 
@@ -66,6 +69,14 @@ class Contract extends EntityBase
     protected $foundByType;
 
     /**
+     * @var \TerraMar\Bundle\SalesBundle\Entity\Salesperson
+     *
+     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Salesperson", cascade={"persist"})
+     * @ORM\JoinColumn(name="salesperson_id", referencedColumnName="id")
+     */
+    protected $salesperson;
+
+    /**
      * @var \Orkestra\Bundle\ApplicationBundle\Entity\File
      *
      * @ORM\OneToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Entity\File", cascade={"persist"})
@@ -74,9 +85,17 @@ class Contract extends EntityBase
     protected $signature;
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->agreement->__toString();
+    }
+
+    /**
      * @param \TerraMar\Bundle\SalesBundle\Entity\Agreement $agreement
      */
-    public function setAgreement($agreement)
+    public function setAgreement(Agreement $agreement)
     {
         $this->agreement = $agreement;
     }
@@ -90,9 +109,25 @@ class Contract extends EntityBase
     }
 
     /**
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Salesperson $salesperson
+     */
+    public function setSalesperson(Salesperson $salesperson)
+    {
+        $this->salesperson = $salesperson;
+    }
+
+    /**
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Salesperson
+     */
+    public function getSalesperson()
+    {
+        return $this->salesperson;
+    }
+
+    /**
      * @param \TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency $billingFrequency
      */
-    public function setBillingFrequency($billingFrequency)
+    public function setBillingFrequency(BillingFrequency $billingFrequency)
     {
         $this->billingFrequency = $billingFrequency;
     }
@@ -108,7 +143,7 @@ class Contract extends EntityBase
     /**
      * @param \DateTime $dateEnd
      */
-    public function setDateEnd($dateEnd)
+    public function setDateEnd(\DateTime $dateEnd)
     {
         $this->dateEnd = $dateEnd;
     }
@@ -124,7 +159,7 @@ class Contract extends EntityBase
     /**
      * @param \DateTime $dateStart
      */
-    public function setDateStart($dateStart)
+    public function setDateStart(\DateTime $dateStart)
     {
         $this->dateStart = $dateStart;
     }
@@ -140,7 +175,7 @@ class Contract extends EntityBase
     /**
      * @param \TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType $foundByType
      */
-    public function setFoundByType($foundByType)
+    public function setFoundByType(FoundByType $foundByType)
     {
         $this->foundByType = $foundByType;
     }
@@ -156,7 +191,7 @@ class Contract extends EntityBase
     /**
      * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
      */
-    public function setProfile($profile)
+    public function setProfile(CustomerSalesProfile $profile)
     {
         $this->profile = $profile;
     }
@@ -172,7 +207,7 @@ class Contract extends EntityBase
     /**
      * @param \Orkestra\Bundle\ApplicationBundle\Entity\File $signature
      */
-    public function setSignature($signature)
+    public function setSignature(File $signature)
     {
         $this->signature = $signature;
     }
@@ -188,7 +223,7 @@ class Contract extends EntityBase
     /**
      * @param \TerraMar\Bundle\SalesBundle\Entity\Contract\ContractStatus $status
      */
-    public function setStatus($status)
+    public function setStatus(ContractStatus $status)
     {
         $this->status = $status;
     }

@@ -1,2 +1,5 @@
 .icon-header { margin-top: 8px }
 .subheader .nav { margin-bottom: 0; }
+.sigNav { width: 420px }
+.sigNav .sigLabel { width: 100px; float: left; margin-top: 5px; }
+.sigNav .clearButton { float: right; }

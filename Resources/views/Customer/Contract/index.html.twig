@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
+
+{% block title %}{{ entity }}{% endblock %}
+
+{% block content %}
+    {% if entities|length > 0 %}
+<table class="table records_list">
+    <thead>
+        <tr>
+            <th>Agreement Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for contract in entities %}
+        <tr>
+            <td><a href="{{ path('customer_contract_show', { id: entity.id, contractid: contract.id }) }}">{{ contract }}</a></td>
+            <td>{{ contract.dateStart }}</td>
+            <td>{{ contract.dateEnd }}</td>
+            <td>{{ contract.status }}</td>
+            <td>
+                <a class="btn btn-mini" href="{{ path('customer_contract_edit', { id: entity.id, contractid: contract.id }) }}">EDIT</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    {% else %}
+<h4>No contracts.</h4>
+<div class="spacer"></div>
+    {% endif %}
+<a href="{{ path('customer_contract_new', { id: entity.id }) }}" class="btn btn-primary">New Contract</a>
+{% endblock %}

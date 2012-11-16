@@ -3,16 +3,23 @@
 namespace TerraMar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use TerraMar\Bundle\SalesBundle\Form\Signature\SignatureTransformer;
+use TerraMar\Bundle\SalesBundle\Helper\FileHelper;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ContractType extends AbstractType
+class SignatureType extends AbstractType
 {
+    protected $fileHelper;
+
+    public function __construct(FileHelper $fileHelper)
+    {
+        $this->fileHelper = $fileHelper;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('status', 'enum', array(
-            'enum' => 'TerraMar\Bundle\SalesBundle\Entity\Contract\ContractStatus'
-        ));
+        $builder->addModelTransformer(new SignatureTransformer($this->fileHelper));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -22,8 +29,13 @@ class ContractType extends AbstractType
         ));
     }
 
+    public function getParent()
+    {
+        return 'text';
+    }
+
     public function getName()
     {
-        return 'contract';
+        return 'signature';
     }
 }

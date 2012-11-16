@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
+
+{% block title %}Edit Contract{% endblock %}
+
+{% block content %}
+<form id="customer_contract_update" action="{{ path('customer_contract_update', { id: entity.id, contractid: contract.id }) }}" method="post" {{ form_enctype(form) }}>
+<div class="well">
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.status, { 'attr' : { 'class' : 'input-medium' } }) }}
+        </div>
+    </div>
+    <div class="hidden">
+        {{ form_rest(form) }}
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}

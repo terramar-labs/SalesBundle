@@ -8,7 +8,7 @@ use Orkestra\Common\Entity\EntityBase;
 /**
  * An agreement
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\AgreementRepository")
  * @ORM\Table(name="terramar_agreements")
  */
 class Agreement extends EntityBase

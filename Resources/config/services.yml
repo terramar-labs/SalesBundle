@@ -7,6 +7,7 @@ parameters:
   terramar.sales.factory.alert.class:                      TerraMar\Bundle\SalesBundle\Factory\AlertFactory
   terramar.sales.factory.assigned_alert.office_user.class: TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\OfficeUserAlertFactory
   terramar.sales.factory.assigned_alert.customer.class:    TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\CustomerAlertFactory
+  terramar.sales.factory.contract.class:                   TerraMar\Bundle\SalesBundle\Factory\ContractFactory
   terramar.sales.helper.invoice.class:                     TerraMar\Bundle\SalesBundle\Helper\InvoiceHelper
   terramar.sales.helper.account.class:                     TerraMar\Bundle\SalesBundle\Helper\AccountHelper
   terramar.sales.helper.file.class:                        TerraMar\Bundle\SalesBundle\Helper\FileHelper
@@ -53,6 +54,8 @@ services:
     class: %terramar.sales.factory.assigned_alert.customer.class%
     tags:
       - { name: terramar.assigned_alert_factory }
+  terramar.sales.factory.contract:
+    class: %terramar.sales.factory.contract.class%
 
   # Helpers
   terramar.sales.helper.invoice:
@@ -67,6 +70,13 @@ services:
   terramar.sales.helper.customer_user:
     class: %terramar.sales.helper.customer_user.class%
     arguments: [ @security.encoder_factory, @doctrine.orm.entity_manager ]
+
+  # Form types
+  terramar.sales.form.signature_type:
+    class: TerraMar\Bundle\SalesBundle\Form\SignatureType
+    arguments: [ @terramar.sales.helper.file ]
+    tags:
+      - { name: form.type, alias: signature }
 
   # Miscellaenous
   terramar.sales.listener.logout:
