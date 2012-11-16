@@ -44,7 +44,7 @@ class AccountHelper
             throw new \RuntimeException('Amount must be greater than 0');
         }
 
-        $configuration = $this->repository->getConfiguration($profile->getOffice());
+        $configuration = $this->repository->findOneByOffice($profile->getOffice());
 
         if (!$configuration) {
             throw new \RuntimeException('The Office has no associated OfficeConfiguration');

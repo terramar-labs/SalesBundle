@@ -11,7 +11,7 @@ use Orkestra\Common\Entity\EntityBase;
 /**
  * An Alert
  *
- * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\AlertRepository")
+ * @ORM\Entity
  * @ORM\Table(name="terramar_alerts")
  */
 class Alert extends EntityBase

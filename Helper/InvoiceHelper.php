@@ -92,7 +92,7 @@ class InvoiceHelper
     public function processPayment(Invoice $invoice, Payment $payment, User $user)
     {
         $office = $invoice->getContract()->getProfile()->getOffice();
-        $configuration = $this->configurationRepository->getConfiguration($office);
+        $configuration = $this->configurationRepository->findOneByOffice($office);
         if (!$configuration) {
             throw new \RuntimeException('Unable to locate office configuration');
         }
