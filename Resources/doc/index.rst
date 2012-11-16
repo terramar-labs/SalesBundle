@@ -43,6 +43,12 @@ Roles Reference
 *ROLE_COMPANY_WRITE*    - Create and edit companies and offices
 *ROLE_COMPANY_READ*     - View companies and offices
 
+*ROLE_AGREEMENT_WRITE*    - Create and edit agreements
+*ROLE_AGREEMENT_READ*     - View agreements
+
+*ROLE_CONTRACT_WRITE*    - Create and edit contracts
+*ROLE_CONTRACT_READ*     - View contracts
+
 *ROLE_TACKBOARD_WRITE*  - Create and edit other users' alerts
 *ROLE_TACKBOARD_READ*   - View other users' alerts
 
