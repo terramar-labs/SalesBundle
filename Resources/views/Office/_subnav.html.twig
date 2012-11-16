@@ -1,3 +1,10 @@
-{% block subnav %}
-{% include '::subnav.html.twig' with { 'pages' : { 'companies': 'Companies', 'companies_offices_all':'View All Branches' } } %}
+{% block subheader %}
+    <ul class="nav nav-pills pull-right">
+    <li{% if is_current_route('company_show') %} class="active"{% endif %}>
+        <a href="{{ path('company_show', { id: entity.id }) }}">Summary</a>
+    </li>
+    <li{% if is_current_route('company_offices') %} class="active"{% endif %}>
+        <a href="{{ path('company_offices', { id: entity.id }) }}">Offices</a>
+    </li>
+</ul>
 {% endblock %}

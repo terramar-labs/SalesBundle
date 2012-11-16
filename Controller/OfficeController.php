@@ -5,7 +5,6 @@ namespace TerraMar\Bundle\SalesBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Orkestra\Bundle\ApplicationBundle\Entity\File;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -38,14 +37,37 @@ class OfficeController extends AbstractController
         );
     }
 
+
     /**
-     * Lists all Office entities for a Parent.
+     * Finds and displays a Office entity.
      *
-     * @Route("/companies/{id}/offices", name="companies_offices")
+     * @Route("/company/{id}/show", name="company_show")
      * @Template()
      * @Secure(roles="ROLE_COMPANY_READ")
      */
-    public function indexBranchAction($id)
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $office = $em->getRepository('TerraMarSalesBundle:Office')->find($id);
+
+        if (!$office) {
+            throw $this->createNotFoundException('Unable to find Office entity.');
+        }
+
+        return array(
+            'entity' => $office
+        );
+    }
+
+    /**
+     * Lists all Office entities for a Parent.
+     *
+     * @Route("/companies/{id}/offices", name="company_offices")
+     * @Template()
+     * @Secure(roles="ROLE_COMPANY_READ")
+     */
+    public function indexOfficeAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -59,18 +81,18 @@ class OfficeController extends AbstractController
 
         return array(
             'entities' => $entities,
-            'parent' => $parent,
+            'entity' => $parent,
         );
     }
 
     /**
      * Lists all Office entities that act as branches.
      *
-     * @Route("/companies/offices", name="companies_offices_all")
+     * @Route("/companies/offices", name="companies_offices")
      * @Template()
      * @Secure(roles="ROLE_COMPANY_READ")
      */
-    public function indexAllBranchesAction()
+    public function indexOfficesAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -82,22 +104,10 @@ class OfficeController extends AbstractController
     }
 
     /**
-     * Finds and displays a Office entity.
-     *
-     * @Route("/company/{id}/show", name="company_show")
-     * @Template()
-     * @Secure(roles="ROLE_COMPANY_READ")
-     */
-    public function showAction($id)
-    {
-
-    }
-
-    /**
      * Displays a form to create a new Office entity.
      *
      * @Route("/company/new", name="company_new")
-     * @Route("/company/{id}/new", name="branch_new")
+     * @Route("/company/{id}/office/new", name="office_new")
      * @Template()
      * @Secure(roles="ROLE_COMPANY_WRITE")
      */
@@ -122,8 +132,9 @@ class OfficeController extends AbstractController
     /**
      * Creates a new Office entity.
      *
-     * @Route("/company/create", name="company_create", defaults={"_format"="json"})
+     * @Route("/company/create", name="company_create")
      * @Method("POST")
+     * @Template("TerraMarSalesBundle:Office:new.html.twig")
      * @Secure(roles="ROLE_COMPANY_WRITE")
      */
     public function createAction(Request $request)
@@ -148,10 +159,13 @@ class OfficeController extends AbstractController
 
             $this->getSession()->getFlashBag()->add('success', 'Company created successfully.');
 
-            return new Response(json_encode(array('type' => 'success', 'reload' => true)));
-        } else {
-            return new Response(json_encode(array('type' => 'error', 'message' => $form->getErrorsAsString() . 'An error occurred while creating the company')));
+            return $this->redirect($this->generateUrl('company_show', array('id' => $entity->getId())));
         }
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
     }
 
     /**
@@ -171,19 +185,20 @@ class OfficeController extends AbstractController
             throw $this->createNotFoundException('Unable to find Office entity.');
         }
 
-        $editForm = $this->createForm(new OfficeType(), $entity);
+        $form = $this->createForm(new OfficeType(), $entity);
 
         return array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
+            'entity' => $entity,
+            'form'   => $form->createView(),
         );
     }
 
     /**
      * Edits an existing Office entity.
      *
-     * @Route("/company/{id}/update", name="company_update", defaults={"_format"="json"})
+     * @Route("/company/{id}/update", name="company_update")
      * @Method("POST")
+     * @Template("TerraMarSalesBundle:Office:edit.html.twig")
      * @Secure(roles="ROLE_COMPANY_WRITE")
      */
     public function updateAction(Request $request, $id)
@@ -211,14 +226,19 @@ class OfficeController extends AbstractController
 
             $this->getSession()->getFlashBag()->add('success', 'Company updated successfully.');
 
-            return new Response(json_encode(array('type' => 'success', 'reload' => true)));
-        } else {
-            return new Response(json_encode(array('type' => 'error', 'message' => 'An error occurred while updating company information')));
+            return $this->redirect($this->generateUrl('company_show', array('id' => $id)));
         }
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
     }
 
     /**
      * Deletes a Company entity.
+     *
+     * @todo Should this be allowed?
      *
      * @Route("/{id}/delete", name="branch_delete", defaults={"_format"="json"})
      * @Method("POST")

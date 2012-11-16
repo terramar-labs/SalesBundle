@@ -40,8 +40,11 @@ Configuration
 Roles Reference
 ---------------
 
-*ROLE_TACKBOARD_WRITE*  - Ability to create other users' alerts
-*ROLE_TACKBOARD_READ*   - Ability to view other users' alerts
+*ROLE_COMPANY_WRITE*    - Create and edit companies and offices
+*ROLE_COMPANY_READ*     - View companies and offices
+
+*ROLE_TACKBOARD_WRITE*  - Create and edit other users' alerts
+*ROLE_TACKBOARD_READ*   - View other users' alerts
 
 
 

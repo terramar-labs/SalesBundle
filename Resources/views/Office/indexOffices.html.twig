@@ -2,13 +2,14 @@
 
 {% use 'TerraMarSalesBundle:Office:_indexSubnav.html.twig' %}
 
-{% block title %}Companies{% endblock %}
+{% block title %}All Offices{% endblock %}
 
 {% block content %}
 {% if entities|length > 0 %}
-<table class="table records_list">
+    <table class="table records_list">
     <thead>
         <tr>
+            <th>Parent</th>
             <th>Name</th>
             <th>Address</th>
             <th>Phone</th>
@@ -18,6 +19,7 @@
     <tbody>
     {% for entity in entities %}
         <tr>
+            <td>{{ entity.parent }}</td>
             <td><a href="{{ path('company_show', { id: entity.id }) }}">{{ entity.name }}</a></td>
             <td>{{ entity.contactAddress|default('n/a') }}</td>
             <td>{{ entity.contactAddress.phone|default('n/a') }}</td>
@@ -29,8 +31,7 @@
     </tbody>
 </table>
 {% else %}
-<h4>No companies.</h4>
-<div class="spacer"></div>
+    <h4>No offices.</h4>
+    <div class="spacer"></div>
 {% endif %}
-<a href="{{ path('company_new') }}" class="btn btn-primary">New Company</a>
 {% endblock %}

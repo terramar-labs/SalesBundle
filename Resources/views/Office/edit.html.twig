@@ -1,67 +1,66 @@
-<div class="row popup-header">
-    <div class="columns">
-        <h3>Edit Company</h3>
-    </div>
-</div>
-<div id="company_update_alert" class="alert-box error"></div>
-<form id="company_update" action="{{ path('company_update', { 'id' : entity.id }) }}" method="post" {{ form_enctype(form) }}>
-    <div class="row">
-        <div class="columns">
-            {{ form_row(form.name) }}
+{% extends '::base.html.twig' %}
+
+{% block title %}Edit {{ entity.parent ? 'Office' : 'Company' }}{% endblock %}
+
+{% block content %}
+    <form id="company_update" action="{{ path('company_update', { id: entity.id }) }}" method="post" {{ form_enctype(form) }}>
+<div class="well">
+    <div class="row-fluid">
+        <div class="span2">
+            {{ form_row(form.name, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
-        <div class="columns">
+        <div class="span2">
             {{ form_row(form.contactAddress.phone, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
-        <div class="columns">
+        <div class="span2">
             {{ form_row(form.contactAddress.altPhone, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
     </div>
-    <div class="row">
-        <div class="columns">
-            {{ form_row(form.contactName) }}
+    <div class="row-fluid">
+        <div class="span2">
+            {{ form_row(form.contactName, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
-        <div class="columns">
+        <div class="span2">
             {{ form_row(form.fax, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
-        <div class="columns">
+        <div class="span2">
             {{ form_row(form.url, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
     </div>
-    <div class="row">
-        <div class="columns">
-            {{ form_row(form.contactAddress.street) }}
+    <div class="row-fluid">
+        <h5>Contact Address</h5>
+    </div>
+    <div class="row-fluid">
+        <div class="span2">
+            {{ form_row(form.contactAddress.street, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
-         <div class="columns">
+         <div class="span2">
             {{ form_row(form.contactAddress.suite, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
     </div>
-    <div class="row">
-        <div class="columns">
-            {{ form_row(form.contactAddress.city) }}
+    <div class="row-fluid">
+        <div class="span2">
+            {{ form_row(form.contactAddress.city, { 'attr' : { 'class' : 'input-medium' } }) }}
         </div>
-         <div class="columns">
+         <div class="span2">
             {{ form_row(form.contactAddress.region, { 'attr' : { 'class' : 'input-small' } }) }}
         </div>
-        <div class="columns">
+        <div class="span2">
             {{ form_row(form.contactAddress.postalCode, { 'attr' : { 'class' : 'input-small' } }) }}
         </div>
     </div>
-    <div class="row">
-        <div class="columns">
+    <div class="row-fluid">
+        <div class="span2">
             {{ form_row(form.logo) }}
         </div>
     </div>
     {{ form_rest(form) }}
     <div class="spacer"></div>
-    <div class="row">
-        <div class="columns">
+    <div class="row-fluid">
+        <div class="span2">
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>
     </div>
+</div>
 </form>
-<script type="text/javascript">
-    $('input[type="tel"]').formatPhonenumber();
-    $('#company_update').validate({
-        errorLabelContainer: '#company_update_alert'
-    });
-</script>
+{% endblock %}

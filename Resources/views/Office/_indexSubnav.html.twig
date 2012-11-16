@@ -1,0 +1,10 @@
+{% block subheader %}
+<ul class="nav nav-pills pull-right">
+    <li{% if is_current_route('companies') %} class="active"{% endif %}>
+        <a href="{{ path('companies') }}">Companies</a>
+    </li>
+    <li{% if is_current_route('companies_offices') %} class="active"{% endif %}>
+        <a href="{{ path('companies_offices') }}">All Offices</a>
+    </li>
+</ul>
+{% endblock %}
