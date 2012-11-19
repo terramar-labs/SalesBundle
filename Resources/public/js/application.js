@@ -1,5 +1,9 @@
 var terramar = $.extend(terramar || {}, (function($) {
 
+  $(function() {
+    $('input[type="tel"]').formatPhone();
+  });
+
   return {
     getRoute: function getRoute(route, replacements) {
       for (var key in replacements) {

@@ -42,8 +42,10 @@ services:
     class: %terramar.sales.factory.office_configuration.class%
   terramar.sales.factory.office:
     class: %terramar.sales.factory.office.class%
+    arguments: [ @terramar.sales.factory.office_configuration ]
   terramar.sales.factory.sales_profile:
     class: %terramar.sales.factory.sales_profile.class%
+    arguments: [ @terramar.sales.factory.payment_account ]
   terramar.sales.factory.alert:
     class: %terramar.sales.factory.alert.class%
   terramar.sales.factory.assigned_alert.office_user:

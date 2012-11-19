@@ -34,6 +34,23 @@ class InvoiceFactory implements InvoiceFactoryInterface
         $invoice = new Invoice();
         $invoice->setContract($contract);
         $invoice->setDateDue($dateDue);
+        $this->buildInvoice($invoice);
+
+        return $invoice;
+    }
+
+    /**
+     * Builds a new invoice
+     *
+     * This method should do any additional work related to invoiced creation.
+     * It is called at time of Invoice creation.
+     *
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice $invoice
+     *
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice
+     */
+    public function buildInvoice(Invoice $invoice)
+    {
         $invoice->setStatus(new InvoiceStatus(InvoiceStatus::NOT_SENT));
 
         return $invoice;

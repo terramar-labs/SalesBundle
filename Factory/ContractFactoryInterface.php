@@ -14,7 +14,7 @@ interface ContractFactoryInterface
      *
      * @param \TerraMar\Bundle\SalesBundle\Entity\Contract $contract
      *
-     * @return void
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Contract
      */
     function buildContract(Contract $contract);
 }

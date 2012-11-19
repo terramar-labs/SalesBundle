@@ -3,6 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Orkestra\Bundle\ApplicationBundle\Entity\File;
 use TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType;
 use TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
@@ -12,7 +13,7 @@ use Orkestra\Common\Entity\EntityBase;
 /**
  * A contract that a customer has signed
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\ContractRepository")
  * @ORM\Table(name="terramar_contracts")
  */
 class Contract extends EntityBase
@@ -83,6 +84,21 @@ class Contract extends EntityBase
      * @ORM\JoinColumn(name="signature_id", referencedColumnName="id")
      */
     protected $signature;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Invoice", mappedBy="contract", cascade={"persist"})
+     */
+    protected $invoices;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->invoices = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -234,5 +250,30 @@ class Contract extends EntityBase
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @param Invoice $invoice
+     */
+    public function addInvoice(Invoice $invoice)
+    {
+        $invoice->setContract($this);
+        $this->invoices->add($invoice);
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\Collection $invoices
+     */
+    public function setInvoices($invoices)
+    {
+        $this->invoices = $invoices;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
     }
 }

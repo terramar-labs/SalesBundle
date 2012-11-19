@@ -17,6 +17,10 @@ class PaymentAccountFactory implements PaymentAccountFactoryInterface
     {
         $address = $customer->getBillingAddress();
 
+        if (!$address) {
+            $address = $customer->getContactAddress();
+        }
+
         $account->setName($customer->__toString());
         $account->setAddress(trim($address->getStreet() . ' ' . $address->getSuite()));
         $account->setCity($address->getCity());

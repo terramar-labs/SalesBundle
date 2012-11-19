@@ -152,6 +152,9 @@ class OfficeController extends AbstractController
                 $entity->setLogo($helper->createLogoFromUploadedFile($file, $entity));
             }
 
+            $helper = $this->get('terramar.sales.factory.office');
+            $helper->buildOffice($entity);
+
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($entity);

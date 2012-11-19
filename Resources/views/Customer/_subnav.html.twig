@@ -6,7 +6,7 @@
     <li{% if is_currently_on([ 'Customer\\Tackboard', 'Customer\\Alert', 'Customer\\ToDo' ]) %} class="active"{% endif %}>
         <a href="{{ path('customer_tackboard', { id: entity.id }) }}">Notifications</a>
     </li>
-    <li{% if is_currently_on('Customer\\Contract') %} class="active"{% endif %}>
+    <li{% if is_currently_on([ 'Customer\\Contract', 'Customer\\Contract\\Invoice' ]) %} class="active"{% endif %}>
         <a href="{{ path('customer_contracts', { id: entity.id }) }}">Contracts</a>
     </li>
 </ul>

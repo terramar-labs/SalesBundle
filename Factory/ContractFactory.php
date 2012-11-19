@@ -15,7 +15,7 @@ class ContractFactory implements ContractFactoryInterface
      *
      * @param \TerraMar\Bundle\SalesBundle\Entity\Contract $contract
      *
-     * @return void
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Contract
      */
     public function buildContract(Contract $contract)
     {
@@ -23,5 +23,7 @@ class ContractFactory implements ContractFactoryInterface
         $dateEnd->modify(sprintf('+%s months', $contract->getAgreement()->getLength()));
         $contract->setDateEnd($dateEnd);
         $contract->setStatus(new ContractStatus(ContractStatus::ACTIVE));
+
+        return $contract;
     }
 }

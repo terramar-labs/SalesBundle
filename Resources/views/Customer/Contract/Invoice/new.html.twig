@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+
+{% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
+
+{% block title %}New Invoice{% endblock %}
+
+{% block content %}
+    <form id="customer_contract_invoice_create" action="{{ path('customer_contract_invoice_create', { id : entity.id, contractid: contract.id }) }}" method="post" {{ form_enctype(form) }}>
+<div class="well">
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.amountDue, { attr: { class: 'input-small' } }) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span3">
+            {{ form_row(form.dateDue, { attr: { class: 'input-small' } }) }}
+        </div>
+    </div>
+    <div class="hidden">
+        {{ form_rest(form) }}
+    </div>
+    <div class="spacer"></div>
+    <div class="row-fluid">
+        <div class="span3">
+            <button class="btn btn-primary" type="submit">Create Invoice</button>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}

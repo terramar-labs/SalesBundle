@@ -22,15 +22,6 @@ class OfficeConfiguration extends EntityBase
     protected $timezone;
 
     /**
-     * @todo Enumeration?
-     *
-     * @var string
-     *
-     * @ORM\Column(name="theme", type="string")
-     */
-    protected $theme = 'blue';
-
-    /**
      * @var bool
      *
      * @ORM\Column(name="enable_points", type="boolean")
@@ -80,26 +71,10 @@ class OfficeConfiguration extends EntityBase
     /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office")
+     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office", inversedBy="configuration")
      * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
     protected $office;
-
-    /**
-     * @param string $theme
-     */
-    public function setTheme($theme)
-    {
-        $this->theme = $theme;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
 
     /**
      * @param boolean $pointsEnabled

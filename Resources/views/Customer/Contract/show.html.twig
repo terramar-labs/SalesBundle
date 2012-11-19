@@ -41,6 +41,7 @@
     <div class="spacer"></div>
     <div class="form-buttons">
         <a class="btn" href="{{ path('customer_contract_edit', { id: entity.id, contractid: contract.id }) }}">Edit Contract</a>
+        <a class="btn btn-primary" href="{{ path('customer_contract_invoices', { id: entity.id, contractid: contract.id }) }}">Invoices</a>
     </div>
 </div>
 {% endblock %}

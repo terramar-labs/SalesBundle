@@ -1,12 +1,10 @@
 {% extends "::base.html.twig" %}
 
-{% use 'PocomosPestManagementBundle:CustomerDetail:_subnav.html.twig' %}
+{% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
 
-{% block title %}Customer Detail{% endblock %}
+{% block title %}{{ entity }}{% endblock %}
 
-{% block mainstage %}
-    {% include 'PocomosPestManagementBundle:CustomerDetail:_customerInfo.html.twig' %}
-    <hr />
+{% block content %}
     <div id="invoice_alert" class="alert-box error"></div>
     <h4 style="margin: 0 0 10px 0">
         Invoice Detail
@@ -65,7 +63,7 @@
 {{ form_rest(form) }}
 </div>
     {% if not invoice.paid %}
-<div class="row">
+<div class="row-fluid">
     <div class="columns">
         <a href="javascript:;" class="add-payment btn btn-success pull-right">Add Payment</a>
     </div>
@@ -80,7 +78,7 @@
 <script type="text/javascript">
     var invoiceManager = (function($, customerId, invoiceId) {
         var _current = {{ form.payments|length - 1 }},
-            _balance = {{ invoice.balance|json_encode|raw }},
+            _balance = parseFloat({{ invoice.balance|json_encode|raw }}),
             _customerId = {{ entity.id|json_encode|raw }},
             _invoiceId = {{ invoice.id|json_encode|raw }},
             _$invoiceBody = $('.invoice-body'),
@@ -122,20 +120,11 @@
             init: function() {
                 $('.add-payment').click(function() { invoiceManager.addRow(); });
 
-                $('#invoice').validate({
-                    errorLabelContainer: '#invoice_alert'
-                });
-
                 $('.refund').click(function(e) {
                     e.preventDefault();
 
                     if (confirm('Are you sure you want to refund this transaction?')) {
-                        $.ajax({
-                            url: $(this).attr('href'),
-                            type: 'post',
-                            dataType: 'json',
-                            success: handleJsonResponse
-                        });
+                        terramar.jsonRequest($(this).attr('href'));
                     }
                 });
 
@@ -162,7 +151,7 @@
             },
 
             calculateBalance: function() {
-                hideAlert('#invoice_alert');
+                $('#invoice_alert').hide();
 
                 var balance = _balance,
                     amount;
@@ -177,7 +166,7 @@
 
                 if (balance < 0) {
                     _$saveButton.attr('disabled', true);
-                    showAlert('#invoice_alert', 'Payments exceed invoice amount. Adjust payments so ending balance is 0.00', 'error');
+                    terramar.showAlert('#invoice_alert', 'Payments exceed invoice amount. Adjust payments so ending balance is 0.00', 'error');
                 } else if (balance == _balance) {
                     _$saveButton.attr('disabled', true);
                 } else {

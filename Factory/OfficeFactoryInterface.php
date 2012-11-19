@@ -2,6 +2,8 @@
 
 namespace TerraMar\Bundle\SalesBundle\Factory;
 
+use TerraMar\Bundle\SalesBundle\Entity\Office;
+
 interface OfficeFactoryInterface
 {
     /**
@@ -10,4 +12,15 @@ interface OfficeFactoryInterface
      * @return \TerraMar\Bundle\SalesBundle\Entity\Office
      */
     function create();
+
+    /**
+     * Builds a new Office
+     *
+     * This method is called when a new Office is created.
+     *
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     *
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Office
+     */
+    function buildOffice(Office $office);
 }

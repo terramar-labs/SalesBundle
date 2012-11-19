@@ -3,6 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
 use Orkestra\Common\Entity\EntityBase;
 
 /**
@@ -66,6 +67,13 @@ class Office extends EntityBase
     protected $billingAddress;
 
     /**
+     * @var \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
+     *
+     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration", mappedBy="office", cascade={"persist"})
+     */
+    protected $configuration;
+
+    /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Office
      *
      * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office")
@@ -73,12 +81,13 @@ class Office extends EntityBase
      */
     protected $parent;
 
-
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string)$this->name;
     }
-
 
     /**
      * @param \Orkestra\Bundle\ApplicationBundle\Entity\Contact\Address $billingAddress
@@ -206,5 +215,22 @@ class Office extends EntityBase
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration $configuration
+     */
+    public function setConfiguration(OfficeConfiguration $configuration)
+    {
+        $configuration->setOffice($this);
+        $this->configuration = $configuration;
+    }
+
+    /**
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
     }
 }

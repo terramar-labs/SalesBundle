@@ -75,7 +75,7 @@ class Invoice extends EntityBase
     /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Contract
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Contract")
+     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Contract", inversedBy="invoices")
      * @ORM\JoinColumn(name="contract_id", referencedColumnName="id")
      */
     protected $contract;
@@ -94,7 +94,7 @@ class Invoice extends EntityBase
      */
     public function isPaid()
     {
-        return Invoice\InvoiceStatus::PAID === $this->status->getValue();
+        return Invoice\InvoiceStatus::PAID == $this->status;
     }
 
     /**
@@ -104,7 +104,7 @@ class Invoice extends EntityBase
      */
     public function isPastDue()
     {
-        return Invoice\InvoiceStatus::PAST_DUE === $this->status->getValue();
+        return Invoice\InvoiceStatus::PAST_DUE == $this->status;
     }
 
     /**
@@ -114,7 +114,7 @@ class Invoice extends EntityBase
      */
     public function isDue()
     {
-        return in_array($this->status->getValue(), array(Invoice\InvoiceStatus::DUE, Invoice\InvoiceStatus::PAST_DUE));
+        return in_array($this->status, array(Invoice\InvoiceStatus::DUE, Invoice\InvoiceStatus::PAST_DUE));
     }
 
     /**
@@ -217,7 +217,7 @@ class Invoice extends EntityBase
         $this->transactions->add($transaction);
         if (
             TransactionType::REFUND != $transaction->getType()
-            && in_array($transaction->getStatus()->getValue(), array(
+            && in_array($transaction->getStatus(), array(
                 ResultStatus::APPROVED,
                 ResultStatus::PROCESSED,
                 ResultStatus::PENDING
