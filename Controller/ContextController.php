@@ -23,7 +23,6 @@ class ContextController extends AbstractController
      */
     public function logoAction()
     {
-        $this->requiresCurrentOffice();
         $office = $this->getCurrentOffice();
 
         return array(
@@ -39,7 +38,6 @@ class ContextController extends AbstractController
      */
     public function officeSelectAction()
     {
-        $this->requiresCurrentOffice();
         $office = $this->getCurrentOffice();
         $user = $this->getCurrentOfficeUser();
 
@@ -59,7 +57,6 @@ class ContextController extends AbstractController
      */
     public function switchContextAction(Request $request)
     {
-        $this->requiresCurrentOffice();
         $office = $this->getCurrentOffice();
         $user = $this->getCurrentOfficeUser();
 
@@ -70,7 +67,9 @@ class ContextController extends AbstractController
             $office = $form->get('office')->getData();
             $this->switchOffice($office);
 
-            return new Response(json_encode(array('type' => 'success')));
+            $this->getSession()->getFlashBag()->set('success', 'The current office has been changed.');
+
+            return $this->redirect($this->generateUrl('customers'));
         }
 
         return array();

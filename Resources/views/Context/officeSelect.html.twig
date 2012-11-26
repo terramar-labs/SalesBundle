@@ -1,14 +1,8 @@
-<form style="display:inline;" id="office_select" method="post" action="{{ path('context_switch') }}">
-    {{ form_widget(form.office) }}
-    {{ form_widget(form._token) }}
-</form>
-
-<script type="text/javascript">
-    $('#office_select_office').change(function(){
-        $('#office_select').ajaxSubmit({
-            success: function(response) {
-                window.location.reload();
-            }
-        })
-    });
-</script>
+<div class="row-fluid">
+    <div class="span12" style="position: absolute; text-align: center; padding-top: 15px;">
+    <form style="display:inline;" class=" form-inline" id="office_select" method="post" action="{{ path('context_switch') }}">
+        {{ form_widget(form.office) }} <button class="btn">Switch</button>
+        {{ form_widget(form._token) }}
+    </form>
+    </div>
+</div>
