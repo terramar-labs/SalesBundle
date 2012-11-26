@@ -1,6 +1,6 @@
 {% if form.vars.errors|length > 0 %}
 <tr class="error-{{ form.get('name') }} error">
-    <td colspan="4" class="error" style="padding: 10px">
+    <td colspan="5" class="error" style="padding: 10px">
         <strong>Could not process payment:</strong> {{ form.vars.errors[0].message }}
     </td>
 </tr>
