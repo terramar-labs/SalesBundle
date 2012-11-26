@@ -227,19 +227,23 @@ class SearchController extends Controller
     {
         $results = $this->get('terramar.customer.helper.search_results')->getLastSearchResults(self::LAST_SEARCH_KEY);
 
+        if (!empty($results)) {
+            /** @var \Doctrine\ORM\EntityManager $em */
+            $em = $this->getDoctrine()->getManager();
+
+            $entities = $em->createQueryBuilder()
+                ->select('c')
+                ->from('TerraMarCustomerBundle:Customer', 'c')
+                ->join('c.contactAddress', 'ca')
+                ->andWhere('c.id IN (:results)')
+                ->setParameter('results', $results)
+                ->getQuery()
+                ->getResult();
+        } else {
+            $entities = array();
+        }
+
         $helper = $this->get('terramar.customer.helper.export');
-
-        /** @var \Doctrine\ORM\EntityManager $em */
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->createQueryBuilder()
-            ->select('c')
-            ->from('TerraMarCustomerBundle:Customer', 'c')
-            ->join('c.contactAddress', 'ca')
-            ->andWhere('c.id IN (:results)')
-            ->setParameter('results', $results)
-            ->getQuery()
-            ->getResult();
 
         return $helper->exportToCsv($entities, array(
             'First Name' => 'firstName',
