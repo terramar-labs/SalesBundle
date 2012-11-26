@@ -104,8 +104,8 @@ class InvoiceController extends AbstractController
     /**
      * Shows an Invoice entity
      *
-     * @Route("customer/{id}/invoice/{invoiceid}/process", name="customer_invoice_process", defaults={"_format"="json"})
-     * @Template()
+     * @Route("customer/{id}/invoice/{invoiceid}/process", name="customer_invoice_process")
+     * @Template("TerraMarSalesBundle:Customer/Invoice:show.html.twig")
      * @Secure(roles="ROLE_CUSTOMER_WRITE")
      */
     public function updateAction(Request $request, $id, $invoiceid)
@@ -179,9 +179,16 @@ class InvoiceController extends AbstractController
             }
 
             return $this->redirect($this->generateUrl('customer_invoice_show', array('id' => $id, 'invoiceid' => $invoiceid)));
-        } else {
-            return new Response(json_encode(array('type' => 'error', 'message' => $form->getErrorsAsString())));
         }
+
+        die($form->getErrorsAsString());
+
+        return array(
+            'form' => $form->createView(),
+            'entity' => $customer,
+            'profile' => $profile,
+            'invoice' => $invoice,
+        );
     }
 
     /**

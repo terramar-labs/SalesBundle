@@ -25,13 +25,14 @@ class SalesProfileFactory implements SalesProfileFactoryInterface
         $profile->setOffice($office);
 
         $pointsAccount = new PointsAccount();
+        $pointsAccount->setName('Points');
         $this->paymentAccountFactory->fillAccountWithDetails($pointsAccount, $customer);
 
         $defaultAccount = new SimpleAccount();
         $defaultAccount->setAlias('Cash or check');
         $this->paymentAccountFactory->fillAccountWithDetails($defaultAccount, $customer);
 
-        $profile->setPointsAccount($pointsAccount);
+        $profile->addAccount($pointsAccount);
         $profile->addAccount($defaultAccount);
 
         return $profile;

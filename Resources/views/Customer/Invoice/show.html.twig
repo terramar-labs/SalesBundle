@@ -15,7 +15,7 @@
     <table class="table records_list center-vertically">
     <thead>
         <tr>
-            <th style="width: 300px">Item Description</th>
+            <th style="width: 400px">Item Description</th>
             <th style="width: 100px">Paid</th>
             <th style="width: 115px">Price</th>
             <th>Balance</th>
@@ -64,11 +64,9 @@
 </div>
     {% if not invoice.paid %}
 <div class="row-fluid">
-    <div class="columns">
-        <a href="javascript:;" class="add-payment btn btn-success pull-right">Add Payment</a>
-    </div>
-    <div class="columns pull-right">
-        <button type="submit" class="save-process btn btn-primary pull-right">Save and Process Payment</button>
+    <div class="span6">
+        <a href="javascript:;" class="add-payment btn btn-success">Add Payment</a> &nbsp;
+        <button type="submit" class="save-process btn btn-primary">Save and Process Payment</button>
     </div>
 </div>
     {% endif %}
@@ -132,7 +130,7 @@
 
                 {% for form in form.payments %}
                 _wireHandlers({{ form.get('name') }});
-                _$invoiceBody.find('tr[row="{{ form.get('name') }}"]').find('.payment-account').val({{ form.vars.data.account.id }});
+                _$invoiceBody.find('tr[row="{{ form.get('name') }}"]').find('.payment-account').val({{ form.vars.data.account.id|default }});
                 {% endfor %}
             },
 

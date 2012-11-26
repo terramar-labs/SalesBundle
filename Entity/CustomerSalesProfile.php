@@ -116,7 +116,11 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
      */
     public function addAccount(AbstractAccount $account)
     {
-        $this->accounts[] = $account;
+        if ($account instanceof PointsAccount) {
+            $this->pointsAccount = $account;
+        }
+
+        $this->accounts->add($account);
     }
 
     /**
@@ -270,14 +274,6 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
         return $this->accounts->filter(function(AbstractAccount $account) {
             return $account instanceof SimpleAccount;
         });
-    }
-
-    /**
-     * @param \Orkestra\Transactor\Entity\Account\PointsAccount $pointsAccount
-     */
-    public function setPointsAccount(PointsAccount $pointsAccount)
-    {
-        $this->pointsAccount = $pointsAccount;
     }
 
     /**
