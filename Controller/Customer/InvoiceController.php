@@ -3,8 +3,8 @@
 namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonReloadResponse;
-use Pocomos\Bundle\ApplicationBundle\Http\JsonErrorResponse;
+use TerraMar\Bundle\SalesBundle\Http\JsonReloadResponse;
+use TerraMar\Bundle\SalesBundle\Http\JsonErrorResponse;
 use Symfony\Component\Form\FormError;
 use Orkestra\Transactor\Entity\Result\ResultStatus;
 use Symfony\Component\HttpFoundation\Response;
