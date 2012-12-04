@@ -3,6 +3,8 @@
 namespace TerraMar\Bundle\SalesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use TerraMar\Bundle\SalesBundle\Factory\CustomerUser\DuplicateEmailException;
+use Symfony\Component\Form\FormError;
 use TerraMar\Bundle\CustomerBundle\Controller\Customer\SearchController;
 use TerraMar\Bundle\CustomerBundle\Form\CustomerType;
 use Symfony\Component\HttpFoundation\Response;
@@ -123,16 +125,20 @@ class CustomerController extends AbstractController
         if ($form->isValid()) {
             $entity = $form->getData();
 
-            $profile = $this->get('terramar.sales.factory.sales_profile')->create($entity, $this->getCurrentOffice());
+            try {
+                $profile = $this->get('terramar.sales.factory.sales_profile')->create($entity, $this->getCurrentOffice());
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($profile);
-            $em->persist($entity);
-            $em->flush();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($profile);
+                $em->persist($entity);
+                $em->flush();
 
-            $this->getSession()->getFlashBag()->set('success', 'The customer has been created successfully.');
+                $this->getSession()->getFlashBag()->set('success', 'The customer has been created successfully.');
 
-            return $this->redirect($this->generateUrl('customers'));
+                return $this->redirect($this->generateUrl('customers'));
+            } catch (DuplicateEmailException $e) {
+                $form->get('emailAddress')->addError(new FormError('This email address is in use by another customer.'));
+            }
         }
 
         return array(
@@ -213,12 +219,16 @@ class CustomerController extends AbstractController
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+            try {
+                $em->persist($entity);
+                $em->flush();
 
-            $this->getSession()->getFlashBag()->set('success', 'The customer has been updated successfully.');
+                $this->getSession()->getFlashBag()->set('success', 'The customer has been updated successfully.');
 
-            return $this->redirect($this->generateUrl('customers'));
+                return $this->redirect($this->generateUrl('customers'));
+            } catch (DuplicateEmailException $e) {
+                $form->get('emailAddress')->addError(new FormError('This email address is in use by another customer.'));
+            }
         }
 
         return array(

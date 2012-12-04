@@ -8,12 +8,13 @@ parameters:
   terramar.sales.factory.assigned_alert.office_user.class: TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\OfficeUserAlertFactory
   terramar.sales.factory.assigned_alert.customer.class:    TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\CustomerAlertFactory
   terramar.sales.factory.contract.class:                   TerraMar\Bundle\SalesBundle\Factory\ContractFactory
+  terramar.sales.factory.customer_user.class:              TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactory
   terramar.sales.helper.invoice.class:                     TerraMar\Bundle\SalesBundle\Helper\InvoiceHelper
   terramar.sales.helper.account.class:                     TerraMar\Bundle\SalesBundle\Helper\AccountHelper
   terramar.sales.helper.file.class:                        TerraMar\Bundle\SalesBundle\Helper\FileHelper
-  terramar.sales.helper.customer_user.class:               TerraMar\Bundle\SalesBundle\Helper\CustomerUserHelper
   terramar.sales.listener.logout.class:                    TerraMar\Bundle\SalesBundle\Listener\LogoutListener
   terramar.sales.subscriber.class_metadata.class:          TerraMar\Bundle\SalesBundle\Subscriber\ClassMetadataSubscriber
+  terramar.sales.subscriber.customer_user.class:           TerraMar\Bundle\SalesBundle\Subscriber\CustomerEmailSubscriber
 
 services:
   # Repository services
@@ -45,7 +46,7 @@ services:
     arguments: [ @terramar.sales.factory.office_configuration ]
   terramar.sales.factory.sales_profile:
     class: %terramar.sales.factory.sales_profile.class%
-    arguments: [ @terramar.sales.factory.payment_account ]
+    arguments: [ @terramar.sales.factory.payment_account, @terramar.sales.factory.customer_user ]
   terramar.sales.factory.alert:
     class: %terramar.sales.factory.alert.class%
   terramar.sales.factory.assigned_alert.office_user:
@@ -58,6 +59,9 @@ services:
       - { name: terramar.assigned_alert_factory }
   terramar.sales.factory.contract:
     class: %terramar.sales.factory.contract.class%
+  terramar.sales.factory.customer_user:
+    class: %terramar.sales.factory.customer_user.class%
+    arguments: [ @security.encoder_factory, @doctrine.orm.entity_manager ]
 
   # Helpers
   terramar.sales.helper.invoice:
@@ -69,9 +73,6 @@ services:
   terramar.sales.helper.file:
     class: %terramar.sales.helper.file.class%
     arguments: [ %orkestra.file_manager.base_path% ]
-  terramar.sales.helper.customer_user:
-    class: %terramar.sales.helper.customer_user.class%
-    arguments: [ @security.encoder_factory, @doctrine.orm.entity_manager ]
 
   # Form types
   terramar.sales.form.signature_type:
@@ -85,6 +86,11 @@ services:
     class: %terramar.sales.listener.logout.class%
   terramar.sales.subscriber.class_metadata:
     class: %terramar.sales.subscriber.class_metadata.class%
+    tags:
+      - { name: doctrine.event_subscriber }
+  terramar.sales.subscriber.customer_user:
+    class: %terramar.sales.subscriber.customer_user.class%
+    arguments: [ @service_container ]
     tags:
       - { name: doctrine.event_subscriber }
 

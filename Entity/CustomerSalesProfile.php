@@ -86,10 +86,10 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
     protected $alerts;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @var \TerraMar\Bundle\SalesBundle\Entity\CustomerUser
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\OfficeUser", cascade={"persist"})
-     * @ORM\JoinColumn(name="office_user_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\CustomerUser", cascade={"persist"})
+     * @ORM\JoinColumn(name="customer_user_id", referencedColumnName="id", nullable=true)
      */
     protected $user;
 
@@ -189,7 +189,7 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\OfficeUser $user
+     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerUser $user
      */
     public function setUser($user)
     {
@@ -197,7 +197,7 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerUser
      */
     public function getUser()
     {

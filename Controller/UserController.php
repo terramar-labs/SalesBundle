@@ -139,7 +139,6 @@ class UserController extends AbstractController
         $form->bind($this->getRequest());
 
         if ($form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
 
             $factory = $this->get('security.encoder_factory');

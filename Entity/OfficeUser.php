@@ -3,7 +3,6 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Filter\OfficeFilter\FilterByOfficeInterface;
 use TerraMar\Bundle\CustomerBundle\Entity\Note;
 use Doctrine\Common\Collections\ArrayCollection;
 use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
@@ -128,5 +127,4 @@ class OfficeUser extends EntityBase implements AssignedByInterface, AssignedToIn
     {
         return $this->notes;
     }
-
 }
