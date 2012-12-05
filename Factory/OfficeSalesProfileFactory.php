@@ -3,13 +3,14 @@
 namespace TerraMar\Bundle\SalesBundle\Factory;
 
 use TerraMar\Bundle\CustomerBundle\Entity\Customer;
+use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
 use TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface;
 use Orkestra\Transactor\Entity\Account\SimpleAccount;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
 use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 use TerraMar\Bundle\SalesBundle\Entity\Office;
 
-class SalesProfileFactory implements SalesProfileFactoryInterface
+class OfficeSalesProfileFactory implements OfficeSalesProfileFactoryInterface
 {
     /**
      * @var \TerraMar\Bundle\SalesBundle\Factory\PaymentAccountFactoryInterface
@@ -17,48 +18,37 @@ class SalesProfileFactory implements SalesProfileFactoryInterface
     protected $paymentAccountFactory;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface
-     */
-    protected $customerUserFactory;
-
-    /**
      * Constructor
      *
      * @param \TerraMar\Bundle\SalesBundle\Factory\PaymentAccountFactoryInterface $paymentAccountFactory
-     * @param \TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface $customerUserFactory
      */
-    public function __construct(PaymentAccountFactoryInterface $paymentAccountFactory, CustomerUserFactoryInterface $customerUserFactory)
+    public function __construct(PaymentAccountFactoryInterface $paymentAccountFactory)
     {
         $this->paymentAccountFactory = $paymentAccountFactory;
-        $this->customerUserFactory = $customerUserFactory;
     }
 
     /**
-     * Creates a new CustomerSalesProfile from the given Customer
+     * Creates a new OfficeSalesProfile from the given Office
      *
-     * @param \TerraMar\Bundle\CustomerBundle\Entity\Customer $customer
      * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
      */
-    public function create(Customer $customer, Office $office)
+    public function create(Office $office)
     {
-        $profile = new CustomerSalesProfile();
-        $profile->setCustomer($customer);
+        $profile = new OfficeSalesProfile();
         $profile->setOffice($office);
 
         $pointsAccount = new PointsAccount();
         $pointsAccount->setName('Points');
-        $this->paymentAccountFactory->fillAccountWithDetails($pointsAccount, $customer);
+        $this->paymentAccountFactory->buildAccountFromOffice($pointsAccount, $office);
 
         $defaultAccount = new SimpleAccount();
         $defaultAccount->setAlias('Cash or check');
-        $this->paymentAccountFactory->fillAccountWithDetails($defaultAccount, $customer);
+        $this->paymentAccountFactory->buildAccountFromOffice($defaultAccount, $office);
 
         $profile->addAccount($pointsAccount);
         $profile->addAccount($defaultAccount);
-
-        $profile->setUser($this->customerUserFactory->create($profile));
 
         return $profile;
     }

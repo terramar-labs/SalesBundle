@@ -37,7 +37,6 @@ class OfficeController extends AbstractController
         );
     }
 
-
     /**
      * Finds and displays a Office entity.
      *
@@ -121,7 +120,7 @@ class OfficeController extends AbstractController
             $entity->setParent($parent);
         }
 
-        $form = $this->createForm(new OfficeType(), $entity, array('include_parent' => true));
+        $form = $this->createForm(new OfficeType(), $entity);
 
         return array(
             'entity' => $entity,
@@ -139,21 +138,18 @@ class OfficeController extends AbstractController
      */
     public function createAction(Request $request)
     {
-        $factory = $this->get('terramar.sales.factory.office');
-
-        $entity = $factory->create();
-        $form = $this->createForm(new OfficeType(), $entity, array('include_parent' => true));
+        $entity = new Office();
+        $form = $this->createForm(new OfficeType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             if ($file = $form->get('logo')->getData()) {
                 $helper = $this->get('terramar.sales.helper.file');
-
                 $entity->setLogo($helper->createLogoFromUploadedFile($file, $entity));
             }
 
-            $helper = $this->get('terramar.sales.factory.office');
-            $helper->buildOffice($entity);
+            $factory = $this->get('terramar.sales.factory.office');
+            $factory->buildOffice($entity);
 
             $em = $this->getDoctrine()->getManager();
 

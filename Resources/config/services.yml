@@ -3,7 +3,8 @@ parameters:
   terramar.sales.factory.payment_account.class:            TerraMar\Bundle\SalesBundle\Factory\PaymentAccountFactory
   terramar.sales.factory.office_configuration.class:       TerraMar\Bundle\SalesBundle\Factory\OfficeConfigurationFactory
   terramar.sales.factory.office.class:                     TerraMar\Bundle\SalesBundle\Factory\OfficeFactory
-  terramar.sales.factory.sales_profile.class:              TerraMar\Bundle\SalesBundle\Factory\SalesProfileFactory
+  terramar.sales.factory.customer_sales_profile.class:     TerraMar\Bundle\SalesBundle\Factory\CustomerSalesProfileFactory
+  terramar.sales.factory.office_sales_profile.class:       TerraMar\Bundle\SalesBundle\Factory\OfficeSalesProfileFactory
   terramar.sales.factory.alert.class:                      TerraMar\Bundle\SalesBundle\Factory\AlertFactory
   terramar.sales.factory.assigned_alert.office_user.class: TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\OfficeUserAlertFactory
   terramar.sales.factory.assigned_alert.customer.class:    TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\CustomerAlertFactory
@@ -43,10 +44,13 @@ services:
     class: %terramar.sales.factory.office_configuration.class%
   terramar.sales.factory.office:
     class: %terramar.sales.factory.office.class%
-    arguments: [ @terramar.sales.factory.office_configuration ]
-  terramar.sales.factory.sales_profile:
-    class: %terramar.sales.factory.sales_profile.class%
+    arguments: [ @terramar.sales.factory.office_configuration, @terramar.sales.factory.office_sales_profile ]
+  terramar.sales.factory.customer_sales_profile:
+    class: %terramar.sales.factory.customer_sales_profile.class%
     arguments: [ @terramar.sales.factory.payment_account, @terramar.sales.factory.customer_user ]
+  terramar.sales.factory.office_sales_profile:
+    class: %terramar.sales.factory.office_sales_profile.class%
+    arguments: [ @terramar.sales.factory.payment_account ]
   terramar.sales.factory.alert:
     class: %terramar.sales.factory.alert.class%
   terramar.sales.factory.assigned_alert.office_user:

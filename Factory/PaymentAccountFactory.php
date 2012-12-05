@@ -3,6 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Factory;
 
 use TerraMar\Bundle\CustomerBundle\Entity\Customer;
+use TerraMar\Bundle\SalesBundle\Entity\Office;
 use Orkestra\Transactor\Entity\AbstractAccount;
 
 class PaymentAccountFactory implements PaymentAccountFactoryInterface
@@ -13,7 +14,7 @@ class PaymentAccountFactory implements PaymentAccountFactoryInterface
      *
      * @return \Orkestra\Transactor\Entity\AbstractAccount
      */
-    public function fillAccountWithDetails(AbstractAccount $account, Customer $customer)
+    public function buildAccountFromCustomer(AbstractAccount $account, Customer $customer)
     {
         $address = $customer->getBillingAddress();
 
@@ -21,12 +22,40 @@ class PaymentAccountFactory implements PaymentAccountFactoryInterface
             $address = $customer->getContactAddress();
         }
 
+        if ($address) {
+            $account->setAddress(trim($address->getStreet() . ' ' . $address->getSuite()));
+            $account->setCity($address->getCity());
+            $account->setRegion($address->getRegion()->getCode());
+            $account->setCountry($address->getRegion()->getCountry()->getCode());
+            $account->setPhoneNumber($address->getPhone());
+        }
+
         $account->setName($customer->__toString());
-        $account->setAddress(trim($address->getStreet() . ' ' . $address->getSuite()));
-        $account->setCity($address->getCity());
-        $account->setRegion($address->getRegion()->getCode());
-        $account->setCountry($address->getRegion()->getCountry()->getCode());
-        $account->setPhoneNumber($address->getPhone());
+
+        return $account;
+    }
+
+    /**
+     * Fills an Orkestra Account with personal details of the given Office
+     *
+     * @param \Orkestra\Transactor\Entity\AbstractAccount $account
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     *
+     * @return \Orkestra\Transactor\Entity\AbstractAccount
+     */
+    public function buildAccountFromOffice(AbstractAccount $account, Office $office)
+    {
+        $address = $office->getContactAddress();
+
+        if ($address) {
+            $account->setAddress(trim($address->getStreet() . ' ' . $address->getSuite()));
+            $account->setCity($address->getCity());
+            $account->setRegion($address->getRegion()->getCode());
+            $account->setCountry($address->getRegion()->getCountry()->getCode());
+            $account->setPhoneNumber($address->getPhone());
+        }
+
+        $account->setName($office->getContactName());
 
         return $account;
     }

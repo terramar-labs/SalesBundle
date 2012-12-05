@@ -19,14 +19,6 @@ use Orkestra\Common\Entity\EntityBase;
 class Contract extends EntityBase
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile
-     *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile", cascade={"persist"})
-     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
-     */
-    protected $profile;
-
-    /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
      *
      * @ORM\Column(name="billing_frequency", type="enum.terramar.sales.billing_frequency")
@@ -202,22 +194,6 @@ class Contract extends EntityBase
     public function getFoundByType()
     {
         return $this->foundByType;
-    }
-
-    /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
-     */
-    public function setProfile(CustomerSalesProfile $profile)
-    {
-        $this->profile = $profile;
-    }
-
-    /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile
-     */
-    public function getProfile()
-    {
-        return $this->profile;
     }
 
     /**

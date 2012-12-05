@@ -138,7 +138,7 @@ class ContractController extends AbstractController
         $form->bind($request);
 
         if ($form->isValid()) {
-            $entity->setProfile($profile);
+            $profile->addContract($entity);
 
             /** @var $factory \TerraMar\Bundle\SalesBundle\Factory\ContractFactoryInterface */
             $factory = $this->get('terramar.sales.factory.contract');

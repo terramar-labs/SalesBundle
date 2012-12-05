@@ -3,6 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
 use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
 use Orkestra\Common\Entity\EntityBase;
 
@@ -72,6 +73,13 @@ class Office extends EntityBase
      * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration", mappedBy="office", cascade={"persist"})
      */
     protected $configuration;
+
+    /**
+     * @var \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     *
+     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile", mappedBy="office", cascade={"persist"})
+     */
+    protected $profile;
 
     /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Office
@@ -232,5 +240,22 @@ class Office extends EntityBase
     public function getConfiguration()
     {
         return $this->configuration;
+    }
+
+    /**
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile $profile
+     */
+    public function setProfile(OfficeSalesProfile $profile)
+    {
+        $profile->setOffice($this);
+        $this->profile = $profile;
+    }
+
+    /**
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 }

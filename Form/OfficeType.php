@@ -10,23 +10,18 @@ class OfficeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
-
-        if (!empty($options['include_parent']) || true === $options['include_parent']) {
-            $builder->add('parent', null, array('required' => false, 'empty_value' => ''));
-        }
-
-        $builder->add('url', 'url', array('required' => false))
+        $builder->add('name')
+            ->add('url', 'url', array('required' => false))
             ->add('fax', 'tel', array('required' => false))
             ->add('contactName', null, array('label' => 'Contact Name'))
             ->add('contactAddress', new AddressType())
-            ->add('logo', 'file', array('property_path' => false, 'required' => false));
+            ->add('logo', 'file', array('property_path' => false, 'required' => false))
+            ->add('parent', 'hidden', array('required' => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'include_parent' => false,
             'data_class' => 'TerraMar\Bundle\SalesBundle\Entity\Office'
         ));
     }

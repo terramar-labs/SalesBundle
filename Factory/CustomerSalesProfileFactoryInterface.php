@@ -6,9 +6,9 @@ use TerraMar\Bundle\CustomerBundle\Entity\Customer;
 use TerraMar\Bundle\SalesBundle\Entity\Office;
 
 /**
- * Defines the contract any SalesProfileFactory must follow
+ * Defines the contract any CustomerSalesProfileFactory must follow
  */
-interface SalesProfileFactoryInterface
+interface CustomerSalesProfileFactoryInterface
 {
     /**
      * Creates a new CustomerSalesProfile from the given Customer

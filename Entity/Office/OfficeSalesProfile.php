@@ -1,25 +1,25 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace TerraMar\Bundle\SalesBundle\Entity\Office;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
-use Orkestra\Transactor\Entity\Account\PointsAccount;
-use TerraMar\Bundle\CustomerBundle\Entity\Customer;
-use Orkestra\Transactor\Entity\Account\SimpleAccount;
-use Orkestra\Transactor\Entity\Account\CardAccount;
+use TerraMar\Bundle\SalesBundle\Entity\Contract;
 use Orkestra\Transactor\Entity\Account\BankAccount;
-use Doctrine\Common\Collections\ArrayCollection;
+use Orkestra\Transactor\Entity\Account\CardAccount;
+use Orkestra\Transactor\Entity\Account\PointsAccount;
+use Orkestra\Transactor\Entity\Account\SimpleAccount;
 use Orkestra\Transactor\Entity\AbstractAccount;
+use Doctrine\Common\Collections\ArrayCollection;
+use TerraMar\Bundle\SalesBundle\Entity\Office;
 use Orkestra\Common\Entity\EntityBase;
 
 /**
- * Information defining a customer's sales profile
+ * An office's sales profile
  *
- * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\CustomerSalesProfileRepository")
- * @ORM\Table(name="terramar_customer_sales_profiles")
+ * @ORM\Entity
+ * @ORM\Table(name="terramar_office_sales_profiles")
  */
-class CustomerSalesProfile extends EntityBase implements AssignedToInterface
+class OfficeSalesProfile extends EntityBase
 {
     /**
      * @var bool
@@ -45,26 +45,10 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
     protected $autopayAccount;
 
     /**
-     * @var \TerraMar\Bundle\CustomerBundle\Entity\Customer
-     *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\CustomerBundle\Entity\Customer")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
-     */
-    protected $customer;
-
-    /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
-     *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office")
-     * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
-     */
-    protected $office;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Contract", cascade={"persist"})
-     * @ORM\JoinTable(name="terramar_customer_sales_profiles_contracts",
+     * @ORM\JoinTable(name="terramar_office_sales_profiles_contracts",
      *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="contract_id", referencedColumnName="id", unique=true)}
      * )
@@ -75,7 +59,7 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="Orkestra\Transactor\Entity\AbstractAccount", cascade={"persist"})
-     * @ORM\JoinTable(name="terramar_customers_accounts",
+     * @ORM\JoinTable(name="terramar_offices_accounts",
      *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="account_id", referencedColumnName="id", unique=true)}
      * )
@@ -83,19 +67,12 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
     protected $accounts;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\OneToMany(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Alert\CustomerAlert", mappedBy="alert", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office", inversedBy="configuration")
+     * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
-    protected $alerts;
-
-    /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\CustomerUser
-     *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\CustomerUser", cascade={"persist"})
-     * @ORM\JoinColumn(name="customer_user_id", referencedColumnName="id", nullable=true)
-     */
-    protected $user;
+    protected $office;
 
     /**
      * Constructor
@@ -159,22 +136,6 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\CustomerBundle\Entity\Customer $customer
-     */
-    public function setCustomer(Customer $customer)
-    {
-        $this->customer = $customer;
-    }
-
-    /**
-     * @return \TerraMar\Bundle\CustomerBundle\Entity\Customer
-     */
-    public function getCustomer()
-    {
-        return $this->customer;
-    }
-
-    /**
      * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
      */
     public function setOffice(Office $office)
@@ -188,22 +149,6 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface
     public function getOffice()
     {
         return $this->office;
-    }
-
-    /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerUser $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerUser
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 
     /**

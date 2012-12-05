@@ -7,18 +7,27 @@ use TerraMar\Bundle\SalesBundle\Entity\Office;
 class OfficeFactory implements OfficeFactoryInterface
 {
     /**
-     * @var OfficeConfigurationFactoryInterface
+     * @var \TerraMar\Bundle\SalesBundle\Factory\OfficeConfigurationFactoryInterface
      */
     protected $officeConfigurationFactory;
+
+    /**
+     * @var \TerraMar\Bundle\SalesBundle\Factory\OfficeSalesProfileFactoryInterface
+     */
+    protected $officeSalesProfileFactory;
 
     /**
      * Constructor
      *
      * @param OfficeConfigurationFactoryInterface $officeConfigurationFactory
+     * @param OfficeSalesProfileFactoryInterface $officeSalesProfileFactory
      */
-    public function __construct(OfficeConfigurationFactoryInterface $officeConfigurationFactory)
-    {
+    public function __construct(
+        OfficeConfigurationFactoryInterface $officeConfigurationFactory,
+        OfficeSalesProfileFactoryInterface $officeSalesProfileFactory
+    ) {
         $this->officeConfigurationFactory = $officeConfigurationFactory;
+        $this->officeSalesProfileFactory  = $officeSalesProfileFactory;
     }
 
     /**
@@ -43,6 +52,7 @@ class OfficeFactory implements OfficeFactoryInterface
     public function buildOffice(Office $office)
     {
         $office->setConfiguration($this->officeConfigurationFactory->create($office));
+        $office->setProfile($this->officeSalesProfileFactory->create($office));
 
         return $office;
     }
