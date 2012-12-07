@@ -16,8 +16,6 @@ use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
  * User controller.
  *
  * @Route("/user")
- *
- * @todo This class creates a dependency on the Pest management bundle
  */
 class UserController extends AbstractController
 {
