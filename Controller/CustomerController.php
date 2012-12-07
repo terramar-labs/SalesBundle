@@ -126,7 +126,7 @@ class CustomerController extends AbstractController
             $entity = $form->getData();
 
             try {
-                $profile = $this->get('terramar.sales.factory.sales_profile')->create($entity, $this->getCurrentOffice());
+                $profile = $this->get('terramar.sales.factory.customer_sales_profile')->create($entity, $this->getCurrentOffice());
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($profile);
