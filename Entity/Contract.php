@@ -50,7 +50,7 @@ class Contract extends EntityBase
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_end", type="datetime")
+     * @ORM\Column(name="date_end", type="datetime", nullable=true)
      */
     protected $dateEnd;
 
@@ -151,7 +151,7 @@ class Contract extends EntityBase
     /**
      * @param \DateTime $dateEnd
      */
-    public function setDateEnd(\DateTime $dateEnd)
+    public function setDateEnd(\DateTime $dateEnd = null)
     {
         $this->dateEnd = $dateEnd;
     }

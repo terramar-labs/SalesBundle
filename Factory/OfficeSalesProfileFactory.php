@@ -39,16 +39,37 @@ class OfficeSalesProfileFactory implements OfficeSalesProfileFactoryInterface
         $profile = new OfficeSalesProfile();
         $profile->setOffice($office);
 
+        return $this->buildProfile($profile);
+    }
+
+    /**
+     * Builds the given OfficeSalesProfile
+     *
+     * This method is called when a new OfficeSalesProfile is created.
+     *
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile $profile
+     *
+     * @throws \RuntimeException
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     */
+    public function buildProfile(OfficeSalesProfile $profile)
+    {
+        $office = $profile->getOffice();
+        if (!$office) {
+            throw new \RuntimeException('The given OfficeSalesProfile must be associated with an Office');
+        }
+
         $pointsAccount = new PointsAccount();
         $pointsAccount->setName('Points');
-        $this->paymentAccountFactory->buildAccountFromOffice($pointsAccount, $office);
+        $profile->setPointsAccount($pointsAccount);
 
         $defaultAccount = new SimpleAccount();
         $defaultAccount->setAlias('Cash or check');
-        $this->paymentAccountFactory->buildAccountFromOffice($defaultAccount, $office);
-
-        $profile->addAccount($pointsAccount);
         $profile->addAccount($defaultAccount);
+
+        foreach ($profile->getAccounts() as $account) {
+            $this->paymentAccountFactory->buildAccountFromOffice($account, $office);
+        }
 
         return $profile;
     }

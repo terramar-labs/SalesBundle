@@ -41,7 +41,7 @@ class OfficeFactory implements OfficeFactoryInterface
     }
 
     /**
-     * Builds a new Office
+     * Builds the given Office
      *
      * This method is called when a new Office is created.
      *
@@ -52,7 +52,11 @@ class OfficeFactory implements OfficeFactoryInterface
     public function buildOffice(Office $office)
     {
         $office->setConfiguration($this->officeConfigurationFactory->create($office));
-        $office->setProfile($this->officeSalesProfileFactory->create($office));
+        if (!$office->getProfile()) {
+            $office->setProfile($this->officeSalesProfileFactory->create($office));
+        } else {
+            $this->officeSalesProfileFactory->buildProfile($office->getProfile());
+        }
 
         return $office;
     }

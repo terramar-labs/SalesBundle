@@ -157,6 +157,9 @@ class OfficeSalesProfile extends EntityBase
     public function setAutopayAccount(AbstractAccount $account = null)
     {
         $this->autopayAccount = $account;
+        if (!$this->accounts->contains($account)) {
+            $this->accounts->add($account);
+        }
     }
 
     /**
@@ -221,6 +224,17 @@ class OfficeSalesProfile extends EntityBase
         return $this->accounts->filter(function(AbstractAccount $account) {
             return $account instanceof SimpleAccount;
         });
+    }
+
+    /**
+     * @param \Orkestra\Transactor\Entity\Account\PointsAccount $account
+     */
+    public function setPointsAccount(PointsAccount $account)
+    {
+        $this->pointsAccount = $account;
+        if (!$this->accounts->contains($account)) {
+            $this->accounts->add($account);
+        }
     }
 
     /**

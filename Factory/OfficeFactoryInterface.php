@@ -14,7 +14,7 @@ interface OfficeFactoryInterface
     function create();
 
     /**
-     * Builds a new Office
+     * Builds the given Office
      *
      * This method is called when a new Office is created.
      *
