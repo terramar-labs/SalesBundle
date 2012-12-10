@@ -20,6 +20,9 @@ class InvoiceType extends AbstractType
     {
         $builder->add('payments', 'collection', array(
                 'type' => new Invoice\PaymentType($this->profile),
+                'options' => array(
+                    'allow_points' => $options['allow_points']
+                ),
                 'allow_add' => true,
                 'by_reference' => false,
                 'property_path' => false,
@@ -30,7 +33,8 @@ class InvoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TerraMar\Bundle\SalesBundle\Entity\Invoice'
+            'data_class' => 'TerraMar\Bundle\SalesBundle\Entity\Invoice',
+            'allow_points' => true,
         ));
     }
 

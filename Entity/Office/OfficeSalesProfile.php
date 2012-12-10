@@ -158,7 +158,7 @@ class OfficeSalesProfile extends EntityBase implements SalesProfileInterface
     public function setAutopayAccount(AbstractAccount $account = null)
     {
         $this->autopayAccount = $account;
-        if (!$this->accounts->contains($account)) {
+        if (null !== $account && !$this->accounts->contains($account)) {
             $this->accounts->add($account);
         }
     }

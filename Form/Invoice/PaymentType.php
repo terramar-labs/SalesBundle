@@ -21,9 +21,15 @@ class PaymentType extends AbstractType
     {
         $profile = $this->profile;
 
+        $excludeTypes = array(NetworkType::MFA);
+
+        if (false === $options['allow_points']) {
+            $excludeTypes[] = NetworkType::POINTS;
+        }
+
         $builder->add('method', 'enum', array(
                 'enum' => 'Orkestra\Transactor\Entity\Transaction\NetworkType',
-                'exclude' => NetworkType::MFA,
+                'exclude' => $excludeTypes,
                 'labels' => array(
                     NetworkType::POINTS => 'Account Credit'
                 )
@@ -41,7 +47,8 @@ class PaymentType extends AbstractType
     {
         $resolver->setDefaults(array(
             'error_bubbling' => false,
-            'data_class' => 'TerraMar\Bundle\SalesBundle\Model\Invoice\Payment'
+            'data_class' => 'TerraMar\Bundle\SalesBundle\Model\Invoice\Payment',
+            'allow_points' => true
         ));
     }
 
