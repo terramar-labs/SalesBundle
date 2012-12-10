@@ -60,7 +60,7 @@ class OfficeSalesProfileFactory implements OfficeSalesProfileFactoryInterface
         }
 
         $pointsAccount = new PointsAccount();
-        $pointsAccount->setName('Points');
+        $pointsAccount->setAlias('Points');
         $profile->setPointsAccount($pointsAccount);
 
         $defaultAccount = new SimpleAccount();

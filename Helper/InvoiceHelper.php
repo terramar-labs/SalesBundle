@@ -3,6 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Helper;
 
 use TerraMar\Bundle\SalesBundle\Entity\Invoice;
+use TerraMar\Bundle\SalesBundle\Entity\Office;
 use Orkestra\Transactor\Entity\Transaction\TransactionType;
 use Orkestra\Transactor\Entity\Transaction;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
@@ -82,6 +83,7 @@ class InvoiceHelper
     /**
      * Processes a payment
      *
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
      * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice $invoice
      * @param \TerraMar\Bundle\SalesBundle\Model\Invoice\Payment $payment
      * @param \Orkestra\Bundle\ApplicationBundle\Entity\User $user
@@ -89,9 +91,8 @@ class InvoiceHelper
      * @throws \RuntimeException
      * @return \Orkestra\Transactor\Entity\Transaction
      */
-    public function processPayment(Invoice $invoice, Payment $payment, User $user)
+    public function processPayment(Office $office, Invoice $invoice, Payment $payment, User $user)
     {
-        $office = $invoice->getContract()->getProfile()->getOffice();
         $configuration = $this->configurationRepository->findOneByOffice($office);
         if (!$configuration) {
             throw new \RuntimeException('Unable to locate office configuration');

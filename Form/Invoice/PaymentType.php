@@ -3,7 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Form\Invoice;
 
 use Symfony\Component\Form\AbstractType;
-use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use TerraMar\Bundle\SalesBundle\Model\SalesProfileInterface;
 use Orkestra\Transactor\Entity\Transaction\NetworkType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -12,7 +12,7 @@ class PaymentType extends AbstractType
 {
     protected $profile;
 
-    public function __construct(CustomerSalesProfile $profile)
+    public function __construct(SalesprofileInterface $profile)
     {
         $this->profile = $profile;
     }

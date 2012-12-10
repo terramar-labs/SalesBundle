@@ -3,6 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use TerraMar\Bundle\SalesBundle\Model\SalesProfileInterface;
 use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
 use TerraMar\Bundle\CustomerBundle\Entity\Customer;
@@ -19,7 +20,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\CustomerSalesProfileRepository")
  * @ORM\Table(name="terramar_customer_sales_profiles")
  */
-class CustomerSalesProfile extends EntityBase implements AssignedToInterface
+class CustomerSalesProfile extends EntityBase implements AssignedToInterface, SalesProfileInterface
 {
     /**
      * @var bool

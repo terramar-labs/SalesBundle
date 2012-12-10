@@ -3,6 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Entity\Office;
 
 use Doctrine\ORM\Mapping as ORM;
+use TerraMar\Bundle\SalesBundle\Model\SalesProfileInterface;
 use TerraMar\Bundle\SalesBundle\Entity\Contract;
 use Orkestra\Transactor\Entity\Account\BankAccount;
 use Orkestra\Transactor\Entity\Account\CardAccount;
@@ -19,7 +20,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_office_sales_profiles")
  */
-class OfficeSalesProfile extends EntityBase
+class OfficeSalesProfile extends EntityBase implements SalesProfileInterface
 {
     /**
      * @var bool

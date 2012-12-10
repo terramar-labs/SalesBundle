@@ -3,7 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use TerraMar\Bundle\SalesBundle\Model\SalesProfileInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -11,7 +11,7 @@ class InvoiceType extends AbstractType
 {
     protected $profile;
 
-    public function __construct(CustomerSalesProfile $profile)
+    public function __construct(SalesProfileInterface $profile)
     {
         $this->profile = $profile;
     }

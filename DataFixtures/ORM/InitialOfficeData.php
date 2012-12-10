@@ -3,6 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use TerraMar\Bundle\SalesBundle\Entity\Office;
 use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
 use Orkestra\Bundle\ApplicationBundle\Entity\Contact\Address;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -33,7 +34,7 @@ class InitialOfficeData extends AbstractFixture implements OrderedFixtureInterfa
         /** @var $factory \TerraMar\Bundle\SalesBundle\Factory\OfficeFactoryInterface */
         $factory = $this->container->get('terramar.sales.factory.office');
 
-        $office = $factory->create();
+        $office = new Office();
         $office->setName('Default Company');
         $office->setContactName('Technical Support');
 
@@ -45,6 +46,7 @@ class InitialOfficeData extends AbstractFixture implements OrderedFixtureInterfa
         $address->setPostalCode('92011');
 
         $office->setContactAddress($address);
+        $factory->buildOffice($office);
 
         $manager->persist($office);
 
