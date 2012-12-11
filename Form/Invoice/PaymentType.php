@@ -12,7 +12,7 @@ class PaymentType extends AbstractType
 {
     protected $profile;
 
-    public function __construct(SalesprofileInterface $profile)
+    public function __construct(SalesProfileInterface $profile)
     {
         $this->profile = $profile;
     }

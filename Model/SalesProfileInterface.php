@@ -5,7 +5,16 @@ namespace TerraMar\Bundle\SalesBundle\Model;
 interface SalesProfileInterface
 {
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * Gets all of a SalesProfile's Transactor accounts
+     *
+     * @return \Doctrine\Common\Collections\Collection|\Orkestra\Transactor\Entity\AbstractAccount[]
      */
     function getAccounts();
+
+    /**
+     * Gets all of a SalesProfile's Transactor accounts that may be used for Autopay
+     *
+     * @return \Doctrine\Common\Collections\Collection|\Orkestra\Transactor\Entity\AbstractAccount[]|
+     */
+    function getAutopayAccounts();
 }
