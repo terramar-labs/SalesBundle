@@ -2,7 +2,7 @@
     "id": {{ entity.id|json_encode|raw }},
     "name": {{ entity.name|json_encode|raw }},
     "description": {{ entity.description|json_encode|raw }},
-    "billing_frequencies": {{ entity.billingFrequencies|json_encode|raw }},
+    "billing_frequencies": [{% for frequency in entity.billingFrequencies %}{{ frequency|json_encode|raw }}{% if not loop.last %},{% endif %}{% endfor %}],
     "length": {{ entity.length|json_encode|raw }},
     "agreement_body": {{ entity.agreementBody|json_encode|raw }},
     "welcome_letter": {{ entity.welcomeLetter|json_encode|raw }},
