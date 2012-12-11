@@ -126,6 +126,10 @@ class CustomerController extends AbstractController
             $entity = $form->getData();
 
             try {
+                /** @var $factory \TerraMar\Bundle\CustomerBundle\Factory\CustomerFactoryInterface */
+                $factory = $this->get('terramar.customer.factory.customer');
+                $factory->buildCustomer($entity);
+
                 $profile = $this->get('terramar.sales.factory.customer_sales_profile')->create($entity, $this->getCurrentOffice());
 
                 $em = $this->getDoctrine()->getManager();
