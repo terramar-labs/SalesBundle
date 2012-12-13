@@ -47,8 +47,12 @@ class FileHelper
      *
      * @return \Orkestra\Bundle\ApplicationBundle\Entity\File
      */
-    protected function createFileFromUploadedFile(UploadedFile $file, $path)
+    public function createFileFromUploadedFile(UploadedFile $file, $path = null)
     {
+        if (!$path) {
+            $path = $this->internalPath;
+        }
+
         return File::createFromUploadedFile($file, $path, $this->generateUploadFilename($file));
     }
 
