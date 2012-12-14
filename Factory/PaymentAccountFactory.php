@@ -27,6 +27,7 @@ class PaymentAccountFactory implements PaymentAccountFactoryInterface
             $account->setCity($address->getCity());
             $account->setRegion($address->getRegion()->getCode());
             $account->setCountry($address->getRegion()->getCountry()->getCode());
+            $account->setPostalCode($address->getPostalCode());
             $account->setPhoneNumber($address->getPhone());
         }
 
@@ -52,6 +53,7 @@ class PaymentAccountFactory implements PaymentAccountFactoryInterface
             $account->setCity($address->getCity());
             $account->setRegion($address->getRegion()->getCode());
             $account->setCountry($address->getRegion()->getCountry()->getCode());
+            $account->setPostalCode($address->getPostalCode());
             $account->setPhoneNumber($address->getPhone());
         }
 
