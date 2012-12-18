@@ -212,7 +212,7 @@ class Office extends EntityBase
     /**
      * @param \TerraMar\Bundle\SalesBundle\Entity\Office $parent
      */
-    public function setParent($parent)
+    public function setParent(Office $parent)
     {
         $this->parent = $parent;
     }

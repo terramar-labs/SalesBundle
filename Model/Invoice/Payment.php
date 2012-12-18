@@ -5,6 +5,7 @@ namespace TerraMar\Bundle\SalesBundle\Model\Invoice;
 use Orkestra\Transactor\Entity\Transaction;
 use Orkestra\Transactor\Entity\AbstractAccount;
 use Serializable;
+use Orkestra\Transactor\Entity\Account\BankAccount;
 
 /**
  * Intermediary model for processing payments for an invoice

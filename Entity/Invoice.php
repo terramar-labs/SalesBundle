@@ -41,6 +41,13 @@ class Invoice extends EntityBase
     protected $status;
 
     /**
+     * @var \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType
+     *
+     * @ORM\Column(name="type", type="enum.terramar.sales.invoice_type")
+     */
+    protected $type;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="balance", type="decimal", precision=8, scale=2)
@@ -85,6 +92,7 @@ class Invoice extends EntityBase
         $this->transactions = new ArrayCollection();
         $this->items = new ArrayCollection();
         $this->invoiceTransactions = new ArrayCollection();
+        $this->type = new Invoice\InvoiceType(Invoice\InvoiceType::ONE_TIME);
     }
 
     /**
@@ -188,7 +196,7 @@ class Invoice extends EntityBase
     /**
      * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus $status
      */
-    public function setStatus($status)
+    public function setStatus(Invoice\InvoiceStatus $status)
     {
         $this->status = $status;
     }
@@ -199,6 +207,22 @@ class Invoice extends EntityBase
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType $type
+     */
+    public function setType(Invoice\InvoiceType $type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**

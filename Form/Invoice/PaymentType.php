@@ -27,6 +27,14 @@ class PaymentType extends AbstractType
             $excludeTypes[] = NetworkType::POINTS;
         }
 
+        if (false === $options['allow_cash']) {
+            $excludeTypes[] = NetworkType::CASH;
+        }
+
+        if (false === $options['allow_check']) {
+            $excludeTypes[] = NetworkType::CHECK;
+        }
+
         $builder->add('method', 'enum', array(
                 'enum' => 'Orkestra\Transactor\Entity\Transaction\NetworkType',
                 'exclude' => $excludeTypes,
@@ -48,7 +56,9 @@ class PaymentType extends AbstractType
         $resolver->setDefaults(array(
             'error_bubbling' => false,
             'data_class' => 'TerraMar\Bundle\SalesBundle\Model\Invoice\Payment',
-            'allow_points' => true
+            'allow_points' => true,
+            'allow_cash' => true,
+            'allow_check' => true
         ));
     }
 

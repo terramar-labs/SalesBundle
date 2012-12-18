@@ -5,6 +5,7 @@ namespace TerraMar\Bundle\SalesBundle\Factory;
 use TerraMar\Bundle\SalesBundle\Entity\Contract;
 use TerraMar\Bundle\SalesBundle\Entity\Invoice;
 use DateTime;
+use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType;
 
 interface InvoiceFactoryInterface
 {
@@ -22,10 +23,11 @@ interface InvoiceFactoryInterface
      *
      * @param \TerraMar\Bundle\SalesBundle\Entity\Contract $contract
      * @param \DateTime $dateDue
+     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType $type
      *
      * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice
      */
-    function createInvoice(Contract $contract, DateTime $dateDue);
+    function createInvoice(Contract $contract, DateTime $dateDue, InvoiceType $type = null);
 
     /**
      * Builds a new invoice

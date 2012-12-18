@@ -21,7 +21,9 @@ class InvoiceType extends AbstractType
         $builder->add('payments', 'collection', array(
                 'type' => new Invoice\PaymentType($this->profile),
                 'options' => array(
-                    'allow_points' => $options['allow_points']
+                    'allow_points' => $options['allow_points'],
+                    'allow_cash' => $options['allow_cash'],
+                    'allow_check' => $options['allow_check']
                 ),
                 'allow_add' => true,
                 'by_reference' => false,
@@ -35,6 +37,8 @@ class InvoiceType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'TerraMar\Bundle\SalesBundle\Entity\Invoice',
             'allow_points' => true,
+            'allow_cash' => true,
+            'allow_check' => true,
         ));
     }
 

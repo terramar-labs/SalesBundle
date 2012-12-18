@@ -6,6 +6,7 @@ use TerraMar\Bundle\SalesBundle\Entity\Contract;
 use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus;
 use TerraMar\Bundle\SalesBundle\Entity\Invoice;
 use DateTime;
+use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType;
 
 class InvoiceFactory implements InvoiceFactoryInterface
 {
@@ -29,11 +30,15 @@ class InvoiceFactory implements InvoiceFactoryInterface
      *
      * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice
      */
-    public function createInvoice(Contract $contract, DateTime $dateDue)
+    public function createInvoice(Contract $contract, DateTime $dateDue, InvoiceType $type = null)
     {
         $invoice = new Invoice();
         $invoice->setContract($contract);
         $invoice->setDateDue($dateDue);
+        if ($type) {
+            $invoice->setType($type);
+        }
+
         $this->buildInvoice($invoice);
 
         return $invoice;

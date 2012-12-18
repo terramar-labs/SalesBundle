@@ -91,7 +91,7 @@ class InvoiceHelper
      * @throws \RuntimeException
      * @return \Orkestra\Transactor\Entity\Transaction
      */
-    public function processPayment(Office $office, Invoice $invoice, Payment $payment, User $user)
+    public function processPayment(Office $office, Invoice $invoice, Payment $payment, User $user = null)
     {
         $configuration = $this->configurationRepository->findOneByOffice($office);
         if (!$configuration) {
@@ -136,7 +136,9 @@ class InvoiceHelper
 
         $invoiceTransaction = new InvoiceTransaction();
         $invoiceTransaction->setTransaction($transaction);
-        $invoiceTransaction->setUser($user);
+        if ($user) {
+            $invoiceTransaction->setUser($user);
+        }
 
         if ($invoice->getStatus() == InvoiceStatus::PAST_DUE) {
             $invoiceTransaction->setPastDue(true);

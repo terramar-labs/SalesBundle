@@ -14,7 +14,7 @@ class InvoiceStatusEnumType extends EnumTypeBase
     /**
      * @var string The unique name for this EnumType
      */
-    protected $_name = 'enum.terramar.sales.contract_status';
+    protected $_name = 'enum.terramar.sales.invoice_status';
 
     /**
      * @var string The fully qualified class name of the Enum that this class wraps
