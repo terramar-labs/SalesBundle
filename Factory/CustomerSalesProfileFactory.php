@@ -38,27 +38,43 @@ class CustomerSalesProfileFactory implements CustomerSalesProfileFactoryInterfac
      *
      * @param \TerraMar\Bundle\CustomerBundle\Entity\Customer $customer
      * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param string|null $password
      *
      * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile
      */
-    public function create(Customer $customer, Office $office)
+    public function create(Customer $customer, Office $office, $password = null)
     {
         $profile = new CustomerSalesProfile();
         $profile->setCustomer($customer);
         $profile->setOffice($office);
 
+        return $this->buildProfile($profile, $password);
+    }
+
+    /**
+     * Builds the given CustomerSalesProfile
+     *
+     * This method is called when a new CustomerSalesProfile is created.
+     *
+     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param string|null $password
+     *
+     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile
+     */
+    public function buildProfile(CustomerSalesProfile $profile, $password = null)
+    {
         $pointsAccount = new PointsAccount();
         $pointsAccount->setName('Points');
-        $this->paymentAccountFactory->buildAccountFromCustomer($pointsAccount, $customer);
+        $this->paymentAccountFactory->buildAccountFromCustomer($pointsAccount, $profile->getCustomer());
 
         $defaultAccount = new SimpleAccount();
         $defaultAccount->setAlias('Cash or check');
-        $this->paymentAccountFactory->buildAccountFromCustomer($defaultAccount, $customer);
+        $this->paymentAccountFactory->buildAccountFromCustomer($defaultAccount, $profile->getCustomer());
 
         $profile->addAccount($pointsAccount);
         $profile->addAccount($defaultAccount);
 
-        $profile->setUser($this->customerUserFactory->create($profile));
+        $profile->setUser($this->customerUserFactory->create($profile, $password));
 
         return $profile;
     }

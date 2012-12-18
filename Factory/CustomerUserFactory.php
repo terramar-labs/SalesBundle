@@ -38,11 +38,12 @@ class CustomerUserFactory implements CustomerUserFactoryInterface
      * Creates a new CustomerUser entity
      *
      * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param string|null $password
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerUser
      * @throws \RuntimeException
+     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerUser
      */
-    public function create(CustomerSalesProfile $profile)
+    public function create(CustomerSalesProfile $profile, $password = null)
     {
         $office = $profile->getOffice();
         $customer = $profile->getCustomer();
@@ -64,10 +65,10 @@ class CustomerUserFactory implements CustomerUserFactoryInterface
 
         $user->addGroup($group);
 
-        // TODO: Investigate ways to pass along a password
-        $password = $this->generatePassword($profile);
+        if (null === $password) {
+            $password = $this->generatePassword($profile);
+        }
         $encoder = $this->encoderFactory->getEncoder($user);
-
         $user->setPassword($encoder->encodePassword($password, $user->getSalt()));
 
         $customerUser = new CustomerUser($office, $customer, $user);

@@ -40,7 +40,7 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface, Sa
     /**
      * @var \Orkestra\Transactor\Entity\AbstractAccount
      *
-     * @ORM\ManyToOne(targetEntity="Orkestra\Transactor\Entity\AbstractAccount")
+     * @ORM\ManyToOne(targetEntity="Orkestra\Transactor\Entity\AbstractAccount", cascade={"persist"})
      * @ORM\JoinColumn(name="autopay_account_id", referencedColumnName="id", nullable=true)
      */
     protected $autopayAccount;
@@ -213,6 +213,9 @@ class CustomerSalesProfile extends EntityBase implements AssignedToInterface, Sa
     public function setAutopayAccount(AbstractAccount $account = null)
     {
         $this->autopayAccount = $account;
+        if (null !== $account && !$this->accounts->contains($account)) {
+            $this->accounts->add($account);
+        }
     }
 
     /**

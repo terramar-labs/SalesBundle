@@ -13,11 +13,11 @@ interface CustomerUserFactoryInterface
      * Creates a new CustomerUser entity
      *
      * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param string|null $password
      *
      * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerUser
-     * @throws \RuntimeException
      */
-    function create(CustomerSalesProfile $profile);
+    function create(CustomerSalesProfile $profile, $password = null);
 
     /**
      * Updates a CustomerUser's email address
