@@ -196,4 +196,12 @@ class FileHelper
 
         return $path;
     }
+
+    /**
+     * @return string
+     */
+    public function getSavePath()
+    {
+        return $this->internalPath;
+    }
 }

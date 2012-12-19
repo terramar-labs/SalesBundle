@@ -70,7 +70,7 @@ class OfficeSalesProfile extends EntityBase implements SalesProfileInterface
     /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office", inversedBy="configuration")
+     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office", inversedBy="profile")
      * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
     protected $office;
