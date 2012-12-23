@@ -29,6 +29,7 @@ Configuration
           enum.terramar.sales.found_by_type:       TerraMar\Bundle\SalesBundle\DbalType\FoundByTypeEnumType
           enum.terramar.sales.billing_frequency:   TerraMar\Bundle\SalesBundle\DbalType\BillingFrequencyEnumType
           enum.terramar.sales.invoice_status:      TerraMar\Bundle\SalesBundle\DbalType\InvoiceStatusEnumType
+          enum.terramar.sales.invoice_type:        TerraMar\Bundle\SalesBundle\DbalType\InvoiceTypeEnumType
           enum.terramar.sales.alert_status:        TerraMar\Bundle\SalesBundle\DbalType\AlertStatusEnumType
           enum.terramar.sales.alert_priority:      TerraMar\Bundle\SalesBundle\DbalType\AlertPriorityEnumType
           enum.terramar.sales.alert_type:          TerraMar\Bundle\SalesBundle\DbalType\AlertTypeEnumType
