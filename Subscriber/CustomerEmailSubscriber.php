@@ -1,15 +1,15 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Subscriber;
+namespace Terramar\Bundle\SalesBundle\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use TerraMar\Bundle\SalesBundle\Repository\CustomerSalesProfileRepository;
-use TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactory;
-use TerraMar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\SalesBundle\Repository\CustomerSalesProfileRepository;
+use Terramar\Bundle\SalesBundle\Factory\CustomerUserFactory;
+use Terramar\Bundle\CustomerBundle\Entity\Customer;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 
@@ -26,12 +26,12 @@ class CustomerEmailSubscriber implements EventSubscriber
     protected $container;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Repository\CustomerSalesProfileRepository
+     * @var \Terramar\Bundle\SalesBundle\Repository\CustomerSalesProfileRepository
      */
     protected $profileRepository;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactory
+     * @var \Terramar\Bundle\SalesBundle\Factory\CustomerUserFactory
      */
     protected $customerUserFactory;
 
@@ -53,7 +53,7 @@ class CustomerEmailSubscriber implements EventSubscriber
     {
         $this->profileRepository = $this->container
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile');
+            ->getRepository('Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile');
         $this->customerUserFactory = $this->container->get('terramar.sales.factory.customer_user');
     }
 

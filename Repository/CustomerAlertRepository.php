@@ -1,11 +1,11 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Repository;
+namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType;
-use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertType;
+use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 
 class CustomerAlertRepository extends EntityRepository
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Repository;
+namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType;
-use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertType;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 
 class OfficeUserAlertRepository extends EntityRepository
 {
@@ -13,7 +13,7 @@ class OfficeUserAlertRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder()
             ->select('oua')
-            ->from('TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
+            ->from('Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
             ->join('oua.alert', 'a')
             ->where('oua.assignedTo = :assignedTo')
             ->andWhere('a.type = :type')
@@ -29,7 +29,7 @@ class OfficeUserAlertRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder()
             ->select('oua')
-            ->from('TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
+            ->from('Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
             ->join('oua.alert', 'a')
             ->where('oua.assignedTo = :assignedTo')
             ->andWhere('a.type = :type')
@@ -45,7 +45,7 @@ class OfficeUserAlertRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder()
             ->select('oua')
-            ->from('TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
+            ->from('Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
             ->join('oua.alert', 'a')
             ->where('oua.assignedTo = :assignedTo')
             ->andWhere('a.status = :statuses')
@@ -62,7 +62,7 @@ class OfficeUserAlertRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder()
             ->select('oua')
-            ->from('TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
+            ->from('Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
             ->join('oua.alert', 'a')
             ->where('oua.assignedTo = :assignedTo')
             ->andWhere('a.status = :statuses')
@@ -79,7 +79,7 @@ class OfficeUserAlertRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder()
             ->select('oua')
-            ->from('TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
+            ->from('Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
             ->join('oua.alert', 'a');
         $qb->where($qb->expr()->orX(
                 $qb->expr()->eq('oua.assignedTo', ':user'),

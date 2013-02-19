@@ -1,11 +1,11 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller;
+namespace Terramar\Bundle\SalesBundle\Controller;
 
 use Orkestra\Bundle\ReportBundle\Controller\Controller;
-use TerraMar\Bundle\SalesBundle\Report\AbstractOfficeReport;
-use TerraMar\Bundle\SalesBundle\Report\OfficeFilter;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Report\AbstractOfficeReport;
+use Terramar\Bundle\SalesBundle\Report\OfficeFilter;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 
 abstract class AbstractController extends Controller
 {
@@ -18,7 +18,7 @@ abstract class AbstractController extends Controller
     /**
      * Switches the office the User belongs during this session
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      */
     protected function switchOffice(Office $office)
     {
@@ -31,7 +31,7 @@ abstract class AbstractController extends Controller
      * Gets the current user's associated office
      *
      * @throws \RuntimeException if the user has no associated office
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office|null
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office|null
      */
     protected function getCurrentOffice()
     {
@@ -40,7 +40,7 @@ abstract class AbstractController extends Controller
         }
 
         if ($this->getSession()->has(self::CURRENT_OFFICE_KEY)) {
-            $this->currentOffice = $this->getDoctrine()->getManager()->find('TerraMarSalesBundle:Office', $this->getSession()->get(self::CURRENT_OFFICE_KEY));
+            $this->currentOffice = $this->getDoctrine()->getManager()->find('TerramarSalesBundle:Office', $this->getSession()->get(self::CURRENT_OFFICE_KEY));
         } else {
             $user = $this->getUser();
 
@@ -61,7 +61,7 @@ abstract class AbstractController extends Controller
     /**
      * Gets the current Office User
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @return \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      */
     protected function getCurrentOfficeUser()
     {
@@ -75,7 +75,7 @@ abstract class AbstractController extends Controller
             return null;
         }
 
-        $userRepository = $this->getDoctrine()->getManager()->getRepository('TerraMarSalesBundle:OfficeUser');
+        $userRepository = $this->getDoctrine()->getManager()->getRepository('TerramarSalesBundle:OfficeUser');
 
         $this->currentUser = $userRepository->findOneBy(array('user' => $user->getId()));
 

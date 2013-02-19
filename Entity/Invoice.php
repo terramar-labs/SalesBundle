@@ -1,14 +1,14 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Orkestra\Transactor\Entity\Transaction\TransactionType;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceTransaction;
+use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceTransaction;
 use Orkestra\Transactor\Entity\Result\ResultStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Orkestra\Transactor\Entity\Transaction;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceItem;
+use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceItem;
 use Orkestra\Common\Entity\AbstractEntity;
 
 /**
@@ -34,14 +34,14 @@ class Invoice extends AbstractEntity
     protected $amountDue;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus
+     * @var \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus
      *
      * @ORM\Column(name="status", type="enum.terramar.sales.invoice_status")
      */
     protected $status;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType
+     * @var \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceType
      *
      * @ORM\Column(name="type", type="enum.terramar.sales.invoice_type")
      */
@@ -68,21 +68,21 @@ class Invoice extends AbstractEntity
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceItem", mappedBy="invoice", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceItem", mappedBy="invoice", cascade={"persist"})
      */
     protected $items;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceTransaction", mappedBy="invoice", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceTransaction", mappedBy="invoice", cascade={"persist"})
      */
     protected $invoiceTransactions;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Contract
+     * @var \Terramar\Bundle\SalesBundle\Entity\Contract
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Contract", inversedBy="invoices")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Contract", inversedBy="invoices")
      * @ORM\JoinColumn(name="contract_id", referencedColumnName="id")
      */
     protected $contract;
@@ -162,7 +162,7 @@ class Invoice extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Contract $contract
+     * @param \Terramar\Bundle\SalesBundle\Entity\Contract $contract
      */
     public function setContract($contract)
     {
@@ -170,7 +170,7 @@ class Invoice extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Contract
+     * @return \Terramar\Bundle\SalesBundle\Entity\Contract
      */
     public function getContract()
     {
@@ -194,7 +194,7 @@ class Invoice extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus $status
+     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus $status
      */
     public function setStatus(Invoice\InvoiceStatus $status)
     {
@@ -202,7 +202,7 @@ class Invoice extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus
+     * @return \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus
      */
     public function getStatus()
     {
@@ -210,7 +210,7 @@ class Invoice extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType $type
+     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceType $type
      */
     public function setType(Invoice\InvoiceType $type)
     {
@@ -218,7 +218,7 @@ class Invoice extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType
+     * @return \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceType
      */
     public function getType()
     {

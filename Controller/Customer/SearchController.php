@@ -1,17 +1,17 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
+namespace Terramar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
 use Orkestra\Bundle\ApplicationBundle\Controller\Controller;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
-use TerraMar\Bundle\CustomerBundle\Form\AdvancedSearchType;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\CustomerBundle\Form\AdvancedSearchType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use TerraMar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\CustomerBundle\Entity\Customer;
 
 /**
  * Customer controller.
@@ -63,7 +63,7 @@ class SearchController extends Controller
 
             $qb = $em->createQueryBuilder()
                 ->select('c')
-                ->from('TerraMarCustomerBundle:Customer', 'c')
+                ->from('TerramarCustomerBundle:Customer', 'c')
                 ->join('c.contactAddress', 'ca');
 
             if ($data['firstName']) {
@@ -145,7 +145,7 @@ class SearchController extends Controller
         $qb = $em->createQueryBuilder();
 
         $entities = $qb->select('c')
-            ->from('TerraMarCustomerBundle:Customer', 'c')
+            ->from('TerramarCustomerBundle:Customer', 'c')
             ->where($qb->expr()->orX(
                 $qb->expr()->like('c.firstName', ':searchTerm'),
                 $qb->expr()->like('c.lastName', ':searchTerm'),
@@ -233,7 +233,7 @@ class SearchController extends Controller
 
             $entities = $em->createQueryBuilder()
                 ->select('c')
-                ->from('TerraMarCustomerBundle:Customer', 'c')
+                ->from('TerramarCustomerBundle:Customer', 'c')
                 ->join('c.contactAddress', 'ca')
                 ->andWhere('c.id IN (:results)')
                 ->setParameter('results', $results)

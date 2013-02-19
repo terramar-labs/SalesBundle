@@ -1,12 +1,12 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Listener;
+namespace Terramar\Bundle\SalesBundle\Listener;
 
 use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 
 class LogoutListener implements LogoutHandlerInterface
 {

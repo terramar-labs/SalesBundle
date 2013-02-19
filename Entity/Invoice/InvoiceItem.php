@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity\Invoice;
+namespace Terramar\Bundle\SalesBundle\Entity\Invoice;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice;
+use Terramar\Bundle\SalesBundle\Entity\Invoice;
 use Orkestra\Common\Entity\AbstractEntity;
 
 /**
@@ -29,9 +29,9 @@ class InvoiceItem extends AbstractEntity
     protected $price;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Invoice
+     * @var \Terramar\Bundle\SalesBundle\Entity\Invoice
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Invoice")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Invoice")
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     protected $invoice;
@@ -69,7 +69,7 @@ class InvoiceItem extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice $invoice
+     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice $invoice
      */
     public function setInvoice(Invoice $invoice)
     {
@@ -77,7 +77,7 @@ class InvoiceItem extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice
+     * @return \Terramar\Bundle\SalesBundle\Entity\Invoice
      */
     public function getInvoice()
     {

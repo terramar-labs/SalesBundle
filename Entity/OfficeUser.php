@@ -1,12 +1,12 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\CustomerBundle\Entity\Note;
+use Terramar\Bundle\CustomerBundle\Entity\Note;
 use Doctrine\Common\Collections\ArrayCollection;
-use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
-use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
+use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
+use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
 use Orkestra\Common\Entity\AbstractEntity;
 
@@ -19,9 +19,9 @@ use Orkestra\Common\Entity\AbstractEntity;
 class OfficeUser extends AbstractEntity implements AssignedByInterface, AssignedToInterface
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office")
      * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
     protected $office;
@@ -37,14 +37,14 @@ class OfficeUser extends AbstractEntity implements AssignedByInterface, Assigned
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert", mappedBy="alert", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert", mappedBy="alert", cascade={"persist"})
      */
     protected $alerts;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="TerraMar\Bundle\CustomerBundle\Entity\Note", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Terramar\Bundle\CustomerBundle\Entity\Note", cascade={"persist"})
      * @ORM\JoinTable(name="terramar_office_user_notes",
      *      joinColumns={@ORM\JoinColumn(name="office_user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="note_id", referencedColumnName="id", unique=true)}
@@ -73,7 +73,7 @@ class OfficeUser extends AbstractEntity implements AssignedByInterface, Assigned
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office
      */
     public function getOffice()
     {

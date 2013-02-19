@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity\Invoice;
+namespace Terramar\Bundle\SalesBundle\Entity\Invoice;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice;
+use Terramar\Bundle\SalesBundle\Entity\Invoice;
 use Orkestra\Common\Entity\AbstractEntity;
 
 /**
@@ -22,9 +22,9 @@ class InvoiceTransaction extends AbstractEntity
     protected $pastDue = false;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Invoice
+     * @var \Terramar\Bundle\SalesBundle\Entity\Invoice
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Invoice", inversedBy="invoiceTransactions")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Invoice", inversedBy="invoiceTransactions")
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     protected $invoice;
@@ -46,7 +46,7 @@ class InvoiceTransaction extends AbstractEntity
     protected $user;
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice $invoice
+     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice $invoice
      */
     public function setInvoice($invoice)
     {
@@ -54,7 +54,7 @@ class InvoiceTransaction extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice
+     * @return \Terramar\Bundle\SalesBundle\Entity\Invoice
      */
     public function getInvoice()
     {

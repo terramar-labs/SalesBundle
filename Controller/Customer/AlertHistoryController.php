@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
+namespace Terramar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -29,19 +29,19 @@ class AlertHistoryController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
         }
 
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
         if (!$profile) {
             throw $this->createNotFoundException('Unable to find Customer Sales Profile entity.');
         }
 
-        $alerts = $em->getRepository('TerraMarSalesBundle:Alert\CustomerAlert')->findAlertHistorybyProfile($profile);
+        $alerts = $em->getRepository('TerramarSalesBundle:Alert\CustomerAlert')->findAlertHistorybyProfile($profile);
 
         return array(
             'entity' => $customer,

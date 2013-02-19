@@ -17,8 +17,8 @@ Configuration
 
 1. Add bundles routes in routing.yml
 
-    TerraMarSalesBundle:
-      resource: "@TerraMarSalesBundle/Resources/config/routing.yml"
+    TerramarSalesBundle:
+      resource: "@TerramarSalesBundle/Resources/config/routing.yml"
 
 2. Ensure the proper roles are in the hierarchy in security.yml. See ROLES REFERENCE below.
 
@@ -72,4 +72,4 @@ Additional Notes
 
 This bundle overrides the metadata for the CustomerBundle's Customer entity,
 changing the repositoryClass to
-`TerraMar\Bundle\SalesBundle\Repository\CustomerRepository`.
+`Terramar\Bundle\SalesBundle\Repository\CustomerRepository`.

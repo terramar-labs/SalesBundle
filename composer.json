@@ -12,7 +12,7 @@
     },
     {
       "type": "git",
-      "url": "git@titanwebdev.com:TerraMarCustomerBundle.git"
+      "url": "git@titanwebdev.com:TerramarCustomerBundle.git"
     }
   ],
   "require": {
@@ -25,7 +25,7 @@
     "tcpdf/tcpdf": "dev-master"
   },
   "autoload": {
-    "psr-0": { "TerraMar\\Bundle\\SalesBundle": "" }
+    "psr-0": { "Terramar\\Bundle\\SalesBundle": "" }
   },
-  "target-dir": "TerraMar/Bundle/SalesBundle"
+  "target-dir": "Terramar/Bundle/SalesBundle"
 }

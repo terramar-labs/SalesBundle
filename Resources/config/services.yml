@@ -1,39 +1,39 @@
 parameters:
-  terramar.sales.factory.invoice.class:                    TerraMar\Bundle\SalesBundle\Factory\InvoiceFactory
-  terramar.sales.factory.payment_account.class:            TerraMar\Bundle\SalesBundle\Factory\PaymentAccountFactory
-  terramar.sales.factory.office_configuration.class:       TerraMar\Bundle\SalesBundle\Factory\OfficeConfigurationFactory
-  terramar.sales.factory.office.class:                     TerraMar\Bundle\SalesBundle\Factory\OfficeFactory
-  terramar.sales.factory.customer_sales_profile.class:     TerraMar\Bundle\SalesBundle\Factory\CustomerSalesProfileFactory
-  terramar.sales.factory.office_sales_profile.class:       TerraMar\Bundle\SalesBundle\Factory\OfficeSalesProfileFactory
-  terramar.sales.factory.alert.class:                      TerraMar\Bundle\SalesBundle\Factory\AlertFactory
-  terramar.sales.factory.assigned_alert.office_user.class: TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\OfficeUserAlertFactory
-  terramar.sales.factory.assigned_alert.customer.class:    TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\CustomerAlertFactory
-  terramar.sales.factory.contract.class:                   TerraMar\Bundle\SalesBundle\Factory\ContractFactory
-  terramar.sales.factory.customer_user.class:              TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactory
-  terramar.sales.helper.invoice.class:                     TerraMar\Bundle\SalesBundle\Helper\InvoiceHelper
-  terramar.sales.helper.account.class:                     TerraMar\Bundle\SalesBundle\Helper\AccountHelper
-  terramar.sales.helper.file.class:                        TerraMar\Bundle\SalesBundle\Helper\FileHelper
-  terramar.sales.listener.logout.class:                    TerraMar\Bundle\SalesBundle\Listener\LogoutListener
-  terramar.sales.subscriber.class_metadata.class:          TerraMar\Bundle\SalesBundle\Subscriber\ClassMetadataSubscriber
-  terramar.sales.subscriber.customer_user.class:           TerraMar\Bundle\SalesBundle\Subscriber\CustomerEmailSubscriber
+  terramar.sales.factory.invoice.class:                    Terramar\Bundle\SalesBundle\Factory\InvoiceFactory
+  terramar.sales.factory.payment_account.class:            Terramar\Bundle\SalesBundle\Factory\PaymentAccountFactory
+  terramar.sales.factory.office_configuration.class:       Terramar\Bundle\SalesBundle\Factory\OfficeConfigurationFactory
+  terramar.sales.factory.office.class:                     Terramar\Bundle\SalesBundle\Factory\OfficeFactory
+  terramar.sales.factory.customer_sales_profile.class:     Terramar\Bundle\SalesBundle\Factory\CustomerSalesProfileFactory
+  terramar.sales.factory.office_sales_profile.class:       Terramar\Bundle\SalesBundle\Factory\OfficeSalesProfileFactory
+  terramar.sales.factory.alert.class:                      Terramar\Bundle\SalesBundle\Factory\AlertFactory
+  terramar.sales.factory.assigned_alert.office_user.class: Terramar\Bundle\SalesBundle\Factory\AssignedAlert\OfficeUserAlertFactory
+  terramar.sales.factory.assigned_alert.customer.class:    Terramar\Bundle\SalesBundle\Factory\AssignedAlert\CustomerAlertFactory
+  terramar.sales.factory.contract.class:                   Terramar\Bundle\SalesBundle\Factory\ContractFactory
+  terramar.sales.factory.customer_user.class:              Terramar\Bundle\SalesBundle\Factory\CustomerUserFactory
+  terramar.sales.helper.invoice.class:                     Terramar\Bundle\SalesBundle\Helper\InvoiceHelper
+  terramar.sales.helper.account.class:                     Terramar\Bundle\SalesBundle\Helper\AccountHelper
+  terramar.sales.helper.file.class:                        Terramar\Bundle\SalesBundle\Helper\FileHelper
+  terramar.sales.listener.logout.class:                    Terramar\Bundle\SalesBundle\Listener\LogoutListener
+  terramar.sales.subscriber.class_metadata.class:          Terramar\Bundle\SalesBundle\Subscriber\ClassMetadataSubscriber
+  terramar.sales.subscriber.customer_user.class:           Terramar\Bundle\SalesBundle\Subscriber\CustomerEmailSubscriber
 
 services:
   # Repository services
   terramar.sales.repository.office:
-    class: TerraMar\Bundle\SalesBundle\Repository\OfficeRepository
+    class: Terramar\Bundle\SalesBundle\Repository\OfficeRepository
     factory_service: doctrine.orm.entity_manager
     factory_method: getRepository
-    arguments: [ TerraMar\Bundle\SalesBundle\Entity\Office ]
+    arguments: [ Terramar\Bundle\SalesBundle\Entity\Office ]
   terramar.sales.repository.office_configuration:
-    class: TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository
+    class: Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository
     factory_service: doctrine.orm.entity_manager
     factory_method: getRepository
-    arguments: [ TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration ]
+    arguments: [ Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration ]
   terramar.sales.repository.office_user_alert:
-    class: TerraMar\Bundle\SalesBundle\Repository\OfficeUserAlertRepository
+    class: Terramar\Bundle\SalesBundle\Repository\OfficeUserAlertRepository
     factory_service: doctrine.orm.entity_manager
     factory_method: getRepository
-    arguments: [ TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert ]
+    arguments: [ Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert ]
 
   # Factories
   terramar.sales.factory.invoice:
@@ -80,7 +80,7 @@ services:
 
   # Form types
   terramar.sales.form.signature_type:
-    class: TerraMar\Bundle\SalesBundle\Form\SignatureType
+    class: Terramar\Bundle\SalesBundle\Form\SignatureType
     arguments: [ @terramar.sales.helper.file ]
     tags:
       - { name: form.type, alias: signature }
@@ -100,6 +100,6 @@ services:
 
   # PDF Generators
   terramar.sales.generator.agreement:
-    class: TerraMar\Bundle\SalesBundle\Generator\AgreementGenerator
+    class: Terramar\Bundle\SalesBundle\Generator\AgreementGenerator
     public: true
     parent: orkestra.pdf.abstract_generator

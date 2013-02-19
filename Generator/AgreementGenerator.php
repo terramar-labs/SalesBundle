@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Generator;
+namespace Terramar\Bundle\SalesBundle\Generator;
 
 use Orkestra\Bundle\PdfBundle\Generator\AbstractPdfGenerator;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -27,7 +27,7 @@ class AgreementGenerator extends AbstractPdfGenerator
             $pdf->image($logo->getPath(), 15, 10, 0, 15);
         }
 
-        $pdf->write(0, $this->render('TerraMarSalesBundle:Pdf/Agreement:welcomeLetter.txt.twig', $parameters));
+        $pdf->write(0, $this->render('TerramarSalesBundle:Pdf/Agreement:welcomeLetter.txt.twig', $parameters));
 
         $pdf->addPage();
 
@@ -35,7 +35,7 @@ class AgreementGenerator extends AbstractPdfGenerator
             $pdf->image($logo->getPath(), 15, 10, 0, 15);
         }
 
-        $pdf->write(0, $this->render('TerraMarSalesBundle:Pdf/Agreement:agreementBody.txt.twig', $parameters));
+        $pdf->write(0, $this->render('TerramarSalesBundle:Pdf/Agreement:agreementBody.txt.twig', $parameters));
 
         if (($signature = $parameters['contract']->getSignature())) {
             $pdf->image($signature->getPath(), '', '', 0, 30);
@@ -57,10 +57,10 @@ class AgreementGenerator extends AbstractPdfGenerator
         ));
 
         $resolver->setAllowedTypes(array(
-            'office' =>    'TerraMar\Bundle\SalesBundle\Entity\Office',
-            'customer' =>  'TerraMar\Bundle\CustomerBundle\Entity\Customer',
-            'contract' =>  'TerraMar\Bundle\SalesBundle\Entity\Contract',
-            'agreement' => 'TerraMar\Bundle\SalesBundle\Entity\Agreement'
+            'office' =>    'Terramar\Bundle\SalesBundle\Entity\Office',
+            'customer' =>  'Terramar\Bundle\CustomerBundle\Entity\Customer',
+            'contract' =>  'Terramar\Bundle\SalesBundle\Entity\Contract',
+            'agreement' => 'Terramar\Bundle\SalesBundle\Entity\Agreement'
         ));
     }
 }

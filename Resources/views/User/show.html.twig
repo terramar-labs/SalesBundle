@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 
-{% use 'TerraMarSalesBundle:User:_subnav.html.twig' %}
+{% use 'TerramarSalesBundle:User:_subnav.html.twig' %}
 
 {% block title %}{{ entity }}{% endblock %}
 
@@ -11,11 +11,11 @@
 {% endblock %}
 
 {% block content %}
-    {% render 'TerraMarSalesBundle:OfficeUser/Alert:index' with { id : entity.id } %}
+    {% render 'TerramarSalesBundle:OfficeUser/Alert:index' with { id : entity.id } %}
     <hr>
-    {% render 'TerraMarSalesBundle:OfficeUser/ToDo:index' with { id : entity.id } %}
+    {% render 'TerramarSalesBundle:OfficeUser/ToDo:index' with { id : entity.id } %}
     <hr>
-    {% render 'TerraMarSalesBundle:OfficeUser/Note:index' with { id : entity.id } %}
+    {% render 'TerramarSalesBundle:OfficeUser/Note:index' with { id : entity.id } %}
     <hr>
-    {% render 'TerraMarSalesBundle:OfficeUser/AlertHistory:index' with { id : entity.id } %}
+    {% render 'TerramarSalesBundle:OfficeUser/AlertHistory:index' with { id : entity.id } %}
 {% endblock %}

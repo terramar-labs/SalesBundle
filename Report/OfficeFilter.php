@@ -1,12 +1,12 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Report;
+namespace Terramar\Bundle\SalesBundle\Report;
 
 use Orkestra\Bundle\ReportBundle\FilterInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\QueryBuilder;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 
 /**
  * A simple Filter that allows a callback to modify the QueryBuilder
@@ -14,14 +14,14 @@ use TerraMar\Bundle\SalesBundle\Entity\Office;
 class OfficeFilter implements FilterInterface
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office
      */
     protected $office;
 
     /**
      * Constructor
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      */
     public function __construct(Office $office)
     {
@@ -34,7 +34,7 @@ class OfficeFilter implements FilterInterface
     public function apply(QueryBuilder $qb)
     {
         $qb->resetDQLPart('from');
-        $qb->from('TerraMarSalesBundle:OfficeSnapshot', 's')
+        $qb->from('TerramarSalesBundle:OfficeSnapshot', 's')
             ->andWhere('s.office = :office')
             ->setParameter('office', $this->office);
     }

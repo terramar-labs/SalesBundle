@@ -1,11 +1,11 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertType;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
 use Orkestra\Common\Entity\AbstractEntity;
 
 /**
@@ -31,21 +31,21 @@ class Alert extends AbstractEntity
     protected $description = '';
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus
+     * @var \Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus
      *
      * @ORM\Column(name="status", type="enum.terramar.sales.alert_status")
      */
     protected $status;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority
+     * @var \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority
      *
      * @ORM\Column(name="priority", type="enum.terramar.sales.alert_priority")
      */
     protected $priority;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType
+     * @var \Terramar\Bundle\SalesBundle\Entity\Alert\AlertType
      *
      * @ORM\Column(name="type", type="enum.terramar.sales.alert_type")
      */
@@ -107,7 +107,7 @@ class Alert extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
      */
     public function setPriority(AlertPriority $priority)
     {
@@ -115,7 +115,7 @@ class Alert extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority
      */
     public function getPriority()
     {
@@ -123,7 +123,7 @@ class Alert extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus $status
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus $status
      */
     public function setStatus(AlertStatus $status)
     {
@@ -131,7 +131,7 @@ class Alert extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus
      */
     public function getStatus()
     {
@@ -139,7 +139,7 @@ class Alert extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType $type
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertType $type
      */
     public function setType(AlertType $type)
     {
@@ -147,7 +147,7 @@ class Alert extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert\AlertType
      */
     public function getType()
     {

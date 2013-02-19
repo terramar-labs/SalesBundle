@@ -1,11 +1,11 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\OfficeUser;
+namespace Terramar\Bundle\SalesBundle\Controller\OfficeUser;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\CustomerBundle\Entity\Note;
-use TerraMar\Bundle\SalesBundle\Form\NoteType;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\CustomerBundle\Entity\Note;
+use Terramar\Bundle\SalesBundle\Form\NoteType;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -31,7 +31,7 @@ class NoteController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $office = $this->getCurrentOffice();
 
-        $user = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office->getId()));
+        $user = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office->getId()));
 
         if (!$user) {
             throw $this->createNotFoundException('Unable to locate User');
@@ -61,7 +61,7 @@ class NoteController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $office = $this->getCurrentOffice();
 
-        $user = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
+        $user = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
 
         if (!$user) {
             throw $this->createNotFoundException('Unable to locate User');
@@ -92,7 +92,7 @@ class NoteController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $office = $this->getCurrentOffice();
 
-            $user = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
+            $user = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
 
             if (!$user) {
                 throw $this->createNotFoundException('Unable to locate User');

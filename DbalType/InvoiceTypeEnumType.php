@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\DbalType;
+namespace Terramar\Bundle\SalesBundle\DbalType;
 
 use Orkestra\Common\DbalType\AbstractEnumType;
 
@@ -19,5 +19,5 @@ class InvoiceTypeEnumType extends AbstractEnumType
     /**
      * @var string The fully qualified class name of the Enum that this class wraps
      */
-    protected $class = 'TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType';
+    protected $class = 'Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceType';
 }

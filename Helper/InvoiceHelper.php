@@ -1,25 +1,25 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Helper;
+namespace Terramar\Bundle\SalesBundle\Helper;
 
-use TerraMar\Bundle\SalesBundle\Entity\Invoice;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\Invoice;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 use Orkestra\Transactor\Entity\Transaction\TransactionType;
 use Orkestra\Transactor\Entity\Transaction;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceTransaction;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus;
-use TerraMar\Bundle\SalesBundle\Model\Invoice\SerializedPayment;
+use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceTransaction;
+use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus;
+use Terramar\Bundle\SalesBundle\Model\Invoice\SerializedPayment;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Orkestra\Transactor\TransactorFactory;
 use Orkestra\Transactor\Entity\Transaction\NetworkType;
-use TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository;
-use TerraMar\Bundle\SalesBundle\Model\Invoice\Payment;
+use Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository;
+use Terramar\Bundle\SalesBundle\Model\Invoice\Payment;
 
 class InvoiceHelper
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository
+     * @var \Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository
      */
     protected $configurationRepository;
 
@@ -36,7 +36,7 @@ class InvoiceHelper
     /**
      * Constructor
      *
-     * @param \TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository $configurationRepository
+     * @param \Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository $configurationRepository
      * @param \Orkestra\Transactor\TransactorFactory $transactorFactory
      * @param \Doctrine\Common\Persistence\ObjectRepository $accountRepository
      */
@@ -53,7 +53,7 @@ class InvoiceHelper
     /**
      * Processes a refund
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice $invoice
+     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice $invoice
      * @param \Orkestra\Transactor\Entity\Transaction $transaction
      * @param \Orkestra\Bundle\ApplicationBundle\Entity\User $user
      *
@@ -83,9 +83,9 @@ class InvoiceHelper
     /**
      * Processes a payment
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice $invoice
-     * @param \TerraMar\Bundle\SalesBundle\Model\Invoice\Payment $payment
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice $invoice
+     * @param \Terramar\Bundle\SalesBundle\Model\Invoice\Payment $payment
      * @param \Orkestra\Bundle\ApplicationBundle\Entity\User $user
      *
      * @throws \RuntimeException
@@ -156,9 +156,9 @@ class InvoiceHelper
     /**
      * Serializes a Payment object for storage
      *
-     * @param \TerraMar\Bundle\SalesBundle\Model\Invoice\Payment $payment
+     * @param \Terramar\Bundle\SalesBundle\Model\Invoice\Payment $payment
      *
-     * @return \TerraMar\Bundle\SalesBundle\Model\Invoice\SerializedPayment
+     * @return \Terramar\Bundle\SalesBundle\Model\Invoice\SerializedPayment
      */
     public function serializePayment(Payment $payment)
     {
@@ -173,9 +173,9 @@ class InvoiceHelper
     /**
      * Hydrates a serialized payment
      *
-     * @param \TerraMar\Bundle\SalesBundle\Model\Invoice\SerializedPayment $serializedPayment
+     * @param \Terramar\Bundle\SalesBundle\Model\Invoice\SerializedPayment $serializedPayment
      *
-     * @return \TerraMar\Bundle\SalesBundle\Model\Invoice\Payment
+     * @return \Terramar\Bundle\SalesBundle\Model\Invoice\Payment
      */
     public function hydrateSerializedPayment(SerializedPayment $serializedPayment)
     {

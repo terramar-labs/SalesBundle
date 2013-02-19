@@ -1,40 +1,40 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Orkestra\Bundle\ApplicationBundle\Entity\File;
-use TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType;
-use TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
-use TerraMar\Bundle\SalesBundle\Entity\Contract\ContractStatus;
+use Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType;
+use Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
+use Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus;
 use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A contract that a customer has signed
  *
- * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\ContractRepository")
+ * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\ContractRepository")
  * @ORM\Table(name="terramar_contracts")
  */
 class Contract extends AbstractEntity
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
+     * @var \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
      *
      * @ORM\Column(name="billing_frequency", type="enum.terramar.sales.billing_frequency")
      */
     protected $billingFrequency;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Agreement
+     * @var \Terramar\Bundle\SalesBundle\Entity\Agreement
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Agreement")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Agreement")
      * @ORM\JoinColumn(name="agreement_id", referencedColumnName="id")
      */
     protected $agreement;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Contract\ContractStatus
+     * @var \Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus
      *
      * @ORM\Column(name="status", type="enum.terramar.sales.contract_status")
      */
@@ -55,16 +55,16 @@ class Contract extends AbstractEntity
     protected $dateEnd;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType
+     * @var \Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType
      *
      * @ORM\Column(name="found_by", type="enum.terramar.sales.found_by_type")
      */
     protected $foundByType;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Salesperson
+     * @var \Terramar\Bundle\SalesBundle\Entity\Salesperson
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Salesperson", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Salesperson", cascade={"persist"})
      * @ORM\JoinColumn(name="salesperson_id", referencedColumnName="id")
      */
     protected $salesperson;
@@ -80,7 +80,7 @@ class Contract extends AbstractEntity
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Invoice", mappedBy="contract", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Invoice", mappedBy="contract", cascade={"persist"})
      */
     protected $invoices;
 
@@ -101,7 +101,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Agreement $agreement
+     * @param \Terramar\Bundle\SalesBundle\Entity\Agreement $agreement
      */
     public function setAgreement(Agreement $agreement)
     {
@@ -109,7 +109,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Agreement
+     * @return \Terramar\Bundle\SalesBundle\Entity\Agreement
      */
     public function getAgreement()
     {
@@ -117,7 +117,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Salesperson $salesperson
+     * @param \Terramar\Bundle\SalesBundle\Entity\Salesperson $salesperson
      */
     public function setSalesperson(Salesperson $salesperson)
     {
@@ -125,7 +125,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Salesperson
+     * @return \Terramar\Bundle\SalesBundle\Entity\Salesperson
      */
     public function getSalesperson()
     {
@@ -133,7 +133,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency $billingFrequency
+     * @param \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency $billingFrequency
      */
     public function setBillingFrequency(BillingFrequency $billingFrequency)
     {
@@ -141,7 +141,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
+     * @return \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
      */
     public function getBillingFrequency()
     {
@@ -181,7 +181,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType $foundByType
+     * @param \Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType $foundByType
      */
     public function setFoundByType(FoundByType $foundByType)
     {
@@ -189,7 +189,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType
+     * @return \Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType
      */
     public function getFoundByType()
     {
@@ -213,7 +213,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Contract\ContractStatus $status
+     * @param \Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus $status
      */
     public function setStatus(ContractStatus $status)
     {
@@ -221,7 +221,7 @@ class Contract extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Contract\ContractStatus
+     * @return \Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus
      */
     public function getStatus()
     {

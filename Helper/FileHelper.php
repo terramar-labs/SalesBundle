@@ -1,13 +1,13 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Helper;
+namespace Terramar\Bundle\SalesBundle\Helper;
 
-use TerraMar\Bundle\SalesBundle\Entity\Contract;
+use Terramar\Bundle\SalesBundle\Entity\Contract;
 use Orkestra\Bundle\ApplicationBundle\Entity\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice;
-use TerraMar\Bundle\CustomerBundle\Entity\Customer;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\Invoice;
+use Terramar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 
 class FileHelper
 {
@@ -30,7 +30,7 @@ class FileHelper
      * Creates a new logo File for an Office using the given UploadedFile
      *
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      *
      * @return \Orkestra\Bundle\ApplicationBundle\Entity\File
      */
@@ -76,7 +76,7 @@ class FileHelper
     /**
      * Gets the path where invoice PDFs are stored
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice $invoice
+     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice $invoice
      *
      * @return string
      */
@@ -97,7 +97,7 @@ class FileHelper
     /**
      * Gets the path where contract PDFs are stored
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Contract $contract
+     * @param \Terramar\Bundle\SalesBundle\Entity\Contract $contract
      *
      * @return string
      */
@@ -118,7 +118,7 @@ class FileHelper
     /**
      * Gets the path where signatures are stored
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Contract $contract
+     * @param \Terramar\Bundle\SalesBundle\Entity\Contract $contract
      *
      * @return string
      */
@@ -169,7 +169,7 @@ class FileHelper
     /**
      * Gets the path where logos are stored
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      *
      * @return string
      */

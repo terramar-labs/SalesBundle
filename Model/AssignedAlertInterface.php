@@ -1,8 +1,8 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Model;
+namespace Terramar\Bundle\SalesBundle\Model;
 
-use TerraMar\Bundle\SalesBundle\Entity\Alert;
+use Terramar\Bundle\SalesBundle\Entity\Alert;
 
 interface AssignedAlertInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Repository;
+namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
-use TerraMar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\CustomerBundle\Entity\Customer;
 
 class CustomerSalesProfileRepository extends EntityRepository
 {

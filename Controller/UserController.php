@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller;
+namespace Terramar\Bundle\SalesBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -8,9 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Orkestra\Bundle\ApplicationBundle\Entity\Group;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
-use TerraMar\Bundle\SalesBundle\Entity\Salesperson;
-use TerraMar\Bundle\SalesBundle\Form\UserType;
-use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\SalesBundle\Entity\Salesperson;
+use Terramar\Bundle\SalesBundle\Form\UserType;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 
 /**
  * User controller.
@@ -37,7 +37,7 @@ class UserController extends AbstractController
         if (!empty($searchTerms)) {
             $qb = $em->createQueryBuilder();
             $entities = $qb->select('u')
-                ->from('TerraMarSalesBundle:OfficeUser', 'ou')
+                ->from('TerramarSalesBundle:OfficeUser', 'ou')
                 ->from('OrkestraApplicationBundle:User', 'u')
                 ->where('ou.user = u')
                 ->andWhere('u.active = true')
@@ -55,7 +55,7 @@ class UserController extends AbstractController
         else {
             $entities = $em->createQueryBuilder()
                 ->select('u')
-                ->from('TerraMarSalesBundle:OfficeUser', 'ou')
+                ->from('TerramarSalesBundle:OfficeUser', 'ou')
                 ->from('OrkestraApplicationBundle:User', 'u')
                 ->where('ou.user = u')
                 ->andWhere('u.active = true')
@@ -83,7 +83,7 @@ class UserController extends AbstractController
 
         $user = $em->createQueryBuilder()
             ->select('u')
-            ->from('TerraMarSalesBundle:OfficeUser ou, OrkestraApplicationBundle:User', 'u')
+            ->from('TerramarSalesBundle:OfficeUser ou, OrkestraApplicationBundle:User', 'u')
             ->where('u.active = true')
             ->andWhere('u.id = :id')
             ->andWhere('ou.office = :office')
@@ -125,7 +125,7 @@ class UserController extends AbstractController
      *
      * @Route("/create", name="orkestra_user_create")
      * @Method("post")
-     * @Template("TerraMarSalesBundle:User:new.html.twig")
+     * @Template("TerramarSalesBundle:User:new.html.twig")
      * @Secure(roles="ROLE_USER_WRITE")
      */
     public function createAction()
@@ -236,7 +236,7 @@ class UserController extends AbstractController
 
         $user = $em->createQueryBuilder()
             ->select('u')
-            ->from('TerraMarSalesBundle:OfficeUser ou, OrkestraApplicationBundle:User', 'u')
+            ->from('TerramarSalesBundle:OfficeUser ou, OrkestraApplicationBundle:User', 'u')
             ->where('u.active = true')
             ->andWhere('u.id = :id')
             ->andWhere('ou.office = :office')
@@ -261,7 +261,7 @@ class UserController extends AbstractController
      *
      * @Route("/{id}/update", name="orkestra_user_update")
      * @Method("post")
-     * @Template("TerraMarSalesBundle:User:edit.html.twig")
+     * @Template("TerramarSalesBundle:User:edit.html.twig")
      * @Secure(roles="ROLE_USER_WRITE")
      */
     public function updateAction($id)
@@ -273,7 +273,7 @@ class UserController extends AbstractController
 
         $user = $em->createQueryBuilder()
             ->select('u')
-            ->from('TerraMarSalesBundle:OfficeUser ou, OrkestraApplicationBundle:User', 'u')
+            ->from('TerramarSalesBundle:OfficeUser ou, OrkestraApplicationBundle:User', 'u')
             ->where('u.active = true')
             ->andWhere('u.id = :id')
             ->andWhere('ou.office = :office')
@@ -292,18 +292,18 @@ class UserController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
 
-            $officeUser = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id));
+            $officeUser = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id));
 
             $salesPersonChecked = $form->get('salesperson')->getData();
             if ($salesPersonChecked) {
-                $salesPerson = $em->getRepository('TerraMarSalesBundle:Salesperson')->findOneBy(array('user' => $officeUser->getId()));
+                $salesPerson = $em->getRepository('TerramarSalesBundle:Salesperson')->findOneBy(array('user' => $officeUser->getId()));
                 if (!$salesPerson) {
                     $salesPerson = new Salesperson($officeUser);
                 }
                 $user->addGroup($em->getRepository('OrkestraApplicationBundle:Group')->findOneBy(array('role' => 'ROLE_SALESPERSON')));
                 $em->persist($salesPerson);
             } else {
-                $salesPerson = $em->getRepository('TerraMarSalesBundle:Salesperson')->findOneBy(array('user' => $officeUser->getId()));
+                $salesPerson = $em->getRepository('TerramarSalesBundle:Salesperson')->findOneBy(array('user' => $officeUser->getId()));
                 if ($salesPerson) {
                     $salesPerson->setActive(false);
                     $em->persist($salesPerson);
@@ -340,7 +340,7 @@ class UserController extends AbstractController
 
         $form = $this->createForm(new UserType(false), $user);
 
-        $officeUser = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $user->getId()));
+        $officeUser = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $user->getId()));
 
         // Set user's main group
         $createFilterCallable = function($type) {
@@ -361,7 +361,7 @@ class UserController extends AbstractController
         }
 
         // Set salesperson
-        $salesperson = $em->getRepository('TerraMarSalesBundle:Salesperson')->findOneBy(array('user' => $officeUser->getId(), 'active' => true));
+        $salesperson = $em->getRepository('TerramarSalesBundle:Salesperson')->findOneBy(array('user' => $officeUser->getId(), 'active' => true));
         if ($salesperson && $form->has('salesperson')) {
             $form->get('salesperson')->setData(true);
         }
@@ -383,7 +383,7 @@ class UserController extends AbstractController
 
         $user = $em->createQueryBuilder()
             ->select('u')
-            ->from('TerraMarSalesBundle:OfficeUser ou, OrkestraApplicationBundle:User', 'u')
+            ->from('TerramarSalesBundle:OfficeUser ou, OrkestraApplicationBundle:User', 'u')
             ->where('u.active = true')
             ->andWhere('u.id = :id')
             ->andWhere('ou.office = :office')
@@ -392,7 +392,7 @@ class UserController extends AbstractController
             ->getOneOrNullResult();
 
         $user->setActive(false);
-        $officeUser = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id));
+        $officeUser = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id));
         $officeUser->setActive(false);
 
         $em->persist($user);

@@ -1,18 +1,18 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Repository;
+namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 
 class OfficeConfigurationRepository extends EntityRepository
 {
     /**
      * Finds a configuration entity for a specified Office
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
      */
     public function findOneByOffice(Office $office)
     {

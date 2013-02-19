@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Orkestra\Common\Entity\AbstractEntity;
@@ -8,15 +8,15 @@ use Orkestra\Common\Entity\AbstractEntity;
 /**
  * A salesperson
  *
- * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\SalespersonRepository")
+ * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\SalespersonRepository")
  * @ORM\Table(name="terramar_salespeople")
  */
 class Salesperson extends AbstractEntity
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @var \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\OfficeUser", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\OfficeUser", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
@@ -29,7 +29,7 @@ class Salesperson extends AbstractEntity
     /**
      * Constructor
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\OfficeUser $user
+     * @param \Terramar\Bundle\SalesBundle\Entity\OfficeUser $user
      */
     public function __construct(OfficeUser $user)
     {
@@ -37,7 +37,7 @@ class Salesperson extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\OfficeUser $user
+     * @param \Terramar\Bundle\SalesBundle\Entity\OfficeUser $user
      */
     public function setUser($user)
     {
@@ -45,7 +45,7 @@ class Salesperson extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @return \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      */
     public function getUser()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Model;
+namespace Terramar\Bundle\SalesBundle\Model;
 
 interface SalesProfileInterface
 {

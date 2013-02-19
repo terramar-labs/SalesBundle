@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller;
+namespace Terramar\Bundle\SalesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Orkestra\Bundle\ApplicationBundle\Entity\File;
@@ -9,8 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
-use TerraMar\Bundle\SalesBundle\Form\OfficeType;
+use Terramar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Form\OfficeType;
 
 /**
  * Office controller.
@@ -30,7 +30,7 @@ class OfficeController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TerraMarSalesBundle:Office')->findParentOffices();
+        $entities = $em->getRepository('TerramarSalesBundle:Office')->findParentOffices();
 
         return array(
             'entities' => $entities,
@@ -48,7 +48,7 @@ class OfficeController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $office = $em->getRepository('TerraMarSalesBundle:Office')->find($id);
+        $office = $em->getRepository('TerramarSalesBundle:Office')->find($id);
 
         if (!$office) {
             throw $this->createNotFoundException('Unable to find Office entity.');
@@ -70,13 +70,13 @@ class OfficeController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $parent = $em->getRepository('TerraMarSalesBundle:Office')->find($id);
+        $parent = $em->getRepository('TerramarSalesBundle:Office')->find($id);
 
         if (!$parent) {
             throw $this->createNotFoundException('Unable to find Parent entity.');
         }
 
-        $entities = $em->getRepository('TerraMarSalesBundle:Office')->findChildOfficesByParent($parent);
+        $entities = $em->getRepository('TerramarSalesBundle:Office')->findChildOfficesByParent($parent);
 
         return array(
             'entities' => $entities,
@@ -95,7 +95,7 @@ class OfficeController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TerraMarSalesBundle:Office')->findAllChildOffices();
+        $entities = $em->getRepository('TerramarSalesBundle:Office')->findAllChildOffices();
 
         return array(
             'entities' => $entities,
@@ -116,7 +116,7 @@ class OfficeController extends AbstractController
         $entity = new Office();
 
         if ($id) {
-            $parent = $em->getRepository('TerraMarSalesBundle:Office')->find($id);
+            $parent = $em->getRepository('TerramarSalesBundle:Office')->find($id);
             $entity->setParent($parent);
         }
 
@@ -133,7 +133,7 @@ class OfficeController extends AbstractController
      *
      * @Route("/company/create", name="company_create")
      * @Method("POST")
-     * @Template("TerraMarSalesBundle:Office:new.html.twig")
+     * @Template("TerramarSalesBundle:Office:new.html.twig")
      * @Secure(roles="ROLE_COMPANY_WRITE")
      */
     public function createAction(Request $request)
@@ -178,7 +178,7 @@ class OfficeController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TerraMarSalesBundle:Office')->find($id);
+        $entity = $em->getRepository('TerramarSalesBundle:Office')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Office entity.');
@@ -197,14 +197,14 @@ class OfficeController extends AbstractController
      *
      * @Route("/company/{id}/update", name="company_update")
      * @Method("POST")
-     * @Template("TerraMarSalesBundle:Office:edit.html.twig")
+     * @Template("TerramarSalesBundle:Office:edit.html.twig")
      * @Secure(roles="ROLE_COMPANY_WRITE")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TerraMarSalesBundle:Office')->find($id);
+        $entity = $em->getRepository('TerramarSalesBundle:Office')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Office entity.');
@@ -245,7 +245,7 @@ class OfficeController extends AbstractController
     public function deleteBranchAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('TerraMarSalesBundle:Office')->find($id);
+        $entity = $em->getRepository('TerramarSalesBundle:Office')->find($id);
         $entity->setActive(false);
         $em->persist($entity);
         $em->flush();

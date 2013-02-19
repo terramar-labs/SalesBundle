@@ -30,7 +30,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace TerraMar\Bundle\SalesBundle\Form\Signature;
+namespace Terramar\Bundle\SalesBundle\Form\Signature;
 
 /**
  * Signature to Image: A supplemental script for Signature Pad that

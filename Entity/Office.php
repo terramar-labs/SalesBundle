@@ -1,16 +1,16 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
-use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
+use Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
+use Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
 use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A physical location of a company
  *
- * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\OfficeRepository")
+ * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\OfficeRepository")
  * @ORM\Table(name="terramar_offices")
  */
 class Office extends AbstractEntity
@@ -68,23 +68,23 @@ class Office extends AbstractEntity
     protected $billingAddress;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
      *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration", mappedBy="office", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration", mappedBy="office", cascade={"persist"})
      */
     protected $configuration;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
      *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile", mappedBy="office", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile", mappedBy="office", cascade={"persist"})
      */
     protected $profile;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
@@ -210,7 +210,7 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $parent
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $parent
      */
     public function setParent(Office $parent)
     {
@@ -218,7 +218,7 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office
      */
     public function getParent()
     {
@@ -226,7 +226,7 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration $configuration
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration $configuration
      */
     public function setConfiguration(OfficeConfiguration $configuration)
     {
@@ -235,7 +235,7 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
      */
     public function getConfiguration()
     {
@@ -243,7 +243,7 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile $profile
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile $profile
      */
     public function setProfile(OfficeSalesProfile $profile)
     {
@@ -252,7 +252,7 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
      */
     public function getProfile()
     {

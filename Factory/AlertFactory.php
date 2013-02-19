@@ -1,15 +1,15 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory;
+namespace Terramar\Bundle\SalesBundle\Factory;
 
-use TerraMar\Bundle\SalesBundle\Factory\AlertFactoryInterface;
-use TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\AssignedAlertFactoryInterface;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Alert;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
-use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
-use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
+use Terramar\Bundle\SalesBundle\Factory\AlertFactoryInterface;
+use Terramar\Bundle\SalesBundle\Factory\AssignedAlert\AssignedAlertFactoryInterface;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertType;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
+use Terramar\Bundle\SalesBundle\Entity\Alert;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
+use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
+use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 
 class AlertFactory implements AlertFactoryInterface
 {
@@ -29,13 +29,13 @@ class AlertFactory implements AlertFactoryInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
      * @param string $name
      * @param string $description
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
      *
-     * @return \TerraMar\Bundle\SalesBundle\Model\AssignedAlertInterface
+     * @return \Terramar\Bundle\SalesBundle\Model\AssignedAlertInterface
      */
     public function createAssignedAlert(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo, $name, $description, AlertPriority $priority)
     {
@@ -48,14 +48,14 @@ class AlertFactory implements AlertFactoryInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
      * @param string $name
      * @param string $description
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
      * @param \DateTime $dateDue
      *
-     * @return \TerraMar\Bundle\SalesBundle\Model\AssignedAlertInterface
+     * @return \Terramar\Bundle\SalesBundle\Model\AssignedAlertInterface
      */
     public function createAssignedToDo(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo, $name, $description, AlertPriority $priority, \DateTime $dateDue)
     {
@@ -70,9 +70,9 @@ class AlertFactory implements AlertFactoryInterface
     /**
      * @param string $name
      * @param string $description
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert
      */
     public function createAlert($name, $description, AlertPriority $priority)
     {
@@ -89,10 +89,10 @@ class AlertFactory implements AlertFactoryInterface
     /**
      * @param string $name
      * @param string $description
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
      * @param \DateTime $dateDue
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert
      */
     public function createToDo($name, $description, AlertPriority $priority, \DateTime $dateDue)
     {
@@ -108,8 +108,8 @@ class AlertFactory implements AlertFactoryInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
      *
      * @return AssignedAlert\AssignedAlertFactoryInterface
      * @throws \RuntimeException

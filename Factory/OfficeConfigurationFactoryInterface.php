@@ -1,17 +1,17 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory;
+namespace Terramar\Bundle\SalesBundle\Factory;
 
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 
 interface OfficeConfigurationFactoryInterface
 {
     /**
      * Creates a new OfficeConfiguration entity with default values
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
      */
     function create(Office $office);
 }

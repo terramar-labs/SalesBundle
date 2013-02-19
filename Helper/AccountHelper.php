@@ -1,12 +1,12 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Helper;
+namespace Terramar\Bundle\SalesBundle\Helper;
 
 use Orkestra\Transactor\TransactorFactory;
 use Orkestra\Transactor\Entity\Transaction\TransactionType;
 use Orkestra\Transactor\Entity\Transaction\NetworkType;
-use TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository;
-use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository;
+use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 use Orkestra\Transactor\Entity\Transaction;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
 
@@ -18,7 +18,7 @@ class AccountHelper
     protected $factory;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository
+     * @var \Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository
      */
     protected $repository;
 
@@ -26,7 +26,7 @@ class AccountHelper
      * Constructor
      *
      * @param \Orkestra\Transactor\TransactorFactory $factory
-     * @param \TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository $repository
+     * @param \Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository $repository
      */
     public function __construct(TransactorFactory $factory, OfficeConfigurationRepository $repository)
     {

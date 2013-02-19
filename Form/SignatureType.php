@@ -1,10 +1,10 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form;
+namespace Terramar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use TerraMar\Bundle\SalesBundle\Form\Signature\SignatureTransformer;
-use TerraMar\Bundle\SalesBundle\Helper\FileHelper;
+use Terramar\Bundle\SalesBundle\Form\Signature\SignatureTransformer;
+use Terramar\Bundle\SalesBundle\Helper\FileHelper;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -25,7 +25,7 @@ class SignatureType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TerraMar\Bundle\SalesBundle\Entity\Contract'
+            'data_class' => 'Terramar\Bundle\SalesBundle\Entity\Contract'
         ));
     }
 

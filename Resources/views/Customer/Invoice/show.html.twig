@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 
-{% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
+{% use 'TerramarSalesBundle:Customer:_subnav.html.twig' %}
 
 {% block title %}{{ entity }}{% endblock %}
 
@@ -22,7 +22,7 @@
             <th class="delete-record"></th>
         </tr>
     </thead>
-    <tbody class="invoice-body" data-prototype="{% filter escape %}{% include 'TerraMarSalesBundle:Customer/Invoice:_paymentRow.html.twig' with { form: form.payments.vars.prototype } %}{% endfilter %}">
+    <tbody class="invoice-body" data-prototype="{% filter escape %}{% include 'TerramarSalesBundle:Customer/Invoice:_paymentRow.html.twig' with { form: form.payments.vars.prototype } %}{% endfilter %}">
     {% set balance = 0 %}
     {% for item in invoice.items %}
         {% set balance = balance + item.price %}
@@ -48,7 +48,7 @@
         {% endif %}
     {% endfor %}
     {% for form in form.payments %}
-        {% include 'TerraMarSalesBundle:Customer/Invoice:_paymentRow.html.twig' with { form: form } %}
+        {% include 'TerramarSalesBundle:Customer/Invoice:_paymentRow.html.twig' with { form: form } %}
     {% endfor %}
     </tbody>
     <tfoot>
@@ -84,10 +84,10 @@
             _$saveButton = $('.save-process'),
             _prototype = _$invoiceBody.data('prototype');
 
-        var _simpleAccountsHtml = '{% include 'TerraMarSalesBundle:Customer/Invoice:_accounts.html.twig' with { accounts: profile.simpleAccounts } %}',
-            _bankAccountsHtml = '{% include 'TerraMarSalesBundle:Customer/Invoice:_accounts.html.twig' with { accounts: profile.bankAccounts } %}',
-            _cardAccountsHtml = '{% include 'TerraMarSalesBundle:Customer/Invoice:_accounts.html.twig' with { accounts: profile.cardAccounts } %}',
-            _pointsAccountsHtml = '{% include 'TerraMarSalesBundle:Customer/Invoice:_accounts.html.twig' with { accounts: [ profile.pointsAccount ] } %}';
+        var _simpleAccountsHtml = '{% include 'TerramarSalesBundle:Customer/Invoice:_accounts.html.twig' with { accounts: profile.simpleAccounts } %}',
+            _bankAccountsHtml = '{% include 'TerramarSalesBundle:Customer/Invoice:_accounts.html.twig' with { accounts: profile.bankAccounts } %}',
+            _cardAccountsHtml = '{% include 'TerramarSalesBundle:Customer/Invoice:_accounts.html.twig' with { accounts: profile.cardAccounts } %}',
+            _pointsAccountsHtml = '{% include 'TerramarSalesBundle:Customer/Invoice:_accounts.html.twig' with { accounts: [ profile.pointsAccount ] } %}';
 
         function _wireHandlers(row) {
             var $row = _$invoiceBody.find('tr[row="' + row + '"]'),

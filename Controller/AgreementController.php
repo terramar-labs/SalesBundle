@@ -1,15 +1,15 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller;
+namespace Terramar\Bundle\SalesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Form\AgreementType;
+use Terramar\Bundle\SalesBundle\Form\AgreementType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use TerraMar\Bundle\SalesBundle\Entity\Agreement;
+use Terramar\Bundle\SalesBundle\Entity\Agreement;
 
 /**
  * Agreement controller.
@@ -30,7 +30,7 @@ class AgreementController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TerraMarSalesBundle:Agreement')->findByOffice($this->getCurrentOffice());
+        $entities = $em->getRepository('TerramarSalesBundle:Agreement')->findByOffice($this->getCurrentOffice());
 
         return array(
             'entities' => $entities,
@@ -49,7 +49,7 @@ class AgreementController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $agreement = $em->getRepository('TerraMarSalesBundle:Agreement')->find($id);
+        $agreement = $em->getRepository('TerramarSalesBundle:Agreement')->find($id);
 
         if (!$agreement) {
             throw $this->createNotFoundException('Unable to locate Agreement');
@@ -80,7 +80,7 @@ class AgreementController extends AbstractController
      * Shows a form to create a new Agreement
      *
      * @Route("/create", name="agreement_create")
-     * @Template("TerraMarSalesBundle:Agreement:new.html.twig")
+     * @Template("TerramarSalesBundle:Agreement:new.html.twig")
      * @Method("POST")
      * @Secure(roles="ROLE_AGREEMENT_WRITE")
      */
@@ -118,7 +118,7 @@ class AgreementController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TerraMarSalesBundle:Agreement')->find($id);
+        $entity = $em->getRepository('TerramarSalesBundle:Agreement')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to locate Agreement');
@@ -136,7 +136,7 @@ class AgreementController extends AbstractController
      * Updates an existing Agreement
      *
      * @Route("/{id}/update", name="agreement_update")
-     * @Template("TerraMarSalesBundle:Agreement:edit.html.twig")
+     * @Template("TerramarSalesBundle:Agreement:edit.html.twig")
      * @Method("POST")
      * @Secure(roles="ROLE_AGREEMENT_WRITE")
      */
@@ -144,7 +144,7 @@ class AgreementController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TerraMarSalesBundle:Agreement')->find($id);
+        $entity = $em->getRepository('TerramarSalesBundle:Agreement')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to locate Agreement');

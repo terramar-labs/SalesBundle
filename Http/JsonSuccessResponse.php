@@ -1,11 +1,11 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Http;
+namespace Terramar\Bundle\SalesBundle\Http;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * A successful JsonSuccessResponse tailored to the TerraMar client side library
+ * A successful JsonSuccessResponse tailored to the Terramar client side library
  */
 class JsonSuccessResponse extends JsonResponse
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity\Alert;
+namespace Terramar\Bundle\SalesBundle\Entity\Alert;
 
 use Orkestra\Common\Type\Enum;
 

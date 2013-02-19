@@ -1,31 +1,31 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory;
+namespace Terramar\Bundle\SalesBundle\Factory;
 
-use TerraMar\Bundle\CustomerBundle\Entity\Customer;
-use TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface;
+use Terramar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface;
 use Orkestra\Transactor\Entity\Account\SimpleAccount;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
-use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 
 class CustomerSalesProfileFactory implements CustomerSalesProfileFactoryInterface
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Factory\PaymentAccountFactoryInterface
+     * @var \Terramar\Bundle\SalesBundle\Factory\PaymentAccountFactoryInterface
      */
     protected $paymentAccountFactory;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface
+     * @var \Terramar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface
      */
     protected $customerUserFactory;
 
     /**
      * Constructor
      *
-     * @param \TerraMar\Bundle\SalesBundle\Factory\PaymentAccountFactoryInterface $paymentAccountFactory
-     * @param \TerraMar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface $customerUserFactory
+     * @param \Terramar\Bundle\SalesBundle\Factory\PaymentAccountFactoryInterface $paymentAccountFactory
+     * @param \Terramar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface $customerUserFactory
      */
     public function __construct(PaymentAccountFactoryInterface $paymentAccountFactory, CustomerUserFactoryInterface $customerUserFactory)
     {
@@ -36,11 +36,11 @@ class CustomerSalesProfileFactory implements CustomerSalesProfileFactoryInterfac
     /**
      * Creates a new CustomerSalesProfile from the given Customer
      *
-     * @param \TerraMar\Bundle\CustomerBundle\Entity\Customer $customer
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\CustomerBundle\Entity\Customer $customer
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      * @param string|null $password
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile
+     * @return \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile
      */
     public function create(Customer $customer, Office $office, $password = null)
     {
@@ -56,10 +56,10 @@ class CustomerSalesProfileFactory implements CustomerSalesProfileFactoryInterfac
      *
      * This method is called when a new CustomerSalesProfile is created.
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
      * @param string|null $password
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile
+     * @return \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile
      */
     public function buildProfile(CustomerSalesProfile $profile, $password = null)
     {

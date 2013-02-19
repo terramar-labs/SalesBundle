@@ -1,8 +1,8 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory;
+namespace Terramar\Bundle\SalesBundle\Factory;
 
-use TerraMar\Bundle\SalesBundle\Entity\Contract;
+use Terramar\Bundle\SalesBundle\Entity\Contract;
 
 interface ContractFactoryInterface
 {
@@ -12,9 +12,9 @@ interface ContractFactoryInterface
      * This method should do any invoice generation or related. It is called
      * at time of Contract creation.
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Contract $contract
+     * @param \Terramar\Bundle\SalesBundle\Entity\Contract $contract
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Contract
+     * @return \Terramar\Bundle\SalesBundle\Entity\Contract
      */
     function buildContract(Contract $contract);
 }

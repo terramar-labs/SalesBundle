@@ -1,13 +1,13 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
+namespace Terramar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Http\JsonReloadResponse;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
-use TerraMar\Bundle\SalesBundle\Form\Customer\AlertType;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Http\JsonReloadResponse;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
+use Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
+use Terramar\Bundle\SalesBundle\Form\Customer\AlertType;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -33,19 +33,19 @@ class AlertController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
         }
 
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
         if (!$profile) {
             throw $this->createNotFoundException('Unable to find Customer Sales Profile entity.');
         }
 
-        $alerts = $em->getRepository('TerraMarSalesBundle:Alert\CustomerAlert')->findActiveAlertsByProfile($profile);
+        $alerts = $em->getRepository('TerramarSalesBundle:Alert\CustomerAlert')->findActiveAlertsByProfile($profile);
 
         usort($alerts, function($a, $b) {
             $a = $a->getAlert();
@@ -77,7 +77,7 @@ class AlertController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -95,14 +95,14 @@ class AlertController extends AbstractController
      * Creates an Alert for a User
      *
      * @Route("/{id}/alert/create", name="customer_alert_create")
-     * @Template("TerraMarSalesBundle:Customer/Alert:new.html.twig")
+     * @Template("TerramarSalesBundle:Customer/Alert:new.html.twig")
      * @Secure(roles="ROLE_TACKBOARD_READ")
      */
     public function createAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -116,7 +116,7 @@ class AlertController extends AbstractController
         if ($form->isValid()) {
             $data = $form->getData();
 
-            $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+            $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
             if (!$profile) {
                 throw $this->createNotFoundException('Unable to find Customer Sales Profile entity.');
@@ -151,13 +151,13 @@ class AlertController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
         }
 
-        $alert = $em->getRepository('TerraMarSalesBundle:Alert\CustomerAlert')->find($alertid);
+        $alert = $em->getRepository('TerramarSalesBundle:Alert\CustomerAlert')->find($alertid);
 
         if (!$alert) {
             throw $this->createNotFoundException('Unable to locate Alert entity');

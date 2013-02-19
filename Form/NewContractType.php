@@ -1,12 +1,12 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form;
+namespace Terramar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use TerraMar\Bundle\SalesBundle\Repository\AgreementRepository;
-use TerraMar\Bundle\SalesBundle\Repository\SalespersonRepository;
+use Terramar\Bundle\SalesBundle\Repository\AgreementRepository;
+use Terramar\Bundle\SalesBundle\Repository\SalespersonRepository;
 
 class NewContractType extends AbstractType
 {
@@ -15,7 +15,7 @@ class NewContractType extends AbstractType
         $office = $options['office'];
 
         $builder->add('billingFrequency', 'enum', array(
-                'enum' => 'TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency',
+                'enum' => 'Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency',
                 'label' => 'Billing Frequency'
             ))
             ->add('dateStart', 'date', array(
@@ -43,7 +43,7 @@ class NewContractType extends AbstractType
         ));
 
         $resolver->setDefaults(array(
-            'data_class' => 'TerraMar\Bundle\SalesBundle\Entity\Contract'
+            'data_class' => 'Terramar\Bundle\SalesBundle\Entity\Contract'
         ));
     }
 

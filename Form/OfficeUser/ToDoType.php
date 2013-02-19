@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form\OfficeUser;
+namespace Terramar\Bundle\SalesBundle\Form\OfficeUser;
 
 use Symfony\Component\Form\AbstractType;
 use Doctrine\ORM\EntityRepository;
@@ -23,7 +23,7 @@ class ToDoType extends AbstractType
             ))
             ->add('alertPriority', 'enum', array(
                 'label' => 'Alert Priority',
-                'enum' => 'TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority'
+                'enum' => 'Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority'
             ));
 
         if ($showAssigned) {
@@ -33,7 +33,7 @@ class ToDoType extends AbstractType
                 'class' => 'Orkestra\Bundle\ApplicationBundle\Entity\User',
                 'query_builder' => function (EntityRepository $er) use ($office) {
                     return $er->createQueryBuilder('u')
-                        ->from('TerraMar\Bundle\SalesBundle\Entity\OfficeUser', 'ou')
+                        ->from('Terramar\Bundle\SalesBundle\Entity\OfficeUser', 'ou')
                         ->where('ou.user = u')
                         ->andWhere('ou.active = true')
                         ->andWhere('u.active = true')

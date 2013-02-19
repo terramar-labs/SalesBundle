@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Subscriber;
+namespace Terramar\Bundle\SalesBundle\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
@@ -19,8 +19,8 @@ class ClassMetadataSubscriber implements EventSubscriber
         $metadata = $event->getClassMetadata();
 
         // Sets the Customer entity's repositoryClass to the SalesBundle's implementation
-        if ($metadata->getName() === 'TerraMar\Bundle\CustomerBundle\Entity\Customer') {
-            $metadata->setCustomRepositoryClass('TerraMar\Bundle\SalesBundle\Repository\CustomerRepository');
+        if ($metadata->getName() === 'Terramar\Bundle\CustomerBundle\Entity\Customer') {
+            $metadata->setCustomRepositoryClass('Terramar\Bundle\SalesBundle\Repository\CustomerRepository');
         }
     }
 

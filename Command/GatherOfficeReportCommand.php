@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Command;
+namespace Terramar\Bundle\SalesBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use TerraMar\Bundle\SalesBundle\Report\AbstractOfficeReport;
+use Terramar\Bundle\SalesBundle\Report\AbstractOfficeReport;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -46,7 +46,7 @@ such as <comment>crontab</comment>.');
 
         $em = $this->getContainer()->get('doctrine')->getManager();
 
-        $offices = $em->getRepository('TerraMarSalesBundle:Office')->findBy(array('active' => true));
+        $offices = $em->getRepository('TerramarSalesBundle:Office')->findBy(array('active' => true));
 
         foreach ($offices as $office) {
             $snapshot = $report->createSnapshot($office);

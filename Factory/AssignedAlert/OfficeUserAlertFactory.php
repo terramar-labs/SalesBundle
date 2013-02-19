@@ -1,21 +1,21 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory\AssignedAlert;
+namespace Terramar\Bundle\SalesBundle\Factory\AssignedAlert;
 
-use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
-use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert;
-use TerraMar\Bundle\SalesBundle\Entity\Alert;
-use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
+use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert;
+use Terramar\Bundle\SalesBundle\Entity\Alert;
+use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 
 class OfficeUserAlertFactory implements AssignedAlertFactoryInterface
 {
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert $alert
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert $alert
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert
      */
     public function createAssignedAlert(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo, Alert $alert)
     {
@@ -30,8 +30,8 @@ class OfficeUserAlertFactory implements AssignedAlertFactoryInterface
     /**
      * Returns true if this factory supports the given assigner and assignee
      *
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
+     * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
      *
      * @return bool
      */
