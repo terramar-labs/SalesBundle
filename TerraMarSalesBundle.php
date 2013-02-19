@@ -18,6 +18,7 @@ class TerraMarSalesBundle extends Bundle
         Type::addType('enum.terramar.sales.alert_status',       'TerraMar\Bundle\SalesBundle\DbalType\AlertStatusEnumType');
         Type::addType('enum.terramar.sales.alert_priority',     'TerraMar\Bundle\SalesBundle\DbalType\AlertPriorityEnumType');
         Type::addType('enum.terramar.sales.alert_type',         'TerraMar\Bundle\SalesBundle\DbalType\AlertTypeEnumType');
+        Type::addType('enum.terramar.sales.invoice_type',       'TerraMar\Bundle\SalesBundle\DbalType\InvoiceTypeEnumType');
     }
 
     /**
