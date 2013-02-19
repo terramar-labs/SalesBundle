@@ -21,7 +21,7 @@
     "orkestra/application-bundle": "dev-develop",
     "orkestra/report-bundle": "dev-master",
     "orkestra/pdf-bundle": "dev-master",
-    "terramar/customer-bundle": "dev-master",
+    "terramar/customer-bundle": "dev-develop",
     "tcpdf/tcpdf": "dev-master"
   },
   "autoload": {
