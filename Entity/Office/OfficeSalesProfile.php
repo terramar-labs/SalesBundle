@@ -12,7 +12,7 @@ use Orkestra\Transactor\Entity\Account\SimpleAccount;
 use Orkestra\Transactor\Entity\AbstractAccount;
 use Doctrine\Common\Collections\ArrayCollection;
 use TerraMar\Bundle\SalesBundle\Entity\Office;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An office's sales profile
@@ -20,7 +20,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_office_sales_profiles")
  */
-class OfficeSalesProfile extends EntityBase implements SalesProfileInterface
+class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface
 {
     /**
      * @var bool

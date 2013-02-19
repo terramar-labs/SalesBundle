@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
 use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A user associated with an Office
@@ -16,7 +16,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_office_users")
  */
-class OfficeUser extends EntityBase implements AssignedByInterface, AssignedToInterface
+class OfficeUser extends AbstractEntity implements AssignedByInterface, AssignedToInterface
 {
     /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Office

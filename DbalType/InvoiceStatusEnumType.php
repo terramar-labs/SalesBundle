@@ -2,14 +2,14 @@
 
 namespace TerraMar\Bundle\SalesBundle\DbalType;
 
-use Orkestra\Common\DBAL\Types\EnumTypeBase;
+use Orkestra\Common\DbalType\AbstractEnumType;
 
 /**
  * Invoice Status EnumType
  *
  * Provides integration for the Invoice Status enumeration and Doctrine DBAL
  */
-class InvoiceStatusEnumType extends EnumTypeBase
+class InvoiceStatusEnumType extends AbstractEnumType
 {
     /**
      * @var string The unique name for this EnumType

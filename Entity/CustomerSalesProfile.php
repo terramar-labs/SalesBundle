@@ -12,7 +12,7 @@ use Orkestra\Transactor\Entity\Account\CardAccount;
 use Orkestra\Transactor\Entity\Account\BankAccount;
 use Doctrine\Common\Collections\ArrayCollection;
 use Orkestra\Transactor\Entity\AbstractAccount;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * Information defining a customer's sales profile
@@ -20,7 +20,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\CustomerSalesProfileRepository")
  * @ORM\Table(name="terramar_customer_sales_profiles")
  */
-class CustomerSalesProfile extends EntityBase implements AssignedToInterface, SalesProfileInterface
+class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface, SalesProfileInterface
 {
     /**
      * @var bool

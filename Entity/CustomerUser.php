@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
 use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A user associated with an Customer
@@ -17,7 +17,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_customer_users")
  */
-class CustomerUser extends EntityBase
+class CustomerUser extends AbstractEntity
 {
     /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Office

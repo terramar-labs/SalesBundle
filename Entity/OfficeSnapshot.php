@@ -3,7 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 use Orkestra\Bundle\ReportBundle\Model\SnapshotInterface;
 use Orkestra\Bundle\ReportBundle\ReportInterface;
 
@@ -13,7 +13,7 @@ use Orkestra\Bundle\ReportBundle\ReportInterface;
  * @ORM\Entity
  * @ORM\Table(name="terramar_office_snapshots")
  */
-class OfficeSnapshot extends EntityBase implements SnapshotInterface
+class OfficeSnapshot extends AbstractEntity implements SnapshotInterface
 {
     /**
      * @var string

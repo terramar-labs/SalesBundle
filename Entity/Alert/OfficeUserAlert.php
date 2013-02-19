@@ -7,7 +7,7 @@ use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
 use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
 use TerraMar\Bundle\SalesBundle\Model\AssignedAlertInterface;
 use TerraMar\Bundle\SalesBundle\Entity\Alert;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An Office Alert
@@ -15,7 +15,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\OfficeUserAlertRepository")
  * @ORM\Table(name="terramar_office_alerts")
  */
-class OfficeUserAlert extends EntityBase implements AssignedAlertInterface
+class OfficeUserAlert extends AbstractEntity implements AssignedAlertInterface
 {
     /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Alert

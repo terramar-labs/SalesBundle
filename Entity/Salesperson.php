@@ -3,7 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A salesperson
@@ -11,7 +11,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\SalespersonRepository")
  * @ORM\Table(name="terramar_salespeople")
  */
-class Salesperson extends EntityBase
+class Salesperson extends AbstractEntity
 {
     /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\OfficeUser

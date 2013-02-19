@@ -2,14 +2,14 @@
 
 namespace TerraMar\Bundle\SalesBundle\DbalType;
 
-use Orkestra\Common\DBAL\Types\EnumTypeBase;
+use Orkestra\Common\DbalType\AbstractEnumType;
 
 /**
  * Found By Type EnumType
  *
  * Provides integration for the Found By Type enumeration and Doctrine DBAL
  */
-class FoundByTypeEnumType extends EnumTypeBase
+class FoundByTypeEnumType extends AbstractEnumType
 {
     /**
      * @var string The unique name for this EnumType

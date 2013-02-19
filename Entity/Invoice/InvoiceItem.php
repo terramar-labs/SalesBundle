@@ -4,7 +4,7 @@ namespace TerraMar\Bundle\SalesBundle\Entity\Invoice;
 
 use Doctrine\ORM\Mapping as ORM;
 use TerraMar\Bundle\SalesBundle\Entity\Invoice;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A line item on an invoice
@@ -12,7 +12,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_invoice_items")
  */
-class InvoiceItem extends EntityBase
+class InvoiceItem extends AbstractEntity
 {
     /**
      * @var string

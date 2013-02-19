@@ -3,7 +3,7 @@
 namespace TerraMar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An agreement
@@ -11,7 +11,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\AgreementRepository")
  * @ORM\Table(name="terramar_agreements")
  */
-class Agreement extends EntityBase
+class Agreement extends AbstractEntity
 {
     /**
      * @var string

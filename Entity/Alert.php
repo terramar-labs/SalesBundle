@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType;
 use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
 use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An Alert
@@ -14,7 +14,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_alerts")
  */
-class Alert extends EntityBase
+class Alert extends AbstractEntity
 {
     /**
      * @var string

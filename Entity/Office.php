@@ -5,7 +5,7 @@ namespace TerraMar\Bundle\SalesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
 use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A physical location of a company
@@ -13,7 +13,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\OfficeRepository")
  * @ORM\Table(name="terramar_offices")
  */
-class Office extends EntityBase
+class Office extends AbstractEntity
 {
     /**
      * @var string

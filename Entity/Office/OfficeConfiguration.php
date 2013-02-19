@@ -4,7 +4,7 @@ namespace TerraMar\Bundle\SalesBundle\Entity\Office;
 
 use Doctrine\ORM\Mapping as ORM;
 use Orkestra\Transactor\Entity\Credentials;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An office's application settings
@@ -12,7 +12,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository")
  * @ORM\Table(name="terramar_office_settings")
  */
-class OfficeConfiguration extends EntityBase
+class OfficeConfiguration extends AbstractEntity
 {
     /**
      * @var string

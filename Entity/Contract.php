@@ -8,7 +8,7 @@ use Orkestra\Bundle\ApplicationBundle\Entity\File;
 use TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType;
 use TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
 use TerraMar\Bundle\SalesBundle\Entity\Contract\ContractStatus;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A contract that a customer has signed
@@ -16,7 +16,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\ContractRepository")
  * @ORM\Table(name="terramar_contracts")
  */
-class Contract extends EntityBase
+class Contract extends AbstractEntity
 {
     /**
      * @var \TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency

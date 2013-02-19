@@ -9,7 +9,7 @@ use Orkestra\Transactor\Entity\Result\ResultStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Orkestra\Transactor\Entity\Transaction;
 use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceItem;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An invoice
@@ -17,7 +17,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_invoices")
  */
-class Invoice extends EntityBase
+class Invoice extends AbstractEntity
 {
     /**
      * @var \DateTime

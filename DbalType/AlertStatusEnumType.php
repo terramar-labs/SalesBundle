@@ -2,14 +2,14 @@
 
 namespace TerraMar\Bundle\SalesBundle\DbalType;
 
-use Orkestra\Common\DBAL\Types\EnumTypeBase;
+use Orkestra\Common\DbalType\AbstractEnumType;
 
 /**
  * Alert Status EnumType
  *
  * Provides integration for the Alert Status enumeration and Doctrine DBAL
  */
-class AlertStatusEnumType extends EnumTypeBase
+class AlertStatusEnumType extends AbstractEnumType
 {
     /**
      * @var string The unique name for this EnumType
