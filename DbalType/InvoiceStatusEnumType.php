@@ -14,10 +14,10 @@ class InvoiceStatusEnumType extends AbstractEnumType
     /**
      * @var string The unique name for this EnumType
      */
-    protected $_name = 'enum.terramar.sales.invoice_status';
+    protected $name = 'enum.terramar.sales.invoice_status';
 
     /**
      * @var string The fully qualified class name of the Enum that this class wraps
      */
-    protected $_class = 'TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus';
+    protected $class = 'TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus';
 }

@@ -14,10 +14,10 @@ class AlertStatusEnumType extends AbstractEnumType
     /**
      * @var string The unique name for this EnumType
      */
-    protected $_name = 'enum.terramar.sales.alert_status';
+    protected $name = 'enum.terramar.sales.alert_status';
 
     /**
      * @var string The fully qualified class name of the Enum that this class wraps
      */
-    protected $_class = 'TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus';
+    protected $class = 'TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus';
 }

@@ -14,10 +14,10 @@ class FoundByTypeEnumType extends AbstractEnumType
     /**
      * @var string The unique name for this EnumType
      */
-    protected $_name = 'enum.terramar.sales.found_by_type';
+    protected $name = 'enum.terramar.sales.found_by_type';
 
     /**
      * @var string The fully qualified class name of the Enum that this class wraps
      */
-    protected $_class = 'TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType';
+    protected $class = 'TerraMar\Bundle\SalesBundle\Entity\Contract\FoundByType';
 }
