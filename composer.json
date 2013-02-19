@@ -19,7 +19,7 @@
     "php": ">=5.3.0",
     "orkestra/common": "1.0.*",
     "orkestra/application-bundle": "dev-develop",
-    "orkestra/report-bundle": "dev-master",
+    "orkestra/report-bundle": "dev-develop",
     "orkestra/pdf-bundle": "dev-master",
     "terramar/customer-bundle": "dev-develop",
     "tcpdf/tcpdf": "dev-master"
