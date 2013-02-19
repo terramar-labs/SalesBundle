@@ -1,39 +1,31 @@
 {
-    "name": "terramar/sales-bundle",
-    "type": "symfony-bundle",
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@gitlounge.com:orkestra-common.git"
-        },
-        {
-            "type": "git",
-            "url": "git@titanwebdev.com:OrkestraApplicationBundle.git"
-        },
-        {
-            "type": "git",
-            "url": "git@titanwebdev.com:OrkestraReportBundle.git"
-        },
-        {
-            "type": "git",
-            "url": "git@titanwebdev.com:OrkestraPdfBundle.git"
-        },
-        {
-            "type": "git",
-            "url": "git@titanwebdev.com:TerraMarCustomerBundle.git"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.0",
-        "orkestra/common": "dev-master",
-        "orkestra/application-bundle": "dev-master",
-        "orkestra/report-bundle": "dev-master",
-        "orkestra/pdf-bundle": "dev-master",
-        "terramar/customer-bundle": "dev-master",
-        "tcpdf/tcpdf": "dev-master"
+  "name": "terramar/sales-bundle",
+  "type": "symfony-bundle",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@titanwebdev.com:OrkestraReportBundle.git"
     },
-    "autoload": {
-        "psr-0": { "TerraMar\\Bundle\\SalesBundle": "" }
+    {
+      "type": "git",
+      "url": "git@titanwebdev.com:OrkestraPdfBundle.git"
     },
-    "target-dir": "TerraMar/Bundle/SalesBundle"
+    {
+      "type": "git",
+      "url": "git@titanwebdev.com:TerraMarCustomerBundle.git"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "orkestra/common": "1.0.*",
+    "orkestra/application-bundle": "dev-develop",
+    "orkestra/report-bundle": "dev-master",
+    "orkestra/pdf-bundle": "dev-master",
+    "terramar/customer-bundle": "dev-master",
+    "tcpdf/tcpdf": "dev-master"
+  },
+  "autoload": {
+    "psr-0": { "TerraMar\\Bundle\\SalesBundle": "" }
+  },
+  "target-dir": "TerraMar/Bundle/SalesBundle"
 }
