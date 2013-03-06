@@ -29,6 +29,13 @@ class InvoiceItem extends AbstractEntity
     protected $price;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantity", type="integer")
+     */
+    protected $quantity;
+
+    /**
      * @var \Terramar\Bundle\SalesBundle\Entity\Invoice
      *
      * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Invoice")
@@ -41,7 +48,7 @@ class InvoiceItem extends AbstractEntity
      */
     public function setPrice($price)
     {
-        $this->price = $price;
+        $this->price = (float)$price;
     }
 
     /**
@@ -57,7 +64,7 @@ class InvoiceItem extends AbstractEntity
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = (string)$description;
     }
 
     /**
@@ -82,5 +89,21 @@ class InvoiceItem extends AbstractEntity
     public function getInvoice()
     {
         return $this->invoice;
+    }
+
+    /**
+     * @param int $quantity
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = (int)$quantity;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
     }
 }

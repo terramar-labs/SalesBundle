@@ -2,6 +2,7 @@
 namespace Terramar\Bundle\SalesBundle\Entity\Alert;
 
 use Doctrine\ORM\Mapping as ORM;
+use Terramar\Bundle\SalesBundle\Model\Alert\System;
 use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
@@ -72,11 +73,15 @@ class OfficeUserAlert extends AbstractEntity implements AssignedAlertInterface
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
+     * @param \Terramar\Bundle\SalesBundle\Entity\OfficeUser|\Terramar\Bundle\SalesBundle\Model\Alert\System $assignedBy
      */
     public function setAssignedBy(AssignedByInterface $assignedBy)
     {
-        $this->assignedBy = $assignedBy;
+        if ($assignedBy instanceof System) {
+            $this->assignedBy = null;
+        } else {
+            $this->assignedBy = $assignedBy;
+        }
     }
 
     /**
@@ -84,7 +89,7 @@ class OfficeUserAlert extends AbstractEntity implements AssignedAlertInterface
      */
     public function getAssignedBy()
     {
-        return $this->assignedBy;
+        return $this->assignedBy ?: new System();
     }
 
     /**

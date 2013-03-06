@@ -2,10 +2,11 @@
 
 namespace Terramar\Bundle\SalesBundle;
 
-use Doctrine\DBAL\Types\Type;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Terramar\Bundle\SalesBundle\DependencyInjection\Compiler\RegisterAlertFactoriesPass;
+use Doctrine\DBAL\Types\Type;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Terramar\Bundle\SalesBundle\DependencyInjection\Compiler\RegisterAlertFactoriesPass;
+use Terramar\Bundle\SalesBundle\DependencyInjection\Compiler\OverrideServiceDefinitionsPass;
 
 class TerramarSalesBundle extends Bundle
 {
@@ -27,5 +28,6 @@ class TerramarSalesBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new RegisterAlertFactoriesPass());
+        $container->addCompilerPass(new OverrideServiceDefinitionsPass());
     }
 }

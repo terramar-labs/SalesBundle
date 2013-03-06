@@ -21,7 +21,7 @@ class PaymentType extends AbstractType
     {
         $profile = $this->profile;
 
-        $excludeTypes = array(NetworkType::MFA);
+        $excludeTypes = array(NetworkType::MFA, NetworkType::SWIPED);
 
         if (false === $options['allow_points']) {
             $excludeTypes[] = NetworkType::POINTS;

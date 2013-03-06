@@ -136,7 +136,7 @@ class AlertController extends AbstractController
     /**
      * Updates an Alert for a User
      *
-     * @Route("{id}/alert/close", name="user_update_alert")
+     * @Route("/{id}/alert/close", name="user_update_alert")
      * @Method("POST")
      * @Template()
      * @Secure(roles="ROLE_USER")

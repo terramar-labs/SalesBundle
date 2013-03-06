@@ -286,21 +286,26 @@ class Invoice extends AbstractEntity
     }
 
     /**
+     * Creates a new line item on this invoice
+     *
      * @param string $description
      * @param float $price
+     * @param int $quantity
      *
      * @return Invoice\InvoiceItem
      */
-    public function addItem($description, $price)
+    public function addItem($description, $price, $quantity = 1)
     {
         $item = new InvoiceItem();
         $item->setDescription($description);
         $item->setPrice($price);
+        $item->setQuantity($quantity);
         $item->setInvoice($this);
 
         $this->items->add($item);
+
         $this->amountDue += $price;
-        $this->balance += $price;
+        $this->balance   += $price;
 
         return $item;
     }

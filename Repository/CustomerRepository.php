@@ -27,8 +27,6 @@ class CustomerRepository extends BaseCustomerRepository
             FROM  TerramarSalesBundle:CustomerSalesProfile csp,
                   TerramarCustomerBundle:Customer c
             WHERE csp.customer = c
-            AND csp.active = true
-            AND c.active = true
             AND csp.office = :office';
         $query = $this->_em->createQuery($dql);
         $query->setParameters(array('office' => $office));

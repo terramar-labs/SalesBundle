@@ -2,6 +2,7 @@
 
 namespace Terramar\Bundle\SalesBundle\Factory\AssignedAlert;
 
+use Terramar\Bundle\SalesBundle\Model\Alert\System;
 use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 use Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert;
@@ -37,7 +38,8 @@ class OfficeUserAlertFactory implements AssignedAlertFactoryInterface
      */
     public function supports(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo)
     {
-        return $assignedBy instanceof OfficeUser && $assignedTo instanceof OfficeUser;
+        return ($assignedBy instanceof OfficeUser || $assignedBy instanceof System)
+            && $assignedTo instanceof OfficeUser;
     }
 
     /**

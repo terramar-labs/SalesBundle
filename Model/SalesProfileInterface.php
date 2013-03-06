@@ -9,33 +9,40 @@ interface SalesProfileInterface
      *
      * @return \Doctrine\Common\Collections\Collection|\Orkestra\Transactor\Entity\AbstractAccount[]
      */
-    function getAccounts();
+    public function getAccounts();
 
     /**
      * Gets all of a SalesProfile's Transactor accounts that may be used for Autopay
      *
      * @return \Doctrine\Common\Collections\Collection|\Orkestra\Transactor\Entity\AbstractAccount[]|
      */
-    function getAutopayAccounts();
+    public function getAutopayAccounts();
 
     /**
-     * Gets the assign autopay account
+     * Gets the assigned autopay account
      *
      * @return \Orkestra\Transactor\Entity\AbstractAccount
      */
-    function getAutopayAccount();
+    public function getAutopayAccount();
 
     /**
      * Sets autopay to enabled or disabled
      *
      * @param boolean $autopay
      */
-    function setAutopay($autopay);
+    public function setAutopay($autopay);
 
     /**
      * Returns true if autopay is enabled
      *
      * @return boolean
      */
-    function isAutopay();
+    public function isAutopay();
+
+    /**
+     * Gets the associated Points account
+     *
+     * @return \Orkestra\Transactor\Entity\Account\PointsAccount
+     */
+    public function getPointsAccount();
 }
