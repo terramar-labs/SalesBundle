@@ -4,7 +4,7 @@ namespace Terramar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
 use Terramar\Bundle\SalesBundle\Http\JsonReloadResponse;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus;
 use Terramar\Bundle\SalesBundle\Form\Customer\ToDoType;
 use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -100,7 +100,7 @@ class ToDoController extends AbstractController
             throw $this->createNotFoundException('Unable to find Customer Sales Profile entity.');
         }
 
-        $factory = $this->get('terramar.sales.factory.alert');
+        $factory = $this->get('terramar.notification.factory.alert');
 
         $form = $this->createForm(new ToDoType(), null, array('office' => $this->getCurrentOffice()));
         $form->bind($request);
@@ -115,7 +115,7 @@ class ToDoController extends AbstractController
                 $assignedTo = $data['assignedTo'];
             }
 
-            $todo = $factory->createAssignedTodo($user, $profile, $data['name'], $data['description'], $data['alertPriority'], $data['dueDate']);
+            $todo = $factory->createAssignedTicket($user, $profile, $data['name'], $data['description'], $data['alertPriority'], $data['dueDate']);
 
             $userDescription = sprintf(
                 '%s<br /><p>Customer: <a href="%s">%s</a></p>',
@@ -124,7 +124,7 @@ class ToDoController extends AbstractController
                 $customer
             );
 
-            $userTodo = $factory->createAssignedTodo($user, $assignedTo, $data['name'], $userDescription, $data['alertPriority'], $data['dueDate']);
+            $userTodo = $factory->createAssignedTicket($user, $assignedTo, $data['name'], $userDescription, $data['alertPriority'], $data['dueDate']);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($todo);

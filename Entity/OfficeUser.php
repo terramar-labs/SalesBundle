@@ -5,8 +5,6 @@ namespace Terramar\Bundle\SalesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Terramar\Bundle\CustomerBundle\Entity\Note;
 use Doctrine\Common\Collections\ArrayCollection;
-use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
-use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
 use Orkestra\Common\Entity\AbstractEntity;
 
@@ -16,7 +14,7 @@ use Orkestra\Common\Entity\AbstractEntity;
  * @ORM\Entity
  * @ORM\Table(name="terramar_office_users")
  */
-class OfficeUser extends AbstractEntity implements AssignedByInterface, AssignedToInterface
+class OfficeUser extends AbstractEntity
 {
     /**
      * @var \Terramar\Bundle\SalesBundle\Entity\Office

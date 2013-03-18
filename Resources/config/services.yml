@@ -5,7 +5,6 @@ parameters:
   terramar.sales.factory.office.class:                     Terramar\Bundle\SalesBundle\Factory\OfficeFactory
   terramar.sales.factory.customer_sales_profile.class:     Terramar\Bundle\SalesBundle\Factory\CustomerSalesProfileFactory
   terramar.sales.factory.office_sales_profile.class:       Terramar\Bundle\SalesBundle\Factory\OfficeSalesProfileFactory
-  terramar.sales.factory.alert.class:                      Terramar\Bundle\SalesBundle\Factory\AlertFactory
   terramar.sales.factory.assigned_alert.office_user.class: Terramar\Bundle\SalesBundle\Factory\AssignedAlert\OfficeUserAlertFactory
   terramar.sales.factory.assigned_alert.customer.class:    Terramar\Bundle\SalesBundle\Factory\AssignedAlert\CustomerAlertFactory
   terramar.sales.factory.contract.class:                   Terramar\Bundle\SalesBundle\Factory\ContractFactory
@@ -51,8 +50,6 @@ services:
   terramar.sales.factory.office_sales_profile:
     class: %terramar.sales.factory.office_sales_profile.class%
     arguments: [ @terramar.sales.factory.payment_account ]
-  terramar.sales.factory.alert:
-    class: %terramar.sales.factory.alert.class%
   terramar.sales.factory.assigned_alert.office_user:
     class: %terramar.sales.factory.assigned_alert.office_user.class%
     tags:

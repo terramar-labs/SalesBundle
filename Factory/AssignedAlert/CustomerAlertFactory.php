@@ -2,25 +2,24 @@
 
 namespace Terramar\Bundle\SalesBundle\Factory\AssignedAlert;
 
-use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
+use Terramar\Bundle\NotificationBundle\Factory\AssignedAlert\AssignedAlertFactoryInterface;
+use Terramar\Bundle\NotificationBundle\Model\MessageInterface;
 use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 use Terramar\Bundle\SalesBundle\Entity\Alert\CustomerAlert;
 use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
-use Terramar\Bundle\SalesBundle\Entity\Alert;
-use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 
 class CustomerAlertFactory implements AssignedAlertFactoryInterface
 {
     /**
      * Creates an assigned alert
      *
-     * @param \Terramar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
-     * @param \Terramar\Bundle\SalesBundle\Entity\Alert $alert
+     * @param object $assignedBy
+     * @param object $assignedTo
+     * @param \Terramar\Bundle\NotificationBundle\Model\MessageInterface $alert
      *
-     * @return \Terramar\Bundle\SalesBundle\Model\AssignedAlertInterface
+     * @return \Terramar\Bundle\NotificationBundle\Model\AssignedAlertInterface
      */
-    public function createAssignedAlert(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo, Alert $alert)
+    public function createAssignedAlert($assignedBy, $assignedTo, MessageInterface $alert)
     {
         return new CustomerAlert($assignedBy, $assignedTo, $alert);
     }
@@ -28,12 +27,12 @@ class CustomerAlertFactory implements AssignedAlertFactoryInterface
     /**
      * Returns true if this factory supports the given assigner and assignee
      *
-     * @param \Terramar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
+     * @param object $assignedBy
+     * @param object $assignedTo
      *
      * @return bool
      */
-    public function supports(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo)
+    public function supports($assignedBy, $assignedTo)
     {
         return $assignedBy instanceof OfficeUser && $assignedTo instanceof CustomerSalesProfile;
     }

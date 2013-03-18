@@ -3,8 +3,8 @@
 namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertType;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertType;
 use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 
 class OfficeUserAlertRepository extends EntityRepository
@@ -19,7 +19,7 @@ class OfficeUserAlertRepository extends EntityRepository
             ->andWhere('a.type = :type')
             ->andWhere('a.status IN (:statuses)');
 
-        $qb->setParameters(array('assignedTo' => $assignedTo, 'type' => AlertType::TODO, 'statuses' => array(AlertStatus::IN_PROGRESS, AlertStatus::POSTED, AlertStatus::VIEWED)));
+        $qb->setParameters(array('assignedTo' => $assignedTo, 'type' => AlertType::TICKET, 'statuses' => array(AlertStatus::IN_PROGRESS, AlertStatus::POSTED, AlertStatus::VIEWED)));
         $result = $qb->getQuery()->getResult();
 
         return $result;

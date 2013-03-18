@@ -7,7 +7,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
- * Registers all workers with the Worker factory
+ * Overrides the necessary service definitions
+ *
+ * This exists as a Compiler Pass to ensure that the proper things get
+ * overridden and that, as much as possible, order is not an issue
  */
 class OverrideServiceDefinitionsPass implements CompilerPassInterface
 {
@@ -18,7 +21,16 @@ class OverrideServiceDefinitionsPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        $this->overrideAlertFactory($container);
         $this->overrideCustomerHelper($container);
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    private function overrideAlertFactory(ContainerBuilder $container)
+    {
+        $container->setParameter('terramar.notification.factory.alert.class', 'Terramar\Bundle\SalesBundle\Factory\AlertFactory');
     }
 
     /**

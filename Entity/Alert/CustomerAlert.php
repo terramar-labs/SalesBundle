@@ -4,10 +4,8 @@ namespace Terramar\Bundle\SalesBundle\Entity\Alert;
 use Doctrine\ORM\Mapping as ORM;
 use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 use Terramar\Bundle\CustomerBundle\Entity\Customer;
-use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
-use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
-use Terramar\Bundle\SalesBundle\Model\AssignedAlertInterface;
+use Terramar\Bundle\NotificationBundle\Model\AssignedAlertInterface;
 use Terramar\Bundle\SalesBundle\Entity\Alert;
 use Orkestra\Common\Entity\AbstractEntity;
 
@@ -74,9 +72,9 @@ class CustomerAlert extends AbstractEntity implements AssignedAlertInterface
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
+     * @param object|\Terramar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
      */
-    public function setAssignedBy(AssignedByInterface $assignedBy)
+    public function setAssignedBy(OfficeUser $assignedBy)
     {
         $this->assignedBy = $assignedBy;
     }
@@ -92,7 +90,7 @@ class CustomerAlert extends AbstractEntity implements AssignedAlertInterface
     /**
      * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $assignedTo
      */
-    public function setAssignedTo(AssignedToInterface $assignedTo)
+    public function setAssignedTo(CustomerSalesProfile $assignedTo)
     {
         $this->assignedTo = $assignedTo;
     }

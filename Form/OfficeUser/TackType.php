@@ -17,7 +17,7 @@ class TackType extends AbstractType
             ->add('description')
             ->add('alertPriority', 'enum', array(
                 'label' => 'Alert Priority',
-                'enum' => 'Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority'
+                'enum' => 'Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority'
             ))
             ->add('dueDate', 'date', array(
                 'label' => 'Due Date',
@@ -28,7 +28,7 @@ class TackType extends AbstractType
             ->add('alertType', 'enum', array(
                 'label' => 'Alert Type',
                 'empty_value' => 'Select ...',
-                'enum' => 'Terramar\Bundle\SalesBundle\Entity\Alert\AlertType'
+                'enum' => 'Terramar\Bundle\NotificationBundle\Model\Alert\AlertType'
             ))
             ->add('assignedTo', 'entity', array(
                 'label' => 'Assign Alert To',

@@ -4,15 +4,19 @@
   "repositories": [
     {
       "type": "git",
-      "url": "git@titanwebdev.com:OrkestraReportBundle.git"
+      "url": "git@terramarlabs.com:OrkestraReportBundle.git"
     },
     {
       "type": "git",
-      "url": "git@titanwebdev.com:OrkestraPdfBundle.git"
+      "url": "git@terramarlabs.com:OrkestraPdfBundle.git"
     },
     {
       "type": "git",
-      "url": "git@titanwebdev.com:TerramarCustomerBundle.git"
+      "url": "git@terramarlabs.com:TerramarCustomerBundle.git"
+    },
+    {
+      "type": "git",
+      "url": "git@terramarlabs.com:TerramarNotificationBundle.git"
     }
   ],
   "require": {
@@ -21,7 +25,8 @@
     "orkestra/application-bundle": "dev-develop",
     "orkestra/report-bundle": "dev-develop",
     "orkestra/pdf-bundle": "dev-master",
-    "terramar/customer-bundle": "dev-develop",
+    "terramar/customer-bundle": "1.0.*",
+    "terramar/notification-bundle": "1.0.*",
     "tcpdf/tcpdf": "dev-master"
   },
   "autoload": {

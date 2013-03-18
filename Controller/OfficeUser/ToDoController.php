@@ -4,7 +4,7 @@ namespace Terramar\Bundle\SalesBundle\Controller\OfficeUser;
 
 use Symfony\Component\HttpFoundation\Request;
 use Terramar\Bundle\SalesBundle\Http\JsonReloadResponse;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus;
 use Terramar\Bundle\SalesBundle\Form\OfficeUser\ToDoType;
 use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -82,7 +82,16 @@ class ToDoController extends AbstractController
      */
     public function createAction(Request $request, $id)
     {
-        $factory = $this->get('terramar.sales.factory.alert');
+        $em = $this->getDoctrine()->getManager();
+        $office = $this->getCurrentOffice();
+
+        $user = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
+
+        if (!$user) {
+            throw $this->createNotFoundException('Unable to locate User');
+        }
+
+        $factory = $this->get('terramar.notification.factory.alert');
 
         $form = $this->createForm(new ToDoType(), null, array('office' => $this->getCurrentOffice(), 'showAssignedTo' => false));
         $form->bind($request);
@@ -100,7 +109,7 @@ class ToDoController extends AbstractController
                 throw $this->createNotFoundException('Unable to locate User');
             }
 
-            $entity = $factory->createAssignedTodo($assignedBy, $user, $data['name'], $data['description'], $data['alertPriority'], $data['dueDate']);
+            $entity = $factory->createAssignedTicket($assignedBy, $user, $data['name'], $data['description'], $data['alertPriority'], $data['dueDate']);
 
             $em->persist($entity);
             $em->flush();
@@ -115,6 +124,7 @@ class ToDoController extends AbstractController
         }
 
         return array(
+            'entity' => $user,
             'form' => $form->createView()
         );
     }

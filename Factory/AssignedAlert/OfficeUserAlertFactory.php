@@ -2,26 +2,26 @@
 
 namespace Terramar\Bundle\SalesBundle\Factory\AssignedAlert;
 
+use Terramar\Bundle\NotificationBundle\Factory\AssignedAlert\AssignedAlertFactoryInterface;
+use Terramar\Bundle\NotificationBundle\Model\MessageInterface;
 use Terramar\Bundle\SalesBundle\Model\Alert\System;
-use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 use Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert;
 use Terramar\Bundle\SalesBundle\Entity\Alert;
-use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 
 class OfficeUserAlertFactory implements AssignedAlertFactoryInterface
 {
     /**
-     * @param \Terramar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
-     * @param \Terramar\Bundle\SalesBundle\Entity\Alert $alert
+     * @param object $assignedBy
+     * @param object $assignedTo
+     * @param \Terramar\Bundle\NotificationBundle\Model\MessageInterface $alert
      *
      * @return \Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert
      */
-    public function createAssignedAlert(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo, Alert $alert)
+    public function createAssignedAlert($assignedBy, $assignedTo, MessageInterface $alert)
     {
         $officeUserAlert = new OfficeUserAlert();
-        $officeUserAlert->setAssignedBy($assignedBy);
+        $officeUserAlert->setAssignedBy($assignedBy instanceof System ? null : $assignedBy);
         $officeUserAlert->setAssignedTo($assignedTo);
         $officeUserAlert->setAlert($alert);
 
@@ -31,12 +31,12 @@ class OfficeUserAlertFactory implements AssignedAlertFactoryInterface
     /**
      * Returns true if this factory supports the given assigner and assignee
      *
-     * @param \Terramar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
+     * @param object $assignedBy
+     * @param object $assignedTo
      *
      * @return bool
      */
-    public function supports(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo)
+    public function supports($assignedBy, $assignedTo)
     {
         return ($assignedBy instanceof OfficeUser || $assignedBy instanceof System)
             && $assignedTo instanceof OfficeUser;

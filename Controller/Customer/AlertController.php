@@ -4,8 +4,8 @@ namespace Terramar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
 use Terramar\Bundle\SalesBundle\Http\JsonReloadResponse;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority;
 use Terramar\Bundle\SalesBundle\Form\Customer\AlertType;
 use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -108,7 +108,7 @@ class AlertController extends AbstractController
             throw $this->createNotFoundException('Unable to locate Customer entity');
         }
 
-        $factory = $this->get('terramar.sales.factory.alert');
+        $factory = $this->get('terramar.notification.factory.alert');
 
         $form = $this->createForm(new AlertType());
         $form->bind($request);

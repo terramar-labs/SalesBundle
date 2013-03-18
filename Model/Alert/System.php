@@ -2,9 +2,10 @@
 
 namespace Terramar\Bundle\SalesBundle\Model\Alert;
 
-use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
-
-class System implements AssignedByInterface
+/**
+ * Represents the System user, ie. automated process
+ */
+class System
 {
 
 }

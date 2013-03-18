@@ -22,7 +22,7 @@ class ToDoType extends AbstractType
             ))
             ->add('alertPriority', 'enum', array(
                 'label' => 'Alert Priority',
-                'enum' => 'Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority'
+                'enum' => 'Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority'
             ))
             ->add('assignedTo', 'entity', array(
                 'required' => false,

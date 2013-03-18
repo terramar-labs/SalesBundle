@@ -15,7 +15,7 @@ class AlertType extends AbstractType
             ->add('description')
             ->add('priority', 'enum', array(
                 'label' => 'Alert Priority',
-                'enum' => 'Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority'
+                'enum' => 'Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority'
             ));
     }
 
