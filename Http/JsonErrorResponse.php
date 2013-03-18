@@ -1,12 +1,12 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Http;
+namespace Terramar\Bundle\SalesBundle\Http;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Form;
 
 /**
- * A JsonSuccessResponse containing error information tailored to the TerraMar client side library
+ * A JsonSuccessResponse containing error information tailored to the Terramar client side library
  */
 class JsonErrorResponse extends JsonResponse
 {
@@ -75,7 +75,7 @@ class JsonErrorResponse extends JsonResponse
     }
 
     /**
-     * Returns an array of data ready to be consumed by the TerraMar client-side javascript
+     * Returns an array of data ready to be consumed by the Terramar client-side javascript
      *
      * @param $message
      *

@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity\Invoice;
+namespace Terramar\Bundle\SalesBundle\Entity\Invoice;
 
 use Orkestra\Common\Type\Enum;
 

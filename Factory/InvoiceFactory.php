@@ -1,19 +1,19 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory;
+namespace Terramar\Bundle\SalesBundle\Factory;
 
-use TerraMar\Bundle\SalesBundle\Entity\Contract;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice;
+use Terramar\Bundle\SalesBundle\Entity\Contract;
+use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus;
+use Terramar\Bundle\SalesBundle\Entity\Invoice;
 use DateTime;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice\InvoiceType;
+use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceType;
 
 class InvoiceFactory implements InvoiceFactoryInterface
 {
     /**
      * Creates a set of invoices based on a Contract's Agreement
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Contract $contract
+     * @param \Terramar\Bundle\SalesBundle\Entity\Contract $contract
      *
      * @throws \RuntimeException
      */
@@ -25,10 +25,10 @@ class InvoiceFactory implements InvoiceFactoryInterface
     /**
      * Creates a new invoice
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Contract $contract
+     * @param \Terramar\Bundle\SalesBundle\Entity\Contract $contract
      * @param \DateTime $dateDue
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice
+     * @return \Terramar\Bundle\SalesBundle\Entity\Invoice
      */
     public function createInvoice(Contract $contract, DateTime $dateDue, InvoiceType $type = null)
     {
@@ -50,9 +50,9 @@ class InvoiceFactory implements InvoiceFactoryInterface
      * This method should do any additional work related to invoiced creation.
      * It is called at time of Invoice creation.
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice $invoice
+     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice $invoice
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice
+     * @return \Terramar\Bundle\SalesBundle\Entity\Invoice
      */
     public function buildInvoice(Invoice $invoice)
     {

@@ -1,18 +1,18 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity\Office;
+namespace Terramar\Bundle\SalesBundle\Entity\Office;
 
 use Doctrine\ORM\Mapping as ORM;
 use Orkestra\Transactor\Entity\Credentials;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An office's application settings
  *
- * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository")
+ * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository")
  * @ORM\Table(name="terramar_office_settings")
  */
-class OfficeConfiguration extends EntityBase
+class OfficeConfiguration extends AbstractEntity
 {
     /**
      * @var string
@@ -69,9 +69,9 @@ class OfficeConfiguration extends EntityBase
     protected $pointsCredentials;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office", inversedBy="configuration")
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office", inversedBy="configuration")
      * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
     protected $office;
@@ -181,7 +181,7 @@ class OfficeConfiguration extends EntityBase
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      */
     public function setOffice($office)
     {
@@ -189,7 +189,7 @@ class OfficeConfiguration extends EntityBase
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office
      */
     public function getOffice()
     {

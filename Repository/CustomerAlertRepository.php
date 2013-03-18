@@ -1,11 +1,11 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Repository;
+namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType;
-use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertType;
+use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 
 class CustomerAlertRepository extends EntityRepository
 {
@@ -40,7 +40,7 @@ class CustomerAlertRepository extends EntityRepository
             ->andWhere('a.status IN (:statuses)')
             ->setParameters(array(
                 'profile' => $profile,
-                'type' => AlertType::TODO,
+                'type' => AlertType::TICKET,
                 'statuses' => array(AlertStatus::POSTED, AlertStatus::IN_PROGRESS, AlertStatus::VIEWED)
             ))
             ->getQuery()

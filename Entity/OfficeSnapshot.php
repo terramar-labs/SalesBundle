@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 use Orkestra\Bundle\ReportBundle\Model\SnapshotInterface;
 use Orkestra\Bundle\ReportBundle\ReportInterface;
 
@@ -13,7 +13,7 @@ use Orkestra\Bundle\ReportBundle\ReportInterface;
  * @ORM\Entity
  * @ORM\Table(name="terramar_office_snapshots")
  */
-class OfficeSnapshot extends EntityBase implements SnapshotInterface
+class OfficeSnapshot extends AbstractEntity implements SnapshotInterface
 {
     /**
      * @var string
@@ -30,9 +30,9 @@ class OfficeSnapshot extends EntityBase implements SnapshotInterface
     protected $facts;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office")
      * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
     protected $office;
@@ -40,7 +40,7 @@ class OfficeSnapshot extends EntityBase implements SnapshotInterface
     /**
      * Constructor
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      * @param \Orkestra\Bundle\ReportBundle\ReportInterface $report
      * @param array $facts An associative array of facts
      */

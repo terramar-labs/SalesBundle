@@ -1,17 +1,17 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An agreement
  *
- * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\AgreementRepository")
+ * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\AgreementRepository")
  * @ORM\Table(name="terramar_agreements")
  */
-class Agreement extends EntityBase
+class Agreement extends AbstractEntity
 {
     /**
      * @var string
@@ -63,9 +63,9 @@ class Agreement extends EntityBase
     protected $invoiceIntro = '';
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office")
      * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
     protected $office;
@@ -76,7 +76,7 @@ class Agreement extends EntityBase
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      */
     public function setOffice(Office $office)
     {
@@ -84,7 +84,7 @@ class Agreement extends EntityBase
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office
      */
     public function getOffice()
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory;
+namespace Terramar\Bundle\SalesBundle\Factory;
 
-use TerraMar\Bundle\SalesBundle\Entity\Office;
-use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
+use Terramar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
 use Orkestra\Transactor\Entity\Credentials;
 
 class OfficeConfigurationFactory implements OfficeConfigurationFactoryInterface
@@ -11,9 +11,9 @@ class OfficeConfigurationFactory implements OfficeConfigurationFactoryInterface
     /**
      * Creates a new OfficeConfiguration entity with default values
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
      */
     public function create(Office $office)
     {

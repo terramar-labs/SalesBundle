@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form\Customer;
+namespace Terramar\Bundle\SalesBundle\Form\Customer;
 
 use Symfony\Component\Form\AbstractType;
 use Doctrine\ORM\EntityRepository;
@@ -22,13 +22,13 @@ class ToDoType extends AbstractType
             ))
             ->add('alertPriority', 'enum', array(
                 'label' => 'Alert Priority',
-                'enum' => 'TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority'
+                'enum' => 'Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority'
             ))
             ->add('assignedTo', 'entity', array(
                 'required' => false,
                 'label' => 'Assign Alert To',
                 'empty_value' => 'Select ...',
-                'class' => 'TerraMar\Bundle\SalesBundle\Entity\OfficeUser',
+                'class' => 'Terramar\Bundle\SalesBundle\Entity\OfficeUser',
                 'query_builder' => function (EntityRepository $er) use ($office) {
                     return $er->createQueryBuilder('ou')
                         ->join('ou.user', 'u')

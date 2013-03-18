@@ -1,44 +1,42 @@
 <?php
-namespace TerraMar\Bundle\SalesBundle\Entity\Alert;
+namespace Terramar\Bundle\SalesBundle\Entity\Alert;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
-use TerraMar\Bundle\CustomerBundle\Entity\Customer;
-use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
-use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
-use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
-use TerraMar\Bundle\SalesBundle\Model\AssignedAlertInterface;
-use TerraMar\Bundle\SalesBundle\Entity\Alert;
-use Orkestra\Common\Entity\EntityBase;
+use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use Terramar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\NotificationBundle\Model\AssignedAlertInterface;
+use Terramar\Bundle\SalesBundle\Entity\Alert;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An alert assigned to a Customer
  *
- * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\CustomerAlertRepository")
+ * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\CustomerAlertRepository")
  * @ORM\Table(name="terramar_customer_alerts")
  */
-class CustomerAlert extends EntityBase implements AssignedAlertInterface
+class CustomerAlert extends AbstractEntity implements AssignedAlertInterface
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Alert
+     * @var \Terramar\Bundle\SalesBundle\Entity\Alert
      *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Alert", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Alert", cascade={"persist"})
      * @ORM\JoinColumn(name="alert_id", referencedColumnName="id")
      */
     protected $alert;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @var \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\OfficeUser")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\OfficeUser")
      * @ORM\JoinColumn(name="assigned_by_id", referencedColumnName="id")
      */
     protected $assignedBy;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile
+     * @var \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile")
      * @ORM\JoinColumn(name="assigned_to_id", referencedColumnName="id")
      */
     protected $assignedTo;
@@ -46,9 +44,9 @@ class CustomerAlert extends EntityBase implements AssignedAlertInterface
     /**
      * Constructor
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $assignedTo
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert $alert
+     * @param \Terramar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
+     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $assignedTo
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert $alert
      */
     public function __construct(OfficeUser $assignedBy = null, CustomerSalesProfile $assignedTo = null, Alert $alert = null)
     {
@@ -58,7 +56,7 @@ class CustomerAlert extends EntityBase implements AssignedAlertInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert $alert
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert $alert
      */
     public function setAlert(Alert $alert)
     {
@@ -66,7 +64,7 @@ class CustomerAlert extends EntityBase implements AssignedAlertInterface
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert
      */
     public function getAlert()
     {
@@ -74,15 +72,15 @@ class CustomerAlert extends EntityBase implements AssignedAlertInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
+     * @param object|\Terramar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
      */
-    public function setAssignedBy(AssignedByInterface $assignedBy)
+    public function setAssignedBy(OfficeUser $assignedBy)
     {
         $this->assignedBy = $assignedBy;
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @return \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      */
     public function getAssignedBy()
     {
@@ -90,15 +88,15 @@ class CustomerAlert extends EntityBase implements AssignedAlertInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $assignedTo
+     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $assignedTo
      */
-    public function setAssignedTo(AssignedToInterface $assignedTo)
+    public function setAssignedTo(CustomerSalesProfile $assignedTo)
     {
         $this->assignedTo = $assignedTo;
     }
 
     /**
-     * @return \TerraMar\Bundle\CustomerBundle\Entity\Customer
+     * @return \Terramar\Bundle\CustomerBundle\Entity\Customer
      */
     public function getAssignedTo()
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity\Invoice;
+namespace Terramar\Bundle\SalesBundle\Entity\Invoice;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice;
-use Orkestra\Common\Entity\EntityBase;
+use Terramar\Bundle\SalesBundle\Entity\Invoice;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A line item on an invoice
@@ -12,7 +12,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_invoice_items")
  */
-class InvoiceItem extends EntityBase
+class InvoiceItem extends AbstractEntity
 {
     /**
      * @var string
@@ -29,9 +29,16 @@ class InvoiceItem extends EntityBase
     protected $price;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Invoice
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Invoice")
+     * @ORM\Column(name="quantity", type="integer")
+     */
+    protected $quantity;
+
+    /**
+     * @var \Terramar\Bundle\SalesBundle\Entity\Invoice
+     *
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Invoice")
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     protected $invoice;
@@ -41,7 +48,7 @@ class InvoiceItem extends EntityBase
      */
     public function setPrice($price)
     {
-        $this->price = $price;
+        $this->price = (float)$price;
     }
 
     /**
@@ -57,7 +64,7 @@ class InvoiceItem extends EntityBase
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = (string)$description;
     }
 
     /**
@@ -69,7 +76,7 @@ class InvoiceItem extends EntityBase
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Invoice $invoice
+     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice $invoice
      */
     public function setInvoice(Invoice $invoice)
     {
@@ -77,10 +84,26 @@ class InvoiceItem extends EntityBase
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Invoice
+     * @return \Terramar\Bundle\SalesBundle\Entity\Invoice
      */
     public function getInvoice()
     {
         return $this->invoice;
+    }
+
+    /**
+     * @param int $quantity
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = (int)$quantity;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
     }
 }

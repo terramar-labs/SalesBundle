@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller;
+namespace Terramar\Bundle\SalesBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Pocomos\Bundle\ApplicationBundle\Http\JsonReloadResponse;
@@ -8,13 +8,13 @@ use Orkestra\Transactor\Entity\Credentials;
 use Orkestra\Transactor\Entity\Transaction\NetworkType;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\DBAL\DBALException;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use TerraMar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
-use TerraMar\Bundle\SalesBundle\Form\Office\OfficeConfigurationType;
+use Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
+use Terramar\Bundle\SalesBundle\Form\Office\OfficeConfigurationType;
 
 /**
  * OfficeConfiguration controller.
@@ -36,7 +36,7 @@ class OfficeConfigurationController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TerraMarSalesBundle:Office\OfficeConfiguration')->findOneBy(array('office' => $office->getId()));
+        $entity = $em->getRepository('TerramarSalesBundle:Office\OfficeConfiguration')->findOneBy(array('office' => $office->getId()));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pest Office Configuration entity.');
@@ -77,7 +77,7 @@ class OfficeConfigurationController extends AbstractController
      * Edits an existing OfficeConfiguration entity.
      *
      * @Route("/update", name="officeconfiguration_update")
-     * @Template("TerraMarSalesBundle:OfficeConfiguration:edit.html.twig")
+     * @Template("TerramarSalesBundle:OfficeConfiguration:edit.html.twig")
      * @Method("POST")
      * @Secure(roles="ROLE_SETTINGS_WRITE")
      */
@@ -87,7 +87,7 @@ class OfficeConfigurationController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TerraMarSalesBundle:Office\OfficeConfiguration')->findOneBy(array('office' => $office->getId()));
+        $entity = $em->getRepository('TerramarSalesBundle:Office\OfficeConfiguration')->findOneBy(array('office' => $office->getId()));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pest Office Configuration entity.');

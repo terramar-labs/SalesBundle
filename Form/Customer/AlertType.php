@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form\Customer;
+namespace Terramar\Bundle\SalesBundle\Form\Customer;
 
 use Symfony\Component\Form\AbstractType;
 use Doctrine\ORM\EntityRepository;
@@ -15,7 +15,7 @@ class AlertType extends AbstractType
             ->add('description')
             ->add('priority', 'enum', array(
                 'label' => 'Alert Priority',
-                'enum' => 'TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority'
+                'enum' => 'Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority'
             ));
     }
 

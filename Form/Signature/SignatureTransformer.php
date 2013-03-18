@@ -1,20 +1,20 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form\Signature;
+namespace Terramar\Bundle\SalesBundle\Form\Signature;
 
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use TerraMar\Bundle\SalesBundle\Helper\FileHelper;
+use Terramar\Bundle\SalesBundle\Helper\FileHelper;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class SignatureTransformer implements DataTransformerInterface
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Helper\FileHelper
+     * @var \Terramar\Bundle\SalesBundle\Helper\FileHelper
      */
     protected $fileHelper;
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Helper\FileHelper $fileHelper
+     * @param \Terramar\Bundle\SalesBundle\Helper\FileHelper $fileHelper
      */
     public function __construct(FileHelper $fileHelper)
     {

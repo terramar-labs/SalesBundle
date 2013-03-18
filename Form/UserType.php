@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form;
+namespace Terramar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Doctrine\ORM\EntityRepository;

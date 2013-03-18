@@ -1,10 +1,10 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
+namespace Terramar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Form\AddCreditType;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Form\AddCreditType;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -32,13 +32,13 @@ class PointsController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $office);
+        $entity = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $office);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($entity);
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($entity);
 
         if (!$profile) {
             throw $this->createNotFoundException('Unable to find Customer Sales Profile entity.');
@@ -71,13 +71,13 @@ class PointsController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $office);
+        $entity = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $office);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($entity);
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($entity);
 
         if (!$profile) {
             throw $this->createNotFoundException('Unable to find Customer Sales Profile entity.');

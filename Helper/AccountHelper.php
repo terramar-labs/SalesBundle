@@ -1,16 +1,15 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Helper;
+namespace Terramar\Bundle\SalesBundle\Helper;
 
 use Orkestra\Transactor\TransactorFactory;
 use Orkestra\Transactor\Entity\Transaction\TransactionType;
 use Orkestra\Transactor\Entity\Transaction\NetworkType;
-use TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository;
-use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
+use Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository;
 use Orkestra\Transactor\Entity\Transaction;
-use Orkestra\Transactor\Entity\Account\PointsAccount;
 
-class AccountHelper
+class AccountHelper implements AccountHelperInterface
 {
     /**
      * @var \Orkestra\Transactor\TransactorFactory
@@ -18,7 +17,7 @@ class AccountHelper
     protected $factory;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository
+     * @var \Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository
      */
     protected $repository;
 
@@ -26,15 +25,25 @@ class AccountHelper
      * Constructor
      *
      * @param \Orkestra\Transactor\TransactorFactory $factory
-     * @param \TerraMar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository $repository
+     * @param \Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository $repository
      */
     public function __construct(TransactorFactory $factory, OfficeConfigurationRepository $repository)
     {
-        $this->factory = $factory;
+        $this->factory    = $factory;
         $this->repository = $repository;
     }
 
-    public function addCredit(CustomerSalesProfile $profile, $amount)
+    /**
+     * Attempts to add credit to a Sales Profile's configured PointsAccount
+     *
+     * @param \Terramar\Bundle\SalesBundle\Model\SalesProfileInterface $profile
+     * @param integer                                                  $amount
+     *
+     * @return \Orkestra\Transactor\Entity\Result
+     *
+     * @throws \RuntimeException
+     */
+    public function addCredit(SalesProfileInterface $profile, $amount)
     {
         if (!$profile->getPointsAccount()) {
             throw new \RuntimeException('The given CustomerSalesProfile has no associated PointsAccount');

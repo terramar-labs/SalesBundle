@@ -1,23 +1,23 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\DbalType;
+namespace Terramar\Bundle\SalesBundle\DbalType;
 
-use Orkestra\Common\DBAL\Types\EnumTypeBase;
+use Orkestra\Common\DbalType\AbstractEnumType;
 
 /**
  * Billing Frequency EnumType
  *
  * Provides integration for the Found By Type enumeration and Doctrine DBAL
  */
-class BillingFrequencyEnumType extends EnumTypeBase
+class BillingFrequencyEnumType extends AbstractEnumType
 {
     /**
      * @var string The unique name for this EnumType
      */
-    protected $_name = 'enum.terramar.sales.billing_frequency';
+    protected $name = 'enum.terramar.sales.billing_frequency';
 
     /**
      * @var string The fully qualified class name of the Enum that this class wraps
      */
-    protected $_class = 'TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency';
+    protected $class = 'Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency';
 }

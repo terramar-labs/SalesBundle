@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form\OfficeUser;
+namespace Terramar\Bundle\SalesBundle\Form\OfficeUser;
 
 use Symfony\Component\Form\AbstractType;
 use Doctrine\ORM\EntityRepository;
@@ -17,7 +17,7 @@ class TackType extends AbstractType
             ->add('description')
             ->add('alertPriority', 'enum', array(
                 'label' => 'Alert Priority',
-                'enum' => 'TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority'
+                'enum' => 'Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority'
             ))
             ->add('dueDate', 'date', array(
                 'label' => 'Due Date',
@@ -28,12 +28,12 @@ class TackType extends AbstractType
             ->add('alertType', 'enum', array(
                 'label' => 'Alert Type',
                 'empty_value' => 'Select ...',
-                'enum' => 'TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType'
+                'enum' => 'Terramar\Bundle\NotificationBundle\Model\Alert\AlertType'
             ))
             ->add('assignedTo', 'entity', array(
                 'label' => 'Assign Alert To',
                 'empty_value' => 'Select ...',
-                'class' => 'TerraMar\Bundle\SalesBundle\Entity\OfficeUser',
+                'class' => 'Terramar\Bundle\SalesBundle\Entity\OfficeUser',
                 'query_builder' => function (EntityRepository $er) use ($office) {
                     return $er->createQueryBuilder('ou')
                         ->join('ou.user', 'u')

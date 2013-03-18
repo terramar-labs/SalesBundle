@@ -1,13 +1,13 @@
 {% extends "::base.html.twig" %}
 
-{% use 'TerraMarSalesBundle:Customer:_subnav.html.twig' %}
+{% use 'TerramarSalesBundle:Customer:_subnav.html.twig' %}
 
 {% block title %}{{ entity }}{% endblock %}
 
 {% block content %}
-    {% render 'TerraMarSalesBundle:Customer/Alert:index' with { id: entity.id } %}
+    {% render 'TerramarSalesBundle:Customer/Alert:index' with { id: entity.id } %}
     <hr />
-    {% render 'TerraMarSalesBundle:Customer/ToDo:index' with { id: entity.id } %}
+    {% render 'TerramarSalesBundle:Customer/ToDo:index' with { id: entity.id } %}
     <hr />
-    {% render 'TerraMarSalesBundle:Customer/AlertHistory:index' with { id: entity.id }%}
+    {% render 'TerramarSalesBundle:Customer/AlertHistory:index' with { id: entity.id }%}
 {% endblock %}

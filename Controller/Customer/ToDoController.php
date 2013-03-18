@@ -1,12 +1,12 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
+namespace Terramar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Http\JsonReloadResponse;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Form\Customer\ToDoType;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Http\JsonReloadResponse;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus;
+use Terramar\Bundle\SalesBundle\Form\Customer\ToDoType;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -32,19 +32,19 @@ class ToDoController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
         }
 
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
         if (!$profile) {
             throw $this->createNotFoundException('Unable to find Customer Sales Profile entity.');
         }
 
-        $todos = $em->getRepository('TerraMarSalesBundle:Alert\CustomerAlert')->findActiveTodosByProfile($profile);
+        $todos = $em->getRepository('TerramarSalesBundle:Alert\CustomerAlert')->findActiveTodosByProfile($profile);
 
         return array(
             'entity' => $customer,
@@ -63,7 +63,7 @@ class ToDoController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
@@ -81,26 +81,26 @@ class ToDoController extends AbstractController
      * Displays a Tackboard.
      *
      * @Route("/{id}/to-do/create", name="customer_todo_create")
-     * @Template("TerraMarSalesBundle:Customer/ToDo:new.html.twig")
+     * @Template("TerramarSalesBundle:Customer/ToDo:new.html.twig")
      * @Secure(roles="ROLE_CUSTOMER_WRITE")
      */
     public function createAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to locate Customer entity');
         }
 
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
         if (!$profile) {
             throw $this->createNotFoundException('Unable to find Customer Sales Profile entity.');
         }
 
-        $factory = $this->get('terramar.sales.factory.alert');
+        $factory = $this->get('terramar.notification.factory.alert');
 
         $form = $this->createForm(new ToDoType(), null, array('office' => $this->getCurrentOffice()));
         $form->bind($request);
@@ -115,7 +115,7 @@ class ToDoController extends AbstractController
                 $assignedTo = $data['assignedTo'];
             }
 
-            $todo = $factory->createAssignedTodo($user, $profile, $data['name'], $data['description'], $data['alertPriority'], $data['dueDate']);
+            $todo = $factory->createAssignedTicket($user, $profile, $data['name'], $data['description'], $data['alertPriority'], $data['dueDate']);
 
             $userDescription = sprintf(
                 '%s<br /><p>Customer: <a href="%s">%s</a></p>',
@@ -124,7 +124,7 @@ class ToDoController extends AbstractController
                 $customer
             );
 
-            $userTodo = $factory->createAssignedTodo($user, $assignedTo, $data['name'], $userDescription, $data['alertPriority'], $data['dueDate']);
+            $userTodo = $factory->createAssignedTicket($user, $assignedTo, $data['name'], $userDescription, $data['alertPriority'], $data['dueDate']);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($todo);
@@ -154,7 +154,7 @@ class ToDoController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $alert = $em->getRepository('TerraMarSalesBundle:Alert\CustomerAlert')->find($alertid);
+        $alert = $em->getRepository('TerramarSalesBundle:Alert\CustomerAlert')->find($alertid);
 
         if (!$alert) {
             throw $this->createNotFoundException('Unable to locate Alert entity');

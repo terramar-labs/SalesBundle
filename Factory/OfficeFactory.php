@@ -1,18 +1,18 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory;
+namespace Terramar\Bundle\SalesBundle\Factory;
 
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 
 class OfficeFactory implements OfficeFactoryInterface
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Factory\OfficeConfigurationFactoryInterface
+     * @var \Terramar\Bundle\SalesBundle\Factory\OfficeConfigurationFactoryInterface
      */
     protected $officeConfigurationFactory;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Factory\OfficeSalesProfileFactoryInterface
+     * @var \Terramar\Bundle\SalesBundle\Factory\OfficeSalesProfileFactoryInterface
      */
     protected $officeSalesProfileFactory;
 
@@ -33,7 +33,7 @@ class OfficeFactory implements OfficeFactoryInterface
     /**
      * Creates a new Office entity
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office
      */
     public function create()
     {
@@ -45,9 +45,9 @@ class OfficeFactory implements OfficeFactoryInterface
      *
      * This method is called when a new Office is created.
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office
      */
     public function buildOffice(Office $office)
     {

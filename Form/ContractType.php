@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form;
+namespace Terramar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,14 +11,14 @@ class ContractType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('status', 'enum', array(
-            'enum' => 'TerraMar\Bundle\SalesBundle\Entity\Contract\ContractStatus'
+            'enum' => 'Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus'
         ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TerraMar\Bundle\SalesBundle\Entity\Contract'
+            'data_class' => 'Terramar\Bundle\SalesBundle\Entity\Contract'
         ));
     }
 

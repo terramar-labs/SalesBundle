@@ -1,11 +1,11 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller;
+namespace Terramar\Bundle\SalesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Form\OfficeSelectType;
+use Terramar\Bundle\SalesBundle\Form\OfficeSelectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

@@ -1,15 +1,15 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\CustomerBundle\Entity\Customer;
-use TerraMar\Bundle\CustomerBundle\Entity\Note;
+use Terramar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\CustomerBundle\Entity\Note;
 use Doctrine\Common\Collections\ArrayCollection;
-use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
-use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
+use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
+use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * A user associated with an Customer
@@ -17,20 +17,20 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_customer_users")
  */
-class CustomerUser extends EntityBase
+class CustomerUser extends AbstractEntity
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office")
      * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
     protected $office;
 
     /**
-     * @var \TerraMar\Bundle\CustomerBundle\Entity\Customer
+     * @var \Terramar\Bundle\CustomerBundle\Entity\Customer
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\CustomerBundle\Entity\Customer")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\CustomerBundle\Entity\Customer")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     protected $customer;
@@ -44,8 +44,8 @@ class CustomerUser extends EntityBase
     protected $user;
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
-     * @param \TerraMar\Bundle\CustomerBundle\Entity\Customer $customer
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\CustomerBundle\Entity\Customer $customer
      * @param \Orkestra\Bundle\ApplicationBundle\Entity\User $user
      */
     public function __construct(Office $office, Customer $customer, User $user)
@@ -64,7 +64,7 @@ class CustomerUser extends EntityBase
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office
      */
     public function getOffice()
     {
@@ -80,7 +80,7 @@ class CustomerUser extends EntityBase
     }
 
     /**
-     * @return \TerraMar\Bundle\CustomerBundle\Entity\Customer
+     * @return \Terramar\Bundle\CustomerBundle\Entity\Customer
      */
     public function getCustomer()
     {

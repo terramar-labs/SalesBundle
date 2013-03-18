@@ -1,14 +1,14 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form;
+namespace Terramar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Orkestra\Bundle\ApplicationBundle\Entity\Group;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
-use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 
 
 class OfficeSelectType extends AbstractType
@@ -32,7 +32,7 @@ class OfficeSelectType extends AbstractType
         $office = $this->user->getOffice();
 
         $builder->add('office', 'entity', array(
-            'class' => 'TerraMar\Bundle\SalesBundle\Entity\Office',
+            'class' => 'Terramar\Bundle\SalesBundle\Entity\Office',
             'query_builder' => function (EntityRepository $er) use ($roles, $office) {
                 $qb = $er->createQueryBuilder('o')->where('o.active = true');
 

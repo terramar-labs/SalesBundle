@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Model\Invoice;
+namespace Terramar\Bundle\SalesBundle\Model\Invoice;
 
 use Orkestra\Transactor\Entity\Transaction;
 use Orkestra\Transactor\Entity\AbstractAccount;

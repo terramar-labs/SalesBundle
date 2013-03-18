@@ -1,20 +1,20 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
+namespace Terramar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Http\JsonReloadResponse;
-use TerraMar\Bundle\SalesBundle\Http\JsonErrorResponse;
+use Terramar\Bundle\SalesBundle\Http\JsonReloadResponse;
+use Terramar\Bundle\SalesBundle\Http\JsonErrorResponse;
 use Symfony\Component\Form\FormError;
 use Orkestra\Transactor\Entity\Result\ResultStatus;
 use Symfony\Component\HttpFoundation\Response;
-use TerraMar\Bundle\SalesBundle\Form\InvoiceType;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Form\InvoiceType;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice;
+use Terramar\Bundle\SalesBundle\Entity\Invoice;
 
 /**
  * Invoice controller.
@@ -37,7 +37,7 @@ class InvoiceController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TerraMarSalesBundle:Invoice')->findBy(array('active' => true));
+        $entities = $em->getRepository('TerramarSalesBundle:Invoice')->findBy(array('active' => true));
 
         return array(
             'entities' => $entities,
@@ -55,15 +55,15 @@ class InvoiceController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->find($id);
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->find($id);
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
-        $invoice = $em->getRepository('TerraMarSalesBundle:Invoice')->findOneBy(array('id' => $invoiceid));
+        $invoice = $em->getRepository('TerramarSalesBundle:Invoice')->findOneBy(array('id' => $invoiceid));
 
         $form = $this->createForm(new InvoiceType($profile), $invoice);
 
@@ -72,7 +72,7 @@ class InvoiceController extends AbstractController
             && $session->has(self::INVOICE_LAST_PAYMENT_DATA_KEY)
             && $invoiceid == $session->get(self::INVOICE_LAST_PROCESSED_KEY)
         ) {
-            /** @var \TerraMar\Bundle\SalesBundle\Helper\InvoiceHelper $helper */
+            /** @var \Terramar\Bundle\SalesBundle\Helper\InvoiceHelper $helper */
             $helper = $this->get('terramar.sales.helper.invoice');
 
             $payments = $errors = array();
@@ -105,7 +105,7 @@ class InvoiceController extends AbstractController
      * Shows an Invoice entity
      *
      * @Route("customer/{id}/invoice/{invoiceid}/process", name="customer_invoice_process")
-     * @Template("TerraMarSalesBundle:Customer/Invoice:show.html.twig")
+     * @Template("TerramarSalesBundle:Customer/Invoice:show.html.twig")
      * @Secure(roles="ROLE_CUSTOMER_WRITE")
      */
     public function updateAction(Request $request, $id, $invoiceid)
@@ -113,15 +113,15 @@ class InvoiceController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $currentUser = $this->getCurrentOfficeUser()->getUser();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->find($id);
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->find($id);
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
-        $invoice = $em->getRepository('TerraMarSalesBundle:Invoice')->findOneBy(array('id' => $invoiceid));
+        $invoice = $em->getRepository('TerramarSalesBundle:Invoice')->findOneBy(array('id' => $invoiceid));
 
         $form = $this->createForm(new InvoiceType($profile), $invoice);
         $form->bind($request);
@@ -129,7 +129,7 @@ class InvoiceController extends AbstractController
         if ($form->isValid()) {
             $payments = $form->get('payments')->getData();
 
-            /** @var \TerraMar\Bundle\SalesBundle\Helper\InvoiceHelper $helper */
+            /** @var \Terramar\Bundle\SalesBundle\Helper\InvoiceHelper $helper */
             $helper = $this->get('terramar.sales.helper.invoice');
 
             $errors = array();
@@ -204,19 +204,19 @@ class InvoiceController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $currentUser = $this->getCurrentOfficeUser()->getUser();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->find($id);
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->find($id);
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
-        $invoice = $em->getRepository('TerraMarSalesBundle:Invoice')->find($invoiceid);
+        $invoice = $em->getRepository('TerramarSalesBundle:Invoice')->find($invoiceid);
 
         $transaction = $em->getRepository('Orkestra\Transactor\Entity\Transaction')->find($transactionid);
 
-        /** @var \TerraMar\Bundle\SalesBundle\Helper\InvoiceHelper $helper */
+        /** @var \Terramar\Bundle\SalesBundle\Helper\InvoiceHelper $helper */
         $helper = $this->get('terramar.sales.helper.invoice');
 
         try {
@@ -244,7 +244,7 @@ class InvoiceController extends AbstractController
     public function deleteAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('TerraMarSalesBundle:Invoice')->find($id);
+        $entity = $em->getRepository('TerramarSalesBundle:Invoice')->find($id);
         $entity->setActive(false);
         $em->persist($entity);
         $em->flush();

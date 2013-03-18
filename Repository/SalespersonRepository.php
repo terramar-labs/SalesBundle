@@ -1,14 +1,14 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Repository;
+namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 
 class SalespersonRepository extends EntityRepository
 {
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      *
      * @return array
      */
@@ -20,7 +20,7 @@ class SalespersonRepository extends EntityRepository
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      *
      * @return \Doctrine\ORM\QueryBuilder
      */

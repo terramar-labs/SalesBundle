@@ -1,11 +1,11 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory;
+namespace Terramar\Bundle\SalesBundle\Factory;
 
-use TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
-use TerraMar\Bundle\SalesBundle\Entity\CustomerUser;
-use TerraMar\Bundle\CustomerBundle\Entity\Customer;
-use TerraMar\Bundle\SalesBundle\Factory\CustomerUser\DuplicateEmailException;
+use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use Terramar\Bundle\SalesBundle\Entity\CustomerUser;
+use Terramar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\SalesBundle\Factory\CustomerUser\DuplicateEmailException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
@@ -37,11 +37,11 @@ class CustomerUserFactory implements CustomerUserFactoryInterface
     /**
      * Creates a new CustomerUser entity
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
      * @param string|null $password
      *
      * @throws \RuntimeException
-     * @return \TerraMar\Bundle\SalesBundle\Entity\CustomerUser
+     * @return \Terramar\Bundle\SalesBundle\Entity\CustomerUser
      */
     public function create(CustomerSalesProfile $profile, $password = null)
     {
@@ -79,7 +79,7 @@ class CustomerUserFactory implements CustomerUserFactoryInterface
     /**
      * Updates a CustomerUser's email address
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
      * @param string $email
      *
      * @return void
@@ -97,7 +97,7 @@ class CustomerUserFactory implements CustomerUserFactoryInterface
      *
      * @param string $email
      *
-     * @throws \TerraMar\Bundle\SalesBundle\Factory\CustomerUser\DuplicateEmailException
+     * @throws \Terramar\Bundle\SalesBundle\Factory\CustomerUser\DuplicateEmailException
      */
     protected function checkForDuplicateEmail($email)
     {
@@ -111,7 +111,7 @@ class CustomerUserFactory implements CustomerUserFactoryInterface
     /**
      * Generates a password for the given Customer
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
      *
      * @return string
      */

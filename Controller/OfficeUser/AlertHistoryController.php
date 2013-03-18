@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\OfficeUser;
+namespace Terramar\Bundle\SalesBundle\Controller\OfficeUser;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -32,14 +32,14 @@ class AlertHistoryController extends AbstractController
         if (!$id) {
             $user = $this->getCurrentOfficeUser();
         } else {
-            $user = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
+            $user = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
         }
 
         if (!$user) {
             throw $this->createNotFoundException('Unable to locate User');
         }
 
-        $alerts = $em->getRepository('TerraMarSalesBundle:Alert\OfficeUserAlert')->findAllAlertHistoryByUser($user);
+        $alerts = $em->getRepository('TerramarSalesBundle:Alert\OfficeUserAlert')->findAllAlertHistoryByUser($user);
 
         return array(
             'entities' => $alerts,

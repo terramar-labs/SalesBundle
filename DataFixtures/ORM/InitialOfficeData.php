@@ -1,10 +1,10 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\DataFixtures\ORM;
+namespace Terramar\Bundle\SalesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
-use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 use Orkestra\Bundle\ApplicationBundle\Entity\Contact\Address;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -31,7 +31,7 @@ class InitialOfficeData extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function load(ObjectManager $manager)
     {
-        /** @var $factory \TerraMar\Bundle\SalesBundle\Factory\OfficeFactoryInterface */
+        /** @var $factory \Terramar\Bundle\SalesBundle\Factory\OfficeFactoryInterface */
         $factory = $this->container->get('terramar.sales.factory.office');
 
         $office = new Office();

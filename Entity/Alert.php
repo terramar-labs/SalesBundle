@@ -1,12 +1,13 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity;
+namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
-use Orkestra\Common\Entity\EntityBase;
+use Orkestra\Common\Entity\AbstractEntity;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertType;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority;
+use Terramar\Bundle\NotificationBundle\Model\TicketInterface;
 
 /**
  * An Alert
@@ -14,7 +15,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_alerts")
  */
-class Alert extends EntityBase
+class Alert extends AbstractEntity implements TicketInterface
 {
     /**
      * @var string
@@ -31,23 +32,23 @@ class Alert extends EntityBase
     protected $description = '';
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus
+     * @var \Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus
      *
-     * @ORM\Column(name="status", type="enum.terramar.sales.alert_status")
+     * @ORM\Column(name="status", type="enum.terramar.notification.alert_status")
      */
     protected $status;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority
+     * @var \Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority
      *
-     * @ORM\Column(name="priority", type="enum.terramar.sales.alert_priority")
+     * @ORM\Column(name="priority", type="enum.terramar.notification.alert_priority")
      */
     protected $priority;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType
+     * @var \Terramar\Bundle\NotificationBundle\Model\Alert\AlertType
      *
-     * @ORM\Column(name="type", type="enum.terramar.sales.alert_type")
+     * @ORM\Column(name="type", type="enum.terramar.notification.alert_type")
      */
     protected $type;
 
@@ -57,6 +58,13 @@ class Alert extends EntityBase
      * @ORM\Column(name="date_due", type="date", nullable=true)
      */
     protected $dateDue;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_completed", type="date", nullable=true)
+     */
+    protected $dateCompleted;
 
     /**
      * @param \DateTime $dateDue
@@ -107,7 +115,7 @@ class Alert extends EntityBase
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
      */
     public function setPriority(AlertPriority $priority)
     {
@@ -115,7 +123,7 @@ class Alert extends EntityBase
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority
      */
     public function getPriority()
     {
@@ -123,7 +131,7 @@ class Alert extends EntityBase
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus $status
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus $status
      */
     public function setStatus(AlertStatus $status)
     {
@@ -131,7 +139,7 @@ class Alert extends EntityBase
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus
      */
     public function getStatus()
     {
@@ -139,7 +147,7 @@ class Alert extends EntityBase
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType $type
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertType $type
      */
     public function setType(AlertType $type)
     {
@@ -147,10 +155,38 @@ class Alert extends EntityBase
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert\AlertType
      */
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Marks the alert as viewed
+     *
+     * @return void
+     */
+    public function markViewed()
+    {
+        $this->setStatus(new AlertStatus(AlertStatus::VIEWED));
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateCompleted()
+    {
+        return $this->dateCompleted;
+    }
+
+    /**
+     * Marks the Ticket as complete
+     *
+     * @return void
+     */
+    public function markComplete()
+    {
+        $this->setStatus(new AlertStatus(AlertStatus::COMPLETED));
     }
 }

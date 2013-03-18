@@ -1,42 +1,41 @@
 <?php
-namespace TerraMar\Bundle\SalesBundle\Entity\Alert;
+namespace Terramar\Bundle\SalesBundle\Entity\Alert;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
-use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
-use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
-use TerraMar\Bundle\SalesBundle\Model\AssignedAlertInterface;
-use TerraMar\Bundle\SalesBundle\Entity\Alert;
-use Orkestra\Common\Entity\EntityBase;
+use Terramar\Bundle\SalesBundle\Model\Alert\System;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\NotificationBundle\Model\AssignedAlertInterface;
+use Terramar\Bundle\SalesBundle\Entity\Alert;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An Office Alert
  *
- * @ORM\Entity(repositoryClass="TerraMar\Bundle\SalesBundle\Repository\OfficeUserAlertRepository")
+ * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\OfficeUserAlertRepository")
  * @ORM\Table(name="terramar_office_alerts")
  */
-class OfficeUserAlert extends EntityBase implements AssignedAlertInterface
+class OfficeUserAlert extends AbstractEntity implements AssignedAlertInterface
 {
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Alert
+     * @var \Terramar\Bundle\SalesBundle\Entity\Alert
      *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Alert", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Alert", cascade={"persist"})
      * @ORM\JoinColumn(name="alert_id", referencedColumnName="id")
      */
     protected $alert;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @var \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\OfficeUser")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\OfficeUser")
      * @ORM\JoinColumn(name="assigned_by_user_id", referencedColumnName="id")
      */
     protected $assignedBy;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @var \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      *
-     * @ORM\ManyToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\OfficeUser")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\OfficeUser")
      * @ORM\JoinColumn(name="assigned_to_user_id", referencedColumnName="id")
      */
     protected $assignedTo;
@@ -44,9 +43,9 @@ class OfficeUserAlert extends EntityBase implements AssignedAlertInterface
     /**
      * Constructor
      *
-     * @param \TerraMar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Entity\OfficeUser $assignedTo
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert $alert
+     * @param \Terramar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
+     * @param \Terramar\Bundle\SalesBundle\Entity\OfficeUser $assignedTo
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert $alert
      */
     public function __construct(OfficeUser $assignedBy = null, OfficeUser $assignedTo = null, Alert $alert = null)
     {
@@ -56,7 +55,7 @@ class OfficeUserAlert extends EntityBase implements AssignedAlertInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert $alert
+     * @param \Terramar\Bundle\SalesBundle\Entity\Alert $alert
      */
     public function setAlert(Alert $alert)
     {
@@ -64,7 +63,7 @@ class OfficeUserAlert extends EntityBase implements AssignedAlertInterface
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert
      */
     public function getAlert()
     {
@@ -72,37 +71,34 @@ class OfficeUserAlert extends EntityBase implements AssignedAlertInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\OfficeUser $assignedBy
+     * @param object|\Terramar\Bundle\SalesBundle\Entity\OfficeUser|null $assignedBy
      */
-    public function setAssignedBy(AssignedByInterface $assignedBy)
+    public function setAssignedBy(OfficeUser $assignedBy = null)
     {
         $this->assignedBy = $assignedBy;
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @return \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      */
     public function getAssignedBy()
     {
-        return $this->assignedBy;
+        return $this->assignedBy ?: new System();
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\OfficeUser $assignedTo
+     * @param object|\Terramar\Bundle\SalesBundle\Entity\OfficeUser $assignedTo
      */
-    public function setAssignedTo(AssignedToInterface $assignedTo)
+    public function setAssignedTo(OfficeUser $assignedTo)
     {
         $this->assignedTo = $assignedTo;
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\OfficeUser
+     * @return \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      */
     public function getAssignedTo()
     {
         return $this->assignedTo;
     }
-
-
-
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form;
+namespace Terramar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Doctrine\ORM\EntityRepository;
-use TerraMar\Bundle\CustomerBundle\Entity\Note\InteractionType;
+use Terramar\Bundle\CustomerBundle\Entity\Note\InteractionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -21,7 +21,7 @@ class NoteType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TerraMar\Bundle\CustomerBundle\Entity\Note'
+            'data_class' => 'Terramar\Bundle\CustomerBundle\Entity\Note'
         ));
     }
 

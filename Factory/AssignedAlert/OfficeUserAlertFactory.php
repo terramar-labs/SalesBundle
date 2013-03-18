@@ -1,26 +1,27 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory\AssignedAlert;
+namespace Terramar\Bundle\SalesBundle\Factory\AssignedAlert;
 
-use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
-use TerraMar\Bundle\SalesBundle\Entity\OfficeUser;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert;
-use TerraMar\Bundle\SalesBundle\Entity\Alert;
-use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
+use Terramar\Bundle\NotificationBundle\Factory\AssignedAlert\AssignedAlertFactoryInterface;
+use Terramar\Bundle\NotificationBundle\Model\MessageInterface;
+use Terramar\Bundle\SalesBundle\Model\Alert\System;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert;
+use Terramar\Bundle\SalesBundle\Entity\Alert;
 
 class OfficeUserAlertFactory implements AssignedAlertFactoryInterface
 {
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert $alert
+     * @param object $assignedBy
+     * @param object $assignedTo
+     * @param \Terramar\Bundle\NotificationBundle\Model\MessageInterface $alert
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert
+     * @return \Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert
      */
-    public function createAssignedAlert(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo, Alert $alert)
+    public function createAssignedAlert($assignedBy, $assignedTo, MessageInterface $alert)
     {
         $officeUserAlert = new OfficeUserAlert();
-        $officeUserAlert->setAssignedBy($assignedBy);
+        $officeUserAlert->setAssignedBy($assignedBy instanceof System ? null : $assignedBy);
         $officeUserAlert->setAssignedTo($assignedTo);
         $officeUserAlert->setAlert($alert);
 
@@ -30,14 +31,15 @@ class OfficeUserAlertFactory implements AssignedAlertFactoryInterface
     /**
      * Returns true if this factory supports the given assigner and assignee
      *
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
+     * @param object $assignedBy
+     * @param object $assignedTo
      *
      * @return bool
      */
-    public function supports(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo)
+    public function supports($assignedBy, $assignedTo)
     {
-        return $assignedBy instanceof OfficeUser && $assignedTo instanceof OfficeUser;
+        return ($assignedBy instanceof OfficeUser || $assignedBy instanceof System)
+            && $assignedTo instanceof OfficeUser;
     }
 
     /**

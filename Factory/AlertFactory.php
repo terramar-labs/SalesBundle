@@ -1,87 +1,35 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Factory;
+namespace Terramar\Bundle\SalesBundle\Factory;
 
-use TerraMar\Bundle\SalesBundle\Factory\AlertFactoryInterface;
-use TerraMar\Bundle\SalesBundle\Factory\AssignedAlert\AssignedAlertFactoryInterface;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertType;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Alert;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
-use TerraMar\Bundle\SalesBundle\Model\AssignedToInterface;
-use TerraMar\Bundle\SalesBundle\Model\AssignedByInterface;
+use Terramar\Bundle\NotificationBundle\Factory\AlertFactory as BaseFactory;
+use Terramar\Bundle\NotificationBundle\Factory\AlertFactoryInterface;
+use Terramar\Bundle\NotificationBundle\Factory\AssignedAlert\AssignedAlertFactoryInterface;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertType;
+use Terramar\Bundle\SalesBundle\Entity\Alert;
 
-class AlertFactory implements AlertFactoryInterface
+/**
+ * Overridden implementation to return Sales Bundle Alert
+ */
+class AlertFactory extends BaseFactory
 {
     /**
-     * @var array|AssignedAlert\AssignedAlertFactoryInterface[]
-     */
-    protected $factories = array();
-
-    /**
-     * Registers an AssignedAlertFactory with this factory
-     *
-     * @param AssignedAlert\AssignedAlertFactoryInterface $alertFactory
-     */
-    public function registerAssignedAlertFactory(AssignedAlertFactoryInterface $alertFactory)
-    {
-        $this->factories[$alertFactory->getName()] = $alertFactory;
-    }
-
-    /**
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
      * @param string $name
      * @param string $description
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority $priority
      *
-     * @return \TerraMar\Bundle\SalesBundle\Model\AssignedAlertInterface
-     */
-    public function createAssignedAlert(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo, $name, $description, AlertPriority $priority)
-    {
-        $alert = $this->createAlert($name, $description, $priority);
-        $factory = $this->getAssignedAlertFactory($assignedBy, $assignedTo);
-
-        $assignedAlert = $factory->createAssignedAlert($assignedBy, $assignedTo, $alert);
-
-        return $assignedAlert;
-    }
-
-    /**
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
-     * @param string $name
-     * @param string $description
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
-     * @param \DateTime $dateDue
-     *
-     * @return \TerraMar\Bundle\SalesBundle\Model\AssignedAlertInterface
-     */
-    public function createAssignedToDo(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo, $name, $description, AlertPriority $priority, \DateTime $dateDue)
-    {
-        $alert = $this->createToDo($name, $description, $priority, $dateDue);
-        $factory = $this->getAssignedAlertFactory($assignedBy, $assignedTo);
-
-        $assignedAlert = $factory->createAssignedAlert($assignedBy, $assignedTo, $alert);
-
-        return $assignedAlert;
-    }
-
-    /**
-     * @param string $name
-     * @param string $description
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
-     *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert
+     * @return \Terramar\Bundle\NotificationBundle\Entity\Alert
      */
     public function createAlert($name, $description, AlertPriority $priority)
     {
         $alert = new Alert();
+        $alert->setType(new AlertType(AlertType::ALERT));
         $alert->setName($name);
         $alert->setDescription($description);
         $alert->setPriority($priority);
         $alert->setStatus(new AlertStatus(AlertStatus::POSTED));
-        $alert->setType(new AlertType(AlertType::ALERT));
 
         return $alert;
     }
@@ -89,39 +37,38 @@ class AlertFactory implements AlertFactoryInterface
     /**
      * @param string $name
      * @param string $description
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
-     * @param \DateTime $dateDue
      *
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Alert
+     * @return \Terramar\Bundle\NotificationBundle\Model\AlertInterface
      */
-    public function createToDo($name, $description, AlertPriority $priority, \DateTime $dateDue)
+    public function createMessage($name, $description)
     {
         $alert = new Alert();
+        $alert->setType(new AlertType(AlertType::MESSAGE));
         $alert->setName($name);
         $alert->setDescription($description);
-        $alert->setPriority($priority);
         $alert->setStatus(new AlertStatus(AlertStatus::POSTED));
-        $alert->setType(new AlertType(AlertType::TODO));
-        $alert->setDateDue($dateDue);
 
         return $alert;
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedByInterface $assignedBy
-     * @param \TerraMar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
+     * @param string $name
+     * @param string $description
+     * @param \Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority $priority
+     * @param \DateTime $dateDue
      *
-     * @return AssignedAlert\AssignedAlertFactoryInterface
-     * @throws \RuntimeException
+     * @return \Terramar\Bundle\NotificationBundle\Entity\Ticket
      */
-    private function getAssignedAlertFactory(AssignedByInterface $assignedBy, AssignedToInterface $assignedTo)
+    public function createTicket($name, $description, AlertPriority $priority, \DateTime $dateDue)
     {
-        foreach ($this->factories as $factory) {
-            if ($factory->supports($assignedBy, $assignedTo)) {
-                return $factory;
-            }
-        }
+        $alert = new Alert();
+        $alert->setType(new AlertType(AlertType::TICKET));
+        $alert->setName($name);
+        $alert->setDescription($description);
+        $alert->setPriority($priority);
+        $alert->setStatus(new AlertStatus(AlertStatus::POSTED));
+        $alert->setDateDue($dateDue);
 
-        throw new \RuntimeException('Unable to locate factory that supports the given parameters');
+        return $alert;
     }
 }

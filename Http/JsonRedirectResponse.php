@@ -1,6 +1,6 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Http;
+namespace Terramar\Bundle\SalesBundle\Http;
 
 /**
  * A successful JsonSuccessResponse that will cause the client's browser to reload the  current page

@@ -1,13 +1,13 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\OfficeUser;
+namespace Terramar\Bundle\SalesBundle\Controller\OfficeUser;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Http\JsonReloadResponse;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use TerraMar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
-use TerraMar\Bundle\SalesBundle\Form\OfficeUser\AlertType;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Http\JsonReloadResponse;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertStatus;
+use Terramar\Bundle\NotificationBundle\Model\Alert\AlertPriority;
+use Terramar\Bundle\SalesBundle\Form\OfficeUser\AlertType;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -34,13 +34,13 @@ class AlertController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $office = $this->getCurrentOffice();
 
-        $user = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office->getId()));
+        $user = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office->getId()));
 
         if (!$user) {
             throw $this->createNotFoundException('Unable to locate User');
         }
 
-        $alerts = $em->getRepository('TerraMarSalesBundle:Alert\OfficeUserAlert')->findActiveAlertsByAssignedTo($user);
+        $alerts = $em->getRepository('TerramarSalesBundle:Alert\OfficeUserAlert')->findActiveAlertsByAssignedTo($user);
 
         usort($alerts, function($a, $b) {
             $a = $a->getAlert();
@@ -73,7 +73,7 @@ class AlertController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $office = $this->getCurrentOffice();
 
-        $user = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
+        $user = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
 
         if (!$user) {
             throw $this->createNotFoundException('Unable to locate User');
@@ -91,12 +91,21 @@ class AlertController extends AbstractController
      * Creates an Alert for a User
      *
      * @Route("/{id}/alert/create", name="user_create_alert")
-     * @Template("TerraMarSalesBundle:OfficeUser/Alert:new.html.twig")
+     * @Template("TerramarSalesBundle:OfficeUser/Alert:new.html.twig")
      * @Secure(roles="ROLE_USER")
      */
     public function createAction(Request $request, $id)
     {
-        $factory = $this->get('terramar.sales.factory.alert');
+        $em = $this->getDoctrine()->getManager();
+        $office = $this->getCurrentOffice();
+
+        $user = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
+
+        if (!$user) {
+            throw $this->createNotFoundException('Unable to locate User');
+        }
+
+        $factory = $this->get('terramar.notification.factory.alert');
 
         $form = $this->createForm(new AlertType(), null, array('office' => $this->getCurrentOffice(), 'showAssignedTo' => false));
         $form->bind($request);
@@ -108,7 +117,7 @@ class AlertController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $office = $this->getCurrentOffice();
 
-            $user = $em->getRepository('TerraMarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
+            $user = $em->getRepository('TerramarSalesBundle:OfficeUser')->findOneBy(array('user' => $id, 'office' => $office));
 
             if (!$user) {
                 throw $this->createNotFoundException('Unable to locate User');
@@ -129,6 +138,7 @@ class AlertController extends AbstractController
         }
 
         return array(
+            'entity' => $user,
             'form' => $form->createView()
         );
     }
@@ -136,7 +146,7 @@ class AlertController extends AbstractController
     /**
      * Updates an Alert for a User
      *
-     * @Route("{id}/alert/close", name="user_update_alert")
+     * @Route("/{id}/alert/close", name="user_update_alert")
      * @Method("POST")
      * @Template()
      * @Secure(roles="ROLE_USER")
@@ -145,7 +155,7 @@ class AlertController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $alert = $em->getRepository('TerraMarSalesBundle:Alert\OfficeUserAlert')->find($id);
+        $alert = $em->getRepository('TerramarSalesBundle:Alert\OfficeUserAlert')->find($id);
         $alert->getAlert()->setStatus(new AlertStatus(AlertStatus::COMPLETED));
 
         $em->persist($alert);

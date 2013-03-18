@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form;
+namespace Terramar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use TerraMar\Bundle\SalesBundle\Model\SalesProfileInterface;
+use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -35,7 +35,7 @@ class InvoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TerraMar\Bundle\SalesBundle\Entity\Invoice',
+            'data_class' => 'Terramar\Bundle\SalesBundle\Entity\Invoice',
             'allow_points' => true,
             'allow_cash' => true,
             'allow_check' => true,

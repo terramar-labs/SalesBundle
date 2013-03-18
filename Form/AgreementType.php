@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form;
+namespace Terramar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use TerraMar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
+use Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -40,7 +40,7 @@ class AgreementType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TerraMar\Bundle\SalesBundle\Entity\Agreement'
+            'data_class' => 'Terramar\Bundle\SalesBundle\Entity\Agreement'
         ));
     }
 

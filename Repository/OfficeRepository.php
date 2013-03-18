@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Repository;
+namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Entity\Office;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
 
 class OfficeRepository extends EntityRepository
@@ -12,7 +12,7 @@ class OfficeRepository extends EntityRepository
     {
         $qb = $this->_em->createQueryBuilder()
             ->select('ou')
-            ->from('TerraMar\Bundle\SalesBundle\Entity\OfficeUser', 'ou')
+            ->from('Terramar\Bundle\SalesBundle\Entity\OfficeUser', 'ou')
             ->join('ou.office', 'o')
             ->where('ou.user = :user');
 

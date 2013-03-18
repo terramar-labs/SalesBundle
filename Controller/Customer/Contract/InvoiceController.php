@@ -1,19 +1,19 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\Customer\Contract;
+namespace Terramar\Bundle\SalesBundle\Controller\Customer\Contract;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Form\NewInvoiceType;
+use Terramar\Bundle\SalesBundle\Form\NewInvoiceType;
 use Symfony\Component\Form\FormError;
 use Orkestra\Transactor\Entity\Result\ResultStatus;
 use Symfony\Component\HttpFoundation\Response;
-use TerraMar\Bundle\SalesBundle\Form\InvoiceType;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Form\InvoiceType;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use TerraMar\Bundle\SalesBundle\Entity\Invoice;
+use Terramar\Bundle\SalesBundle\Entity\Invoice;
 
 /**
  * Invoice controller.
@@ -32,13 +32,13 @@ class InvoiceController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $contract = $em->getRepository('TerraMarSalesBundle:Contract')->findOneByIdAndCustomer($contractid, $customer);
+        $contract = $em->getRepository('TerramarSalesBundle:Contract')->findOneByIdAndCustomer($contractid, $customer);
 
         if (!$contract) {
             throw $this->createNotFoundException('Unable to locate Contract');
@@ -61,13 +61,13 @@ class InvoiceController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $contract = $em->getRepository('TerraMarSalesBundle:Contract')->findOneByIdAndCustomer($contractid, $customer);
+        $contract = $em->getRepository('TerramarSalesBundle:Contract')->findOneByIdAndCustomer($contractid, $customer);
 
         if (!$contract) {
             throw $this->createNotFoundException('Unable to locate Contract');
@@ -84,7 +84,7 @@ class InvoiceController extends AbstractController
 
     /**
      * @Route("/{id}/contract/{contractid}/invoice/create", name="customer_contract_invoice_create")
-     * @Template("TerraMarSalesBundle:Customer/Contract/Invoice:new.html.twig")
+     * @Template("TerramarSalesBundle:Customer/Contract/Invoice:new.html.twig")
      * @Method("POST")
      * @Secure(roles="ROLE_INVOICE_WRITE")
      */
@@ -93,13 +93,13 @@ class InvoiceController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $contract = $em->getRepository('TerraMarSalesBundle:Contract')->findOneByIdAndCustomer($contractid, $customer);
+        $contract = $em->getRepository('TerramarSalesBundle:Contract')->findOneByIdAndCustomer($contractid, $customer);
 
         if (!$contract) {
             throw $this->createNotFoundException('Unable to locate Contract');

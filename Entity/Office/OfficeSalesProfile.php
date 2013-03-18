@@ -1,18 +1,18 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Entity\Office;
+namespace Terramar\Bundle\SalesBundle\Entity\Office;
 
 use Doctrine\ORM\Mapping as ORM;
-use TerraMar\Bundle\SalesBundle\Model\SalesProfileInterface;
-use TerraMar\Bundle\SalesBundle\Entity\Contract;
+use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
+use Terramar\Bundle\SalesBundle\Entity\Contract;
 use Orkestra\Transactor\Entity\Account\BankAccount;
 use Orkestra\Transactor\Entity\Account\CardAccount;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
 use Orkestra\Transactor\Entity\Account\SimpleAccount;
 use Orkestra\Transactor\Entity\AbstractAccount;
 use Doctrine\Common\Collections\ArrayCollection;
-use TerraMar\Bundle\SalesBundle\Entity\Office;
-use Orkestra\Common\Entity\EntityBase;
+use Terramar\Bundle\SalesBundle\Entity\Office;
+use Orkestra\Common\Entity\AbstractEntity;
 
 /**
  * An office's sales profile
@@ -20,7 +20,7 @@ use Orkestra\Common\Entity\EntityBase;
  * @ORM\Entity
  * @ORM\Table(name="terramar_office_sales_profiles")
  */
-class OfficeSalesProfile extends EntityBase implements SalesProfileInterface
+class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface
 {
     /**
      * @var bool
@@ -48,7 +48,7 @@ class OfficeSalesProfile extends EntityBase implements SalesProfileInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Contract", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Contract", cascade={"persist"})
      * @ORM\JoinTable(name="terramar_office_sales_profiles_contracts",
      *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="contract_id", referencedColumnName="id", unique=true)}
@@ -68,9 +68,9 @@ class OfficeSalesProfile extends EntityBase implements SalesProfileInterface
     protected $accounts;
 
     /**
-     * @var \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office
      *
-     * @ORM\OneToOne(targetEntity="TerraMar\Bundle\SalesBundle\Entity\Office", inversedBy="profile")
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office", inversedBy="profile")
      * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
     protected $office;
@@ -137,7 +137,7 @@ class OfficeSalesProfile extends EntityBase implements SalesProfileInterface
     }
 
     /**
-     * @param \TerraMar\Bundle\SalesBundle\Entity\Office $office
+     * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      */
     public function setOffice(Office $office)
     {
@@ -145,7 +145,7 @@ class OfficeSalesProfile extends EntityBase implements SalesProfileInterface
     }
 
     /**
-     * @return \TerraMar\Bundle\SalesBundle\Entity\Office
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office
      */
     public function getOffice()
     {

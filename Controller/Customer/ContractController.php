@@ -1,17 +1,17 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Controller\Customer;
+namespace Terramar\Bundle\SalesBundle\Controller\Customer;
 
 use Symfony\Component\HttpFoundation\Request;
-use TerraMar\Bundle\SalesBundle\Form\ContractType;
-use TerraMar\Bundle\SalesBundle\Controller\AbstractController;
-use TerraMar\Bundle\SalesBundle\Form\NewContractType;
+use Terramar\Bundle\SalesBundle\Form\ContractType;
+use Terramar\Bundle\SalesBundle\Controller\AbstractController;
+use Terramar\Bundle\SalesBundle\Form\NewContractType;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use TerraMar\Bundle\SalesBundle\Entity\Contract;
+use Terramar\Bundle\SalesBundle\Entity\Contract;
 
 /**
  * Contract controller.
@@ -31,14 +31,14 @@ class ContractController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        /** @var $profile \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile */
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+        /** @var $profile \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile */
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
         if (!$profile) {
             throw $this->createNotFoundException('Unable to find Sales Profile entity.');
@@ -62,13 +62,13 @@ class ContractController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $contract = $em->getRepository('TerraMarSalesBundle:Contract')->find($contractid);
+        $contract = $em->getRepository('TerramarSalesBundle:Contract')->find($contractid);
 
         if (!$contract) {
             throw $this->createNotFoundException('Unable to locate Contract');
@@ -92,7 +92,7 @@ class ContractController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
@@ -110,7 +110,7 @@ class ContractController extends AbstractController
      * Shows a form to create a new Contract
      *
      * @Route("/{id}/contract/create", name="customer_contract_create")
-     * @Template("TerraMarSalesBundle:Contract:new.html.twig")
+     * @Template("TerramarSalesBundle:Contract:new.html.twig")
      * @Method("POST")
      * @Secure(roles="ROLE_CONTRACT_WRITE")
      */
@@ -119,14 +119,14 @@ class ContractController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        /** @var $profile \TerraMar\Bundle\SalesBundle\Entity\CustomerSalesProfile */
-        $profile = $em->getRepository('TerraMarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
+        /** @var $profile \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile */
+        $profile = $em->getRepository('TerramarSalesBundle:CustomerSalesProfile')->findOneByCustomer($customer);
 
         if (!$profile) {
             throw $this->createNotFoundException('Unable to find Sales Profile entity.');
@@ -140,7 +140,7 @@ class ContractController extends AbstractController
         if ($form->isValid()) {
             $profile->addContract($entity);
 
-            /** @var $factory \TerraMar\Bundle\SalesBundle\Factory\ContractFactoryInterface */
+            /** @var $factory \Terramar\Bundle\SalesBundle\Factory\ContractFactoryInterface */
             $factory = $this->get('terramar.sales.factory.contract');
             $factory->buildContract($entity);
 
@@ -170,13 +170,13 @@ class ContractController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $contract = $em->getRepository('TerraMarSalesBundle:Contract')->find($contractid);
+        $contract = $em->getRepository('TerramarSalesBundle:Contract')->find($contractid);
 
         if (!$contract) {
             throw $this->createNotFoundException('Unable to locate Contract');
@@ -195,7 +195,7 @@ class ContractController extends AbstractController
      * Updates an existing Contract
      *
      * @Route("/{id}/contract/{contractid}/update", name="customer_contract_update")
-     * @Template("TerraMarSalesBundle:Contract:edit.html.twig")
+     * @Template("TerramarSalesBundle:Contract:edit.html.twig")
      * @Method("POST")
      * @Secure(roles="ROLE_CONTRACT_WRITE")
      */
@@ -204,13 +204,13 @@ class ContractController extends AbstractController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $customer = $em->getRepository('TerraMarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
+        $customer = $em->getRepository('TerramarCustomerBundle:Customer')->findOneByIdAndOffice($id, $this->getCurrentOffice());
 
         if (!$customer) {
             throw $this->createNotFoundException('Unable to find Customer entity.');
         }
 
-        $contract = $em->getRepository('TerraMarSalesBundle:Contract')->find($contractid);
+        $contract = $em->getRepository('TerramarSalesBundle:Contract')->find($contractid);
 
         if (!$contract) {
             throw $this->createNotFoundException('Unable to locate Contract');

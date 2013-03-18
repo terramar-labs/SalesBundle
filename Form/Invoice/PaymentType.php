@@ -1,9 +1,9 @@
 <?php
 
-namespace TerraMar\Bundle\SalesBundle\Form\Invoice;
+namespace Terramar\Bundle\SalesBundle\Form\Invoice;
 
 use Symfony\Component\Form\AbstractType;
-use TerraMar\Bundle\SalesBundle\Model\SalesProfileInterface;
+use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
 use Orkestra\Transactor\Entity\Transaction\NetworkType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -21,7 +21,7 @@ class PaymentType extends AbstractType
     {
         $profile = $this->profile;
 
-        $excludeTypes = array(NetworkType::MFA);
+        $excludeTypes = array(NetworkType::MFA, NetworkType::SWIPED);
 
         if (false === $options['allow_points']) {
             $excludeTypes[] = NetworkType::POINTS;
@@ -55,7 +55,7 @@ class PaymentType extends AbstractType
     {
         $resolver->setDefaults(array(
             'error_bubbling' => false,
-            'data_class' => 'TerraMar\Bundle\SalesBundle\Model\Invoice\Payment',
+            'data_class' => 'Terramar\Bundle\SalesBundle\Model\Invoice\Payment',
             'allow_points' => true,
             'allow_cash' => true,
             'allow_check' => true
