@@ -26,8 +26,10 @@
     "orkestra/report-bundle": "dev-develop",
     "orkestra/pdf-bundle": "dev-master",
     "terramar/customer-bundle": "1.0.*",
-    "terramar/notification-bundle": "1.1.*",
     "tcpdf/tcpdf": "dev-master"
+  },
+  "suggest": {
+    "terramar/notification-bundle": "For intra and inter-office messaging"
   },
   "autoload": {
     "psr-0": { "Terramar\\Bundle\\SalesBundle": "" }
