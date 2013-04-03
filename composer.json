@@ -3,20 +3,8 @@
   "type": "symfony-bundle",
   "repositories": [
     {
-      "type": "git",
-      "url": "git@terramarlabs.com:OrkestraReportBundle.git"
-    },
-    {
-      "type": "git",
-      "url": "git@terramarlabs.com:OrkestraPdfBundle.git"
-    },
-    {
-      "type": "git",
-      "url": "git@terramarlabs.com:TerramarCustomerBundle.git"
-    },
-    {
-      "type": "git",
-      "url": "git@terramarlabs.com:TerramarNotificationBundle.git"
+      "type": "composer",
+      "url": "http://packages.terramarlabs.com"
     }
   ],
   "require": {
@@ -25,11 +13,10 @@
     "orkestra/application-bundle": "dev-develop",
     "orkestra/report-bundle": "dev-develop",
     "orkestra/pdf-bundle": "dev-master",
-    "terramar/customer-bundle": "1.0.*",
+    "terramar/customer-bundle": "dev-develop",
+    "terramar/notification-bundle": "dev-develop",
     "tcpdf/tcpdf": "dev-master"
-  },
-  "suggest": {
-    "terramar/notification-bundle": "For intra and inter-office messaging"
+
   },
   "autoload": {
     "psr-0": { "Terramar\\Bundle\\SalesBundle": "" }
