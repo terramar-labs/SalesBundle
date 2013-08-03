@@ -24,7 +24,7 @@
   "target-dir": "Terramar/Bundle/SalesBundle",
   "extra": {
     "branch-alias": {
-      "dev-develop": "1.0-dev"
+      "dev-develop": "1.1-dev"
     }
   }
 }
