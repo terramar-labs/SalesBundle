@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Doctrine\ORM\EntityRepository;
 use Orkestra\Bundle\ApplicationBundle\Form\PreferencesType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
@@ -43,17 +44,17 @@ class UserType extends AbstractType
                             ->setParameter('exclude', array('ROLE_CUSTOMER', 'ROLE_TECHNICIAN', 'ROLE_SALESPERSON'));
                     },
                 ))
-                ->add('technician', 'checkbox', array('property_path' => false, 'required' => false))
-                ->add('salesperson', 'checkbox', array('property_path' => false, 'required' => false))
-                ->add('licensenumber', 'text', array('property_path' => false, 'required' => false, 'label' => 'License #'))
+                ->add('technician', 'checkbox', array('mapping' => false, 'required' => false))
+                ->add('salesperson', 'checkbox', array('mapping' => false, 'required' => false))
+                ->add('licensenumber', 'text', array('mapping' => false, 'required' => false, 'label' => 'License #'))
                 ->add('preferences', new PreferencesType());
     }
 
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'data_class' => 'Orkestra\Bundle\ApplicationBundle\Entity\User',
-        );
+            ));
     }
 
     public function getName()
