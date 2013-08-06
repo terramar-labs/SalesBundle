@@ -67,7 +67,7 @@
 {% block additional_javascripts %}
 <script type="text/javascript">
     $(function() {
-        $('#{{ form.groups.get('id') }}').change(function() {
+        $('#{{ form.groups.vars.id }}').change(function() {
             if ($('option:selected', this).text() == 'Administrator') {
                 $('input[type="checkbox"]').attr('disabled', true);
             } else {

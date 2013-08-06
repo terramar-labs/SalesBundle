@@ -49,7 +49,7 @@
             _$achCredentials = $('#ach-transactor');
 
         function _bindCardForm() {
-            $('#{{ form.cardCredentials.transactor.get('id') }}').change(function() {
+            $('#{{ form.cardCredentials.transactor.vars.id }}').change(function() {
                 _$cardCredentials.val($(this).val());
                 $.ajax({
                     url: '{{ path('officeconfiguration_edit') }}',
@@ -65,7 +65,7 @@
         }
 
         function _bindAchForm() {
-            $('#{{ form.achCredentials.transactor.get('id') }}').change(function() {
+            $('#{{ form.achCredentials.transactor.vars.id }}').change(function() {
                 _$achCredentials.val($(this).val());
                 $.ajax({
                     url: '{{ path('officeconfiguration_edit') }}',

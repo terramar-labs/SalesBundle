@@ -129,8 +129,8 @@
                 invoiceManager.calculateBalance();
 
                 {% for form in form.payments %}
-                _wireHandlers({{ form.get('name') }});
-                _$invoiceBody.find('tr[row="{{ form.get('name') }}"]').find('.payment-account').val({{ form.vars.data.account.id|default }});
+                _wireHandlers({{ form.vars.name }});
+                _$invoiceBody.find('tr[row="{{ form.vars.name }}"]').find('.payment-account').val({{ form.vars.data.account.id|default }});
                 {% endfor %}
             },
 

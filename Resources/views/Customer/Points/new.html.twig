@@ -19,7 +19,7 @@
 </form>
 <script type="text/javascript">
     $(function() {
-        $('#{{ form.amount.get('id') }}').formatCurrency(true);
+        $('#{{ form.amount.vars.id }}').formatCurrency(true);
 
         $('#customer_credit_create').validate({
             errorLabelContainer: '#customer_credit_create_alert'

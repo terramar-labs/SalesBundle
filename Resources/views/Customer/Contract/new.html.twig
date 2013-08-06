@@ -57,12 +57,12 @@
 (function($) {
     var _showPath = '{{ path('agreement_show', { _format: 'json', id: '_id_' }) }}',
         _$billingFrequencyContainer = $('.billing-frequency'),
-        _$billingFrequency = $('#{{ form.billingFrequency.get('id') }}');
+        _$billingFrequency = $('#{{ form.billingFrequency.vars.id }}');
 
     $(function() {
         $('#customer_contract_create').signaturePad({ drawOnly: true, lineTop: 140, validateFields: false });
 
-        $('#{{ form.agreement.get('id') }}').change(function() {
+        $('#{{ form.agreement.vars.id }}').change(function() {
             _$billingFrequencyContainer.slideUp();
 
             var id = $(this).val();
