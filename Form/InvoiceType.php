@@ -27,7 +27,7 @@ class InvoiceType extends AbstractType
                 ),
                 'allow_add' => true,
                 'by_reference' => false,
-                'mapping' => false,
+                'mapped' => false,
                 'error_bubbling' => false
             ));
     }

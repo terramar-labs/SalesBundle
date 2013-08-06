@@ -44,9 +44,9 @@ class UserType extends AbstractType
                             ->setParameter('exclude', array('ROLE_CUSTOMER', 'ROLE_TECHNICIAN', 'ROLE_SALESPERSON'));
                     },
                 ))
-                ->add('technician', 'checkbox', array('mapping' => false, 'required' => false))
-                ->add('salesperson', 'checkbox', array('mapping' => false, 'required' => false))
-                ->add('licensenumber', 'text', array('mapping' => false, 'required' => false, 'label' => 'License #'))
+                ->add('technician', 'checkbox', array('mapped' => false, 'required' => false))
+                ->add('salesperson', 'checkbox', array('mapped' => false, 'required' => false))
+                ->add('licensenumber', 'text', array('mapped' => false, 'required' => false, 'label' => 'License #'))
                 ->add('preferences', new PreferencesType());
     }
 
