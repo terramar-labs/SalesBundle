@@ -101,5 +101,4 @@ services:
   # PDF Generators
   terramar.sales.generator.agreement:
     class: Terramar\Bundle\SalesBundle\Generator\AgreementGenerator
-    public: true
-    parent: orkestra.pdf.abstract_generator
+    arguments: [ @orkestra.pdf.pdf_factory, @templating ]
