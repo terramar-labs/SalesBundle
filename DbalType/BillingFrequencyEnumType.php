@@ -19,5 +19,5 @@ class BillingFrequencyEnumType extends AbstractEnumType
     /**
      * @var string The fully qualified class name of the Enum that this class wraps
      */
-    protected $class = 'Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency';
+    protected $class = 'Terramar\Bundle\SalesBundle\Model\Contract\BillingFrequency';
 }
