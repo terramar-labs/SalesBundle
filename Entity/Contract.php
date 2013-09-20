@@ -5,9 +5,9 @@ namespace Terramar\Bundle\SalesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Orkestra\Bundle\ApplicationBundle\Entity\File;
-use Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType;
-use Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
-use Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus;
+use Terramar\Bundle\SalesBundle\Model\Contract\FoundByType;
+use Terramar\Bundle\SalesBundle\Model\Contract\BillingFrequency;
+use Terramar\Bundle\SalesBundle\Model\Contract\ContractStatus;
 use Orkestra\Common\Entity\AbstractEntity;
 use Terramar\Bundle\SalesBundle\Model\AgreementInterface;
 use Terramar\Bundle\SalesBundle\Model\ContractInterface;
@@ -21,7 +21,7 @@ use Terramar\Bundle\SalesBundle\Model\ContractInterface;
 class Contract extends AbstractEntity implements ContractInterface
 {
     /**
-     * @var \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
+     * @var \Terramar\Bundle\SalesBundle\Model\Contract\BillingFrequency
      *
      * @ORM\Column(name="billing_frequency", type="enum.terramar.sales.billing_frequency")
      */
@@ -36,7 +36,7 @@ class Contract extends AbstractEntity implements ContractInterface
     protected $agreement;
 
     /**
-     * @var \Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus
+     * @var \Terramar\Bundle\SalesBundle\Model\Contract\ContractStatus
      *
      * @ORM\Column(name="status", type="enum.terramar.sales.contract_status")
      */
@@ -57,7 +57,7 @@ class Contract extends AbstractEntity implements ContractInterface
     protected $dateEnd;
 
     /**
-     * @var \Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType
+     * @var \Terramar\Bundle\SalesBundle\Model\Contract\FoundByType
      *
      * @ORM\Column(name="found_by", type="enum.terramar.sales.found_by_type")
      */
@@ -135,15 +135,19 @@ class Contract extends AbstractEntity implements ContractInterface
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency $billingFrequency
+     * @param \Terramar\Bundle\SalesBundle\Model\Contract\BillingFrequency $billingFrequency
      */
     public function setBillingFrequency($billingFrequency)
     {
+        if (!($billingFrequency instanceof BillingFrequency)) {
+            $billingFrequency = new BillingFrequency($billingFrequency);
+        }
+
         $this->billingFrequency = $billingFrequency;
     }
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
+     * @return \Terramar\Bundle\SalesBundle\Model\Contract\BillingFrequency
      */
     public function getBillingFrequency()
     {
@@ -183,15 +187,19 @@ class Contract extends AbstractEntity implements ContractInterface
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType $foundByType
+     * @param \Terramar\Bundle\SalesBundle\Model\Contract\FoundByType $foundByType
      */
     public function setFoundByType($foundByType)
     {
+        if (!($foundByType instanceof FoundByType)) {
+            $foundByType = new FoundByType($foundByType);
+        }
+
         $this->foundByType = $foundByType;
     }
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType
+     * @return \Terramar\Bundle\SalesBundle\Model\Contract\FoundByType
      */
     public function getFoundByType()
     {
@@ -215,15 +223,19 @@ class Contract extends AbstractEntity implements ContractInterface
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus $status
+     * @param \Terramar\Bundle\SalesBundle\Model\Contract\ContractStatus $status
      */
     public function setStatus($status)
     {
+        if (!($status instanceof ContractStatus)) {
+            $status = new ContractStatus($status);
+        }
+
         $this->status = $status;
     }
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus
+     * @return \Terramar\Bundle\SalesBundle\Model\Contract\ContractStatus
      */
     public function getStatus()
     {

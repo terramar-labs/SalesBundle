@@ -10,6 +10,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Orkestra\Transactor\Entity\Transaction;
 use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceItem;
 use Orkestra\Common\Entity\AbstractEntity;
+use Terramar\Bundle\SalesBundle\Model\Invoice\InvoiceStatus;
+use Terramar\Bundle\SalesBundle\Model\Invoice\InvoiceType;
 
 /**
  * An invoice
@@ -34,14 +36,14 @@ class Invoice extends AbstractEntity
     protected $amountDue;
 
     /**
-     * @var \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus
+     * @var \Terramar\Bundle\SalesBundle\Model\Invoice\InvoiceStatus
      *
      * @ORM\Column(name="status", type="enum.terramar.sales.invoice_status")
      */
     protected $status;
 
     /**
-     * @var \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceType
+     * @var \Terramar\Bundle\SalesBundle\Model\Invoice\InvoiceType
      *
      * @ORM\Column(name="type", type="enum.terramar.sales.invoice_type")
      */
@@ -92,7 +94,7 @@ class Invoice extends AbstractEntity
         $this->transactions = new ArrayCollection();
         $this->items = new ArrayCollection();
         $this->invoiceTransactions = new ArrayCollection();
-        $this->type = new Invoice\InvoiceType(Invoice\InvoiceType::ONE_TIME);
+        $this->type = new InvoiceType(InvoiceType::ONE_TIME);
     }
 
     /**
@@ -102,7 +104,7 @@ class Invoice extends AbstractEntity
      */
     public function isPaid()
     {
-        return Invoice\InvoiceStatus::PAID == $this->status;
+        return InvoiceStatus::PAID == $this->status;
     }
 
     /**
@@ -112,7 +114,7 @@ class Invoice extends AbstractEntity
      */
     public function isPastDue()
     {
-        return Invoice\InvoiceStatus::PAST_DUE == $this->status;
+        return InvoiceStatus::PAST_DUE == $this->status;
     }
 
     /**
@@ -122,7 +124,7 @@ class Invoice extends AbstractEntity
      */
     public function isDue()
     {
-        return in_array($this->status, array(Invoice\InvoiceStatus::DUE, Invoice\InvoiceStatus::PAST_DUE));
+        return in_array($this->status, array(InvoiceStatus::DUE, InvoiceStatus::PAST_DUE));
     }
 
     /**
@@ -194,15 +196,15 @@ class Invoice extends AbstractEntity
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus $status
+     * @param \Terramar\Bundle\SalesBundle\Model\Invoice\InvoiceStatus $status
      */
-    public function setStatus(Invoice\InvoiceStatus $status)
+    public function setStatus(InvoiceStatus $status)
     {
         $this->status = $status;
     }
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus
+     * @return \Terramar\Bundle\SalesBundle\Model\Invoice\InvoiceStatus
      */
     public function getStatus()
     {
@@ -210,15 +212,15 @@ class Invoice extends AbstractEntity
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceType $type
+     * @param \Terramar\Bundle\SalesBundle\Model\Invoice\InvoiceType $type
      */
-    public function setType(Invoice\InvoiceType $type)
+    public function setType(InvoiceType $type)
     {
         $this->type = $type;
     }
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceType
+     * @return \Terramar\Bundle\SalesBundle\Model\Invoice\InvoiceType
      */
     public function getType()
     {
@@ -289,7 +291,7 @@ class Invoice extends AbstractEntity
      * @param string $description
      * @param float $price
      *
-     * @return Invoice\InvoiceItem
+     * @return InvoiceItem
      */
     public function addItem($description, $price)
     {
