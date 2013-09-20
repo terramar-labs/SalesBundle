@@ -5,6 +5,8 @@ namespace Terramar\Bundle\SalesBundle\Entity\Office;
 use Doctrine\ORM\Mapping as ORM;
 use Orkestra\Transactor\Entity\Credentials;
 use Orkestra\Common\Entity\AbstractEntity;
+use Terramar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Model\Office\OfficeConfigurationInterface;
 
 /**
  * An office's application settings
@@ -12,7 +14,7 @@ use Orkestra\Common\Entity\AbstractEntity;
  * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository")
  * @ORM\Table(name="terramar_office_settings")
  */
-class OfficeConfiguration extends AbstractEntity
+class OfficeConfiguration extends AbstractEntity implements OfficeConfigurationInterface
 {
     /**
      * @var string
@@ -183,7 +185,7 @@ class OfficeConfiguration extends AbstractEntity
     /**
      * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      */
-    public function setOffice($office)
+    public function setOffice(Office $office)
     {
         $this->office = $office;
     }

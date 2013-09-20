@@ -3,6 +3,8 @@
 namespace Terramar\Bundle\SalesBundle\Entity\Office;
 
 use Doctrine\ORM\Mapping as ORM;
+use Terramar\Bundle\SalesBundle\Model\ContractInterface;
+use Terramar\Bundle\SalesBundle\Model\ContractSalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Entity\Contract;
 use Orkestra\Transactor\Entity\Account\BankAccount;
@@ -20,7 +22,7 @@ use Orkestra\Common\Entity\AbstractEntity;
  * @ORM\Entity
  * @ORM\Table(name="terramar_office_sales_profiles")
  */
-class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface
+class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface, ContractSalesProfileInterface
 {
     /**
      * @var bool
@@ -48,7 +50,7 @@ class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Contract", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Terramar\Bundle\SalesBundle\Model\ContractInterface", cascade={"persist"})
      * @ORM\JoinTable(name="terramar_office_sales_profiles_contracts",
      *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="contract_id", referencedColumnName="id", unique=true)}
@@ -115,7 +117,7 @@ class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface
     /**
      * @param Contract $contract
      */
-    public function addContract(Contract $contract)
+    public function addContract(ContractInterface $contract)
     {
         $this->contracts->add($contract);
     }

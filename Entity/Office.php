@@ -68,9 +68,9 @@ class Office extends AbstractEntity
     protected $billingAddress;
 
     /**
-     * @var \Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
+     * @var \Terramar\Bundle\SalesBundle\Model\Office\OfficeConfigurationInterface
      *
-     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration", mappedBy="office", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Model\Office\OfficeConfigurationInterface", mappedBy="office", cascade={"persist"})
      */
     protected $configuration;
 

@@ -4,14 +4,14 @@ namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Orkestra\Common\Entity\AbstractEntity;
+use Terramar\Bundle\SalesBundle\Model\AgreementInterface;
 
 /**
  * An agreement
  *
- * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\AgreementRepository")
- * @ORM\Table(name="terramar_agreements")
+ * @ORM\MappedSuperclass
  */
-class Agreement extends AbstractEntity
+abstract class Agreement extends AbstractEntity implements AgreementInterface
 {
     /**
      * @var string

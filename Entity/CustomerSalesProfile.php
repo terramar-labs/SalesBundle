@@ -3,6 +3,9 @@
 namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Terramar\Bundle\CustomerBundle\Model\CustomerInterface;
+use Terramar\Bundle\SalesBundle\Model\ContractInterface;
+use Terramar\Bundle\SalesBundle\Model\ContractSalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
@@ -20,7 +23,9 @@ use Orkestra\Common\Entity\AbstractEntity;
  * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\CustomerSalesProfileRepository")
  * @ORM\Table(name="terramar_customer_sales_profiles")
  */
-class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface, SalesProfileInterface
+class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface,
+                                                             SalesProfileInterface,
+                                                             ContractSalesProfileInterface
 {
     /**
      * @var bool
@@ -48,7 +53,7 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     /**
      * @var \Terramar\Bundle\CustomerBundle\Entity\Customer
      *
-     * @ORM\OneToOne(targetEntity="Terramar\Bundle\CustomerBundle\Entity\Customer")
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\CustomerBundle\Model\CustomerInterface")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     protected $customer;
@@ -64,7 +69,7 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Contract", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Terramar\Bundle\SalesBundle\Model\ContractInterface", cascade={"persist"})
      * @ORM\JoinTable(name="terramar_customer_sales_profiles_contracts",
      *      joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="contract_id", referencedColumnName="id", unique=true)}
@@ -136,9 +141,9 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     }
 
     /**
-     * @param Contract $contract
+     * @param ContractInterface $contract
      */
-    public function addContract(Contract $contract)
+    public function addContract(ContractInterface $contract)
     {
         $this->contracts->add($contract);
     }
@@ -162,7 +167,7 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     /**
      * @param \Terramar\Bundle\CustomerBundle\Entity\Customer $customer
      */
-    public function setCustomer(Customer $customer)
+    public function setCustomer(CustomerInterface $customer)
     {
         $this->customer = $customer;
     }

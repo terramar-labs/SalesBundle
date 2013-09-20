@@ -9,14 +9,15 @@ use Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType;
 use Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
 use Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus;
 use Orkestra\Common\Entity\AbstractEntity;
+use Terramar\Bundle\SalesBundle\Model\AgreementInterface;
+use Terramar\Bundle\SalesBundle\Model\ContractInterface;
 
 /**
  * A contract that a customer has signed
  *
- * @ORM\Entity(repositoryClass="Terramar\Bundle\SalesBundle\Repository\ContractRepository")
- * @ORM\Table(name="terramar_contracts")
+ * @ORM\MappedSuperclass
  */
-class Contract extends AbstractEntity
+abstract class Contract extends AbstractEntity implements ContractInterface
 {
     /**
      * @var \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
@@ -103,7 +104,7 @@ class Contract extends AbstractEntity
     /**
      * @param \Terramar\Bundle\SalesBundle\Entity\Agreement $agreement
      */
-    public function setAgreement(Agreement $agreement)
+    public function setAgreement(AgreementInterface $agreement)
     {
         $this->agreement = $agreement;
     }
@@ -135,7 +136,7 @@ class Contract extends AbstractEntity
     /**
      * @param \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency $billingFrequency
      */
-    public function setBillingFrequency(BillingFrequency $billingFrequency)
+    public function setBillingFrequency($billingFrequency)
     {
         $this->billingFrequency = $billingFrequency;
     }
@@ -183,7 +184,7 @@ class Contract extends AbstractEntity
     /**
      * @param \Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType $foundByType
      */
-    public function setFoundByType(FoundByType $foundByType)
+    public function setFoundByType($foundByType)
     {
         $this->foundByType = $foundByType;
     }
@@ -215,7 +216,7 @@ class Contract extends AbstractEntity
     /**
      * @param \Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus $status
      */
-    public function setStatus(ContractStatus $status)
+    public function setStatus($status)
     {
         $this->status = $status;
     }
