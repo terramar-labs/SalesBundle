@@ -15,9 +15,10 @@ use Terramar\Bundle\SalesBundle\Model\ContractInterface;
 /**
  * A contract that a customer has signed
  *
- * @ORM\MappedSuperclass
+ * @ORM\Entity
+ * @ORM\Table(name="terramar_contracts")
  */
-abstract class Contract extends AbstractEntity implements ContractInterface
+class Contract extends AbstractEntity implements ContractInterface
 {
     /**
      * @var \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
@@ -29,7 +30,7 @@ abstract class Contract extends AbstractEntity implements ContractInterface
     /**
      * @var \Terramar\Bundle\SalesBundle\Entity\Agreement
      *
-     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Agreement")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Model\AgreementInterface")
      * @ORM\JoinColumn(name="agreement_id", referencedColumnName="id")
      */
     protected $agreement;

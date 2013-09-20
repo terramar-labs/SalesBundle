@@ -9,9 +9,10 @@ use Terramar\Bundle\SalesBundle\Model\AgreementInterface;
 /**
  * An agreement
  *
- * @ORM\MappedSuperclass
+ * @ORM\Entity
+ * @ORM\Table(name="terramar_agreements")
  */
-abstract class Agreement extends AbstractEntity implements AgreementInterface
+class Agreement extends AbstractEntity implements AgreementInterface
 {
     /**
      * @var string
