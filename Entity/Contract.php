@@ -187,21 +187,21 @@ class Contract extends AbstractEntity implements ContractInterface
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Model\Contract\FoundByType $foundByType
+     * @param \Terramar\Bundle\SalesBundle\Model\Contract\FoundByType $marketingType
      */
-    public function setFoundByType($foundByType)
+    public function setMarketingType($marketingType)
     {
-        if (!($foundByType instanceof FoundByType)) {
-            $foundByType = new FoundByType($foundByType);
+        if (!($marketingType instanceof FoundByType)) {
+            $marketingType = new FoundByType($marketingType);
         }
 
-        $this->foundByType = $foundByType;
+        $this->foundByType = $marketingType;
     }
 
     /**
      * @return \Terramar\Bundle\SalesBundle\Model\Contract\FoundByType
      */
-    public function getFoundByType()
+    public function getMarketingType()
     {
         return $this->foundByType;
     }

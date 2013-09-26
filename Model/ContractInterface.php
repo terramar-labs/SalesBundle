@@ -33,12 +33,12 @@ interface ContractInterface extends PersistentModelInterface
     public function getSalesperson();
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency $billingFrequency
+     * @param mixed
      */
     public function setBillingFrequency($billingFrequency);
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency
+     * @return mixed
      */
     public function getBillingFrequency();
 
@@ -63,14 +63,14 @@ interface ContractInterface extends PersistentModelInterface
     public function getDateStart();
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType $foundByType
+     * @param string $marketingType
      */
-    public function setFoundByType($foundByType);
+    public function setMarketingType($marketingType);
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Contract\FoundByType
+     * @return string
      */
-    public function getFoundByType();
+    public function getMarketingType();
 
     /**
      * @param \Orkestra\Bundle\ApplicationBundle\Entity\File $signature
@@ -83,12 +83,12 @@ interface ContractInterface extends PersistentModelInterface
     public function getSignature();
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus $status
+     * @param mixed
      */
     public function setStatus($status);
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Contract\ContractStatus
+     * @return mixed
      */
     public function getStatus();
 
