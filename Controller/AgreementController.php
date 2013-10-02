@@ -69,7 +69,7 @@ class AgreementController extends AbstractController
      */
     public function newAction()
     {
-        $form = $this->createForm(new AgreementType());
+        $form = $this->createForm('terramar_agreement');
 
         return array(
             'form' => $form->createView()
@@ -86,7 +86,7 @@ class AgreementController extends AbstractController
      */
     public function createAction(Request $request)
     {
-        $form = $this->createForm(new AgreementType());
+        $form = $this->createForm('terramar_agreement');
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -124,7 +124,7 @@ class AgreementController extends AbstractController
             throw $this->createNotFoundException('Unable to locate Agreement');
         }
 
-        $form = $this->createForm(new AgreementType(), $entity);
+        $form = $this->createForm('terramar_agreement', $entity);
 
         return array(
             'entity' => $entity,
@@ -150,7 +150,7 @@ class AgreementController extends AbstractController
             throw $this->createNotFoundException('Unable to locate Agreement');
         }
 
-        $form = $this->createForm(new AgreementType(), $entity);
+        $form = $this->createForm('terramar_agreement', $entity);
         $form->bind($request);
 
         if ($form->isValid()) {

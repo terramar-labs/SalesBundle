@@ -3,7 +3,7 @@
 namespace Terramar\Bundle\SalesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Terramar\Bundle\SalesBundle\Entity\Contract\BillingFrequency;
+use Terramar\Bundle\SalesBundle\Model\Contract\BillingFrequency;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -46,6 +46,6 @@ class AgreementType extends AbstractType
 
     public function getName()
     {
-        return 'agreement';
+        return 'terramar_agreement';
     }
 }

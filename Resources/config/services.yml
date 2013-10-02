@@ -84,6 +84,10 @@ services:
     arguments: [ @terramar.sales.helper.file ]
     tags:
       - { name: form.type, alias: signature }
+  terramar.sales.form.agreement_type:
+    class: Terramar\Bundle\SalesBundle\Form\AgreementType
+    tags:
+      - { name: form.type, alias: terramar_agreement }
 
   # Miscellaenous
   terramar.sales.listener.logout:
