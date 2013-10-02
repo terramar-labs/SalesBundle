@@ -39,7 +39,7 @@ class OfficeConfigurationController extends AbstractController
         $entity = $em->getRepository('TerramarSalesBundle:Office\OfficeConfiguration')->findOneBy(array('office' => $office->getId()));
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pest Office Configuration entity.');
+            throw $this->createNotFoundException('Unable to find Office Configuration entity.');
         }
 
         $this->updateCredentialsFromRequest($entity, $request);
@@ -90,7 +90,7 @@ class OfficeConfigurationController extends AbstractController
         $entity = $em->getRepository('TerramarSalesBundle:Office\OfficeConfiguration')->findOneBy(array('office' => $office->getId()));
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pest Office Configuration entity.');
+            throw $this->createNotFoundException('Unable to find Office Configuration entity.');
         }
 
         $this->updateCredentialsFromRequest($entity, $request);

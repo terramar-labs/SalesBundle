@@ -43,14 +43,20 @@ class OfficeConfigurationType extends AbstractType
                 'cardCredentials',
                 $helper->getType($cardCredentials, 'Orkestra\Transactor\Entity\Credentials'),
                 $cardCredentials,
-                array('required' => false, 'label' => 'Card Credentials', 'network' => new NetworkType(NetworkType::CARD))
+                array('required' => false,
+                      'label' => 'Card Credentials',
+                      'network' => new NetworkType(NetworkType::CARD),
+                      'auto_initialize' => false)
             ));
 
             $form->add($factory->createNamed(
                 'achCredentials',
                 $helper->getType($achCredentials, 'Orkestra\Transactor\Entity\Credentials'),
                 $achCredentials,
-                array('required' => false, 'label' => 'ACH Credentials', 'network' => new NetworkType(NetworkType::ACH))
+                array('required' => false,
+                      'label' => 'ACH Credentials',
+                      'network' => new NetworkType(NetworkType::ACH),
+                      'auto_initialize' => false)
             ));
         });
     }
