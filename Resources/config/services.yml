@@ -13,6 +13,7 @@ parameters:
   terramar.sales.helper.invoice.class:                     Terramar\Bundle\SalesBundle\Helper\InvoiceHelper
   terramar.sales.helper.account.class:                     Terramar\Bundle\SalesBundle\Helper\AccountHelper
   terramar.sales.helper.file.class:                        Terramar\Bundle\SalesBundle\Helper\FileHelper
+  terramar.sales.helper.email.class:                        Terramar\Bundle\SalesBundle\Helper\EmailHelper
   terramar.sales.listener.logout.class:                    Terramar\Bundle\SalesBundle\Listener\LogoutListener
   terramar.sales.subscriber.class_metadata.class:          Terramar\Bundle\SalesBundle\Subscriber\ClassMetadataSubscriber
   terramar.sales.subscriber.customer_user.class:           Terramar\Bundle\SalesBundle\Subscriber\CustomerEmailSubscriber
@@ -77,6 +78,9 @@ services:
   terramar.sales.helper.file:
     class: %terramar.sales.helper.file.class%
     arguments: [ %orkestra.file_manager.base_path% ]
+  terramar.sales.helper.email:
+    class: %terramar.sales.helper.email.class%
+    arguments: [ @templating, @mailer, %orkestra.system_email_address% ]
 
   # Form types
   terramar.sales.form.signature_type:
