@@ -47,6 +47,13 @@ class Office extends AbstractEntity
     /**
      * @var string
      *
+     * @ORM\Column(name="email", type="string")
+     */
+    protected $emailAddress = '';
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="contact_name", type="string")
      */
     protected $contactName;
@@ -258,4 +265,22 @@ class Office extends AbstractEntity
     {
         return $this->profile;
     }
+
+    /**
+     * @param string $emailAddress
+     */
+    public function setEmailAddress($emailAddress)
+    {
+        $this->emailAddress = $emailAddress;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmailAddress()
+    {
+        return $this->emailAddress;
+    }
+
+    
 }
