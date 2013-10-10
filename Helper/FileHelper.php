@@ -2,7 +2,7 @@
 
 namespace Terramar\Bundle\SalesBundle\Helper;
 
-use Terramar\Bundle\SalesBundle\Entity\Contract;
+use Terramar\Bundle\SalesBundle\Model\ContractInterface;
 use Orkestra\Bundle\ApplicationBundle\Entity\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Terramar\Bundle\SalesBundle\Entity\Invoice;
@@ -101,12 +101,12 @@ class FileHelper
      *
      * @return string
      */
-    private function getContractPath(Contract $contract)
+    private function getContractPath(ContractInterface $contract)
     {
         return $this->ensureDirectoryExists($this->internalPath . DIRECTORY_SEPARATOR . 'contracts');
     }
 
-    public function getContractFilename(Contract $contract)
+    public function getContractFilename(ContractInterface $contract)
     {
         if (!$contract->getId()) {
             return $this->getContractPath($contract) . DIRECTORY_SEPARATOR . $this->generateFilename('pdf');
@@ -127,7 +127,7 @@ class FileHelper
         return $this->ensureDirectoryExists($this->internalPath . '/signatures');
     }
 
-    public function getSignatureFilename(Contract $contract)
+    public function getSignatureFilename(ContractInterface $contract)
     {
         if (!$contract->getId()) {
             return $this->getSignaturePath() . DIRECTORY_SEPARATOR . $this->generateFilename('png');

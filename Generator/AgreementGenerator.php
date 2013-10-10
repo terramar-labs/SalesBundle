@@ -59,7 +59,7 @@ class AgreementGenerator extends AbstractPdfGenerator
         $resolver->setAllowedTypes(array(
             'office' =>    'Terramar\Bundle\SalesBundle\Entity\Office',
             'customer' =>  'Terramar\Bundle\CustomerBundle\Entity\Customer',
-            'contract' =>  'Terramar\Bundle\SalesBundle\Entity\Contract',
+            'contract' =>  'Terramar\Bundle\SalesBundle\Model\ContractInterface',
             'agreement' => 'Terramar\Bundle\SalesBundle\Entity\Agreement'
         ));
     }
