@@ -97,6 +97,17 @@ class Office extends AbstractEntity
     protected $parent;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Terramar\Bundle\CustomerBundle\Model\NoteInterface", cascade={"persist"})
+     * @ORM\JoinTable(name="terramar_customers_notes",
+     *      joinColumns={@ORM\JoinColumn(name="office_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="note_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    protected $notes;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -282,5 +293,21 @@ class Office extends AbstractEntity
         return $this->emailAddress;
     }
 
-    
+    /**
+     * @param \Doctrine\Common\Collections\Collection $notes
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+
 }
