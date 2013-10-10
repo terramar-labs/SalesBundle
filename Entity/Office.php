@@ -2,7 +2,10 @@
 
 namespace Terramar\Bundle\SalesBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Terramar\Bundle\CustomerBundle\Entity\Note;
+use Terramar\Bundle\CustomerBundle\Model\NoteInterface;
 use Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
 use Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
 use Orkestra\Common\Entity\AbstractEntity;
@@ -106,6 +109,14 @@ class Office extends AbstractEntity
      * )
      */
     protected $notes;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->notes = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -302,12 +313,19 @@ class Office extends AbstractEntity
     }
 
     /**
+     * @param NoteInterface $note
+     */
+    public function addNote(NoteInterface $note)
+    {
+        $this->notes->add($note);
+    }
+
+    /**
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getNotes()
     {
         return $this->notes;
     }
-
 
 }
