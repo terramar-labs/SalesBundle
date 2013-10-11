@@ -103,7 +103,7 @@ class Office extends AbstractEntity
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="Terramar\Bundle\CustomerBundle\Model\NoteInterface", cascade={"persist"})
-     * @ORM\JoinTable(name="terramar_customers_notes",
+     * @ORM\JoinTable(name="terramar_office_notes",
      *      joinColumns={@ORM\JoinColumn(name="office_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="note_id", referencedColumnName="id", unique=true)}
      * )
