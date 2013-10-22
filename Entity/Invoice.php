@@ -82,9 +82,9 @@ class Invoice extends AbstractEntity
     protected $invoiceTransactions;
 
     /**
-     * @var \Terramar\Bundle\SalesBundle\Entity\Contract
+     * @var \Terramar\Bundle\SalesBundle\Model\ContractInterface
      *
-     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Contract", inversedBy="invoices")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Model\ContractInterface", inversedBy="invoices")
      * @ORM\JoinColumn(name="contract_id", referencedColumnName="id")
      */
     protected $contract;

@@ -12,7 +12,7 @@
     "orkestra/common": "1.0.*",
     "orkestra/application-bundle": "1.0.*@dev",
     "orkestra/report-bundle": "dev-develop",
-    "orkestra/pdf-bundle": "~0.9",
+    "orkestra/pdf-bundle": "1.0.x-dev",
     "terramar/customer-bundle": "1.0.*"
   },
   "require-dev": {

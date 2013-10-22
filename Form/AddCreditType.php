@@ -17,6 +17,7 @@ class AddCreditType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        /**
         $collectionConstraint = new Collection(array(
             'amount' => new Min(0)
         ));
@@ -24,6 +25,7 @@ class AddCreditType extends AbstractType
         $resolver->setDefaults(array(
             'validation_constraint' => $collectionConstraint
         ));
+        **/
     }
 
     public function getName()

@@ -19,6 +19,20 @@ interface SalesProfileInterface extends PersistentModelInterface
     public function getAutopayAccounts();
 
     /**
+     * Gets a SalesProfile's Points account that may be used for Crediting customer
+     *
+     * @return \Orkestra\Transactor\Entity\Account\PointsAccount
+     */
+    public function getPointsAccount();
+
+    /**
+     * Gets all of a SalesProfile's Office
+     *
+     * @return \Terramar\Bundle\SalesBundle\Entity\Office
+     */
+    public function getOffice();
+
+    /**
      * Gets the assign autopay account
      *
      * @return \Orkestra\Transactor\Entity\AbstractAccount

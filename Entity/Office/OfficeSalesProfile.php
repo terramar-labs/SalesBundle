@@ -131,7 +131,7 @@ class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection|ContractInterface[]
      */
     public function getContracts()
     {

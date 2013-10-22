@@ -5,6 +5,7 @@ namespace Terramar\Bundle\SalesBundle\Helper;
 use Orkestra\Transactor\TransactorFactory;
 use Orkestra\Transactor\Entity\Transaction\TransactionType;
 use Orkestra\Transactor\Entity\Transaction\NetworkType;
+use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Repository\OfficeConfigurationRepository;
 use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 use Orkestra\Transactor\Entity\Transaction;
@@ -34,7 +35,7 @@ class AccountHelper
         $this->repository = $repository;
     }
 
-    public function addCredit(CustomerSalesProfile $profile, $amount)
+    public function addCredit(SalesProfileInterface $profile, $amount)
     {
         if (!$profile->getPointsAccount()) {
             throw new \RuntimeException('The given CustomerSalesProfile has no associated PointsAccount');
