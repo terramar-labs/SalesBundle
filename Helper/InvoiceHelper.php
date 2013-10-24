@@ -119,6 +119,7 @@ class InvoiceHelper
                 break;
             case NetworkType::POINTS:
                 $credentials = $configuration->getPointsCredentials();
+                $transaction->setAmount($transaction->getAmount()*100);
 
                 break;
             default:

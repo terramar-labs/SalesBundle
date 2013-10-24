@@ -249,7 +249,7 @@ class Invoice extends AbstractEntity
                 ResultStatus::PENDING
             ))
         ) {
-            $this->balance -= $transaction->getAmount();
+            $this->balance -= ($transaction->getNetwork() == Transaction\NetworkType::POINTS ? $transaction->getAmount()/100 : $transaction->getAmount());
         }
     }
 
