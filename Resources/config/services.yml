@@ -10,10 +10,11 @@ parameters:
   terramar.sales.factory.assigned_alert.customer.class:    Terramar\Bundle\SalesBundle\Factory\AssignedAlert\CustomerAlertFactory
   terramar.sales.factory.contract.class:                   Terramar\Bundle\SalesBundle\Factory\ContractFactory
   terramar.sales.factory.customer_user.class:              Terramar\Bundle\SalesBundle\Factory\CustomerUserFactory
+  terramar.sales.factory.office_user.class:                Terramar\Bundle\SalesBundle\Factory\OfficeUserFactory
   terramar.sales.helper.invoice.class:                     Terramar\Bundle\SalesBundle\Helper\InvoiceHelper
   terramar.sales.helper.account.class:                     Terramar\Bundle\SalesBundle\Helper\AccountHelper
   terramar.sales.helper.file.class:                        Terramar\Bundle\SalesBundle\Helper\FileHelper
-  terramar.sales.helper.email.class:                        Terramar\Bundle\SalesBundle\Helper\EmailHelper
+  terramar.sales.helper.email.class:                       Terramar\Bundle\SalesBundle\Helper\EmailHelper
   terramar.sales.listener.logout.class:                    Terramar\Bundle\SalesBundle\Listener\LogoutListener
   terramar.sales.subscriber.class_metadata.class:          Terramar\Bundle\SalesBundle\Subscriber\ClassMetadataSubscriber
   terramar.sales.subscriber.customer_user.class:           Terramar\Bundle\SalesBundle\Subscriber\CustomerEmailSubscriber
@@ -67,6 +68,9 @@ services:
   terramar.sales.factory.customer_user:
     class: %terramar.sales.factory.customer_user.class%
     arguments: [ @security.encoder_factory, @doctrine.orm.entity_manager ]
+  terramar.sales.factory.office_user:
+     class: %terramar.sales.factory.office_user.class%
+     arguments: [ @security.encoder_factory, @doctrine.orm.entity_manager ]
 
   # Helpers
   terramar.sales.helper.invoice:
