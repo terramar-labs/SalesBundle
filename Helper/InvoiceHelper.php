@@ -8,7 +8,7 @@ use Orkestra\Transactor\Entity\Transaction\TransactionType;
 use Orkestra\Transactor\Entity\Transaction;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
 use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceTransaction;
-use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceStatus;
+use Terramar\Bundle\SalesBundle\Model\Invoice\InvoiceStatus;
 use Terramar\Bundle\SalesBundle\Model\Invoice\SerializedPayment;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Orkestra\Transactor\TransactorFactory;
