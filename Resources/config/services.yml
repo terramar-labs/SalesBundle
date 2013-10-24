@@ -109,4 +109,4 @@ services:
   # PDF Generators
   terramar.sales.generator.agreement:
     class: Terramar\Bundle\SalesBundle\Generator\AgreementGenerator
-    arguments: [ @orkestra.pdf.pdf_factory, @templating ]
+    arguments: [ @orkestra.pdf.factory_registry, @templating ]

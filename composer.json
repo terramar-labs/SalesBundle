@@ -13,6 +13,7 @@
     "orkestra/application-bundle": "1.0.*@dev",
     "orkestra/report-bundle": "dev-develop",
     "orkestra/pdf-bundle": "1.0.x-dev",
+    "tecnick.com/tcpdf": "~6.0",
     "terramar/customer-bundle": "1.0.*"
   },
   "require-dev": {
