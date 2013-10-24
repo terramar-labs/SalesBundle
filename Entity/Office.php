@@ -4,6 +4,7 @@ namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Orkestra\Bundle\ApplicationBundle\Model\Contact\AddressInterface;
 use Terramar\Bundle\CustomerBundle\Entity\Note;
 use Terramar\Bundle\CustomerBundle\Model\NoteInterface;
 use Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
@@ -62,17 +63,17 @@ class Office extends AbstractEntity
     protected $contactName;
 
     /**
-     * @var \Orkestra\Bundle\ApplicationBundle\Entity\Contact\Address
+     * @var \Orkestra\Bundle\ApplicationBundle\Model\Contact\AddressInterface
      *
-     * @ORM\ManyToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Entity\Contact\Address", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Model\Contact\AddressInterface", cascade={"persist"})
      * @ORM\JoinColumn(name="contact_address_id", referencedColumnName="id")
      */
     protected $contactAddress;
 
     /**
-     * @var \Orkestra\Bundle\ApplicationBundle\Entity\Contact\Address
+     * @var \Orkestra\Bundle\ApplicationBundle\Model\Contact\AddressInterface
      *
-     * @ORM\ManyToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Entity\Contact\Address", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Model\Contact\AddressInterface", cascade={"persist"})
      * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id")
      */
     protected $billingAddress;
@@ -127,9 +128,9 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @param \Orkestra\Bundle\ApplicationBundle\Entity\Contact\Address $billingAddress
+     * @param \Orkestra\Bundle\ApplicationBundle\Model\Contact\AddressInterface $billingAddress
      */
-    public function setBillingAddress($billingAddress)
+    public function setBillingAddress(AddressInterface $billingAddress)
     {
         $this->billingAddress = $billingAddress;
     }
@@ -143,9 +144,9 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @param \Orkestra\Bundle\ApplicationBundle\Entity\Contact\Address $contactAddress
+     * @param \Orkestra\Bundle\ApplicationBundle\Model\Contact\AddressInterface $contactAddress
      */
-    public function setContactAddress($contactAddress)
+    public function setContactAddress(AddressInterface $contactAddress)
     {
         $this->contactAddress = $contactAddress;
     }
@@ -327,5 +328,4 @@ class Office extends AbstractEntity
     {
         return $this->notes;
     }
-
 }
