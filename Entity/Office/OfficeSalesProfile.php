@@ -3,6 +3,7 @@
 namespace Terramar\Bundle\SalesBundle\Entity\Office;
 
 use Doctrine\ORM\Mapping as ORM;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 use Terramar\Bundle\SalesBundle\Model\ContractInterface;
 use Terramar\Bundle\SalesBundle\Model\ContractSalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
@@ -76,6 +77,14 @@ class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface
      * @ORM\JoinColumn(name="office_id", referencedColumnName="id")
      */
     protected $office;
+
+    /**
+     * @var \Terramar\Bundle\SalesBundle\Entity\OfficeUser
+     *
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\OfficeUser", cascade={"persist"})
+     * @ORM\JoinColumn(name="office_user_id", referencedColumnName="id")
+     */
+    protected $systemOfficeUser;
 
     /**
      * Constructor
@@ -246,5 +255,21 @@ class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface
     public function getPointsAccount()
     {
         return $this->pointsAccount;
+    }
+
+    /**
+     * @param \Terramar\Bundle\SalesBundle\Entity\OfficeUser $systemOfficeUser
+     */
+    public function setSystemOfficeUser(OfficeUser $systemOfficeUser = null)
+    {
+        $this->systemOfficeUser = $systemOfficeUser;
+    }
+
+    /**
+     * @return \Terramar\Bundle\SalesBundle\Entity\OfficeUser
+     */
+    public function getSystemOfficeUser()
+    {
+        return $this->systemOfficeUser;
     }
 }
