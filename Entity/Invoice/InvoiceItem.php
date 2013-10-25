@@ -31,7 +31,7 @@ class InvoiceItem extends AbstractEntity
     /**
      * @var \Terramar\Bundle\SalesBundle\Entity\Invoice
      *
-     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Invoice")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Invoice", inversedBy="items")
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     protected $invoice;

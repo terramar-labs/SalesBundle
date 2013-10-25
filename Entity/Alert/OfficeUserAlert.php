@@ -36,7 +36,7 @@ class OfficeUserAlert extends AbstractEntity implements AssignedAlertInterface
     /**
      * @var \Terramar\Bundle\SalesBundle\Entity\OfficeUser
      *
-     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\OfficeUser")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\OfficeUser", inversedBy="alerts")
      * @ORM\JoinColumn(name="assigned_to_user_id", referencedColumnName="id")
      */
     protected $assignedTo;

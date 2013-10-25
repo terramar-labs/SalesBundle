@@ -38,7 +38,7 @@ class CustomerAlert extends AbstractEntity implements AssignedAlertInterface
     /**
      * @var \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile
      *
-     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile")
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile", inversedBy="alerts")
      * @ORM\JoinColumn(name="assigned_to_id", referencedColumnName="id")
      */
     protected $assignedTo;

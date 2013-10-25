@@ -91,7 +91,7 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Alert\CustomerAlert", mappedBy="alert", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Alert\CustomerAlert", mappedBy="assignedTo", cascade={"persist"})
      */
     protected $alerts;
 

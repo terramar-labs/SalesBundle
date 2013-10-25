@@ -38,7 +38,7 @@ class OfficeUser extends AbstractEntity implements AssignedByInterface, Assigned
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert", mappedBy="alert", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert", mappedBy="assignedTo", cascade={"persist"})
      */
     protected $alerts;
 
