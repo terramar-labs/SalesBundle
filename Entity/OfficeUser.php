@@ -3,6 +3,7 @@
 namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Orkestra\Bundle\ApplicationBundle\Model\UserInterface;
 use Terramar\Bundle\CustomerBundle\Entity\Note;
 use Doctrine\Common\Collections\ArrayCollection;
 use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
@@ -27,9 +28,9 @@ class OfficeUser extends AbstractEntity implements AssignedByInterface, Assigned
     protected $office;
 
     /**
-     * @var \Orkestra\Bundle\ApplicationBundle\Entity\User
+     * @var \Orkestra\Bundle\ApplicationBundle\Model\UserInterface
      *
-     * @ORM\OneToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Model\UserInterface", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
@@ -54,9 +55,9 @@ class OfficeUser extends AbstractEntity implements AssignedByInterface, Assigned
 
     /**
      * @param Office $office
-     * @param \Orkestra\Bundle\ApplicationBundle\Entity\User $user
+     * @param \Orkestra\Bundle\ApplicationBundle\Model\UserInterface $user
      */
-    public function __construct(Office $office, User $user)
+    public function __construct(Office $office, UserInterface $user)
     {
         $this->office = $office;
         $this->user = $user;
@@ -81,7 +82,7 @@ class OfficeUser extends AbstractEntity implements AssignedByInterface, Assigned
     }
 
     /**
-     * @return \Orkestra\Bundle\ApplicationBundle\Entity\User
+     * @return \Orkestra\Bundle\ApplicationBundle\Model\UserInterface
      */
     public function getUser()
     {
