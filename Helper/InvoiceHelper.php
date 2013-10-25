@@ -194,4 +194,24 @@ class InvoiceHelper
 
         return $payment;
     }
+
+    /**
+     * Cancels the given invoice
+     *
+     * @param Invoice $invoice
+     *
+     * @return bool
+     * @throws \RuntimeException
+     */
+    public function cancelInvoice(Invoice $invoice)
+    {
+        if ($invoice->hasPayments()) {
+            throw new \RuntimeException('An invoice with payments may not be cancelled');
+        }
+
+        $invoice->setStatus(new InvoiceStatus(InvoiceStatus::CANCELLED));
+        $invoice->setBalance(0);
+
+        return true;
+    }
 }

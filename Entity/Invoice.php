@@ -306,4 +306,34 @@ class Invoice extends AbstractEntity
 
         return $item;
     }
+
+    /**
+     * Returns true if the invoice has been cancelled
+     *
+     * @return bool
+     */
+    public function isCancelled()
+    {
+        return InvoiceStatus::CANCELLED === $this->status->getValue();
+    }
+
+    /**
+     * Returns true if this invoice should be considered payable
+     *
+     * @return bool
+     */
+    public function isPayable()
+    {
+        return !$this->isPaid() && !$this->isCancelled();
+    }
+
+    /**
+     * Returns true if the invoice has any payments
+     *
+     * @return bool
+     */
+    public function hasPayments()
+    {
+        return abs($this->balance - $this->getAmountDue()) > 0.001;
+    }
 }
