@@ -70,7 +70,7 @@ services:
     arguments: [ @security.encoder_factory, @doctrine.orm.entity_manager ]
   terramar.sales.factory.office_user:
      class: %terramar.sales.factory.office_user.class%
-     arguments: [ @security.encoder_factory, @doctrine.orm.entity_manager ]
+     arguments: [ @doctrine.orm.entity_manager ]
 
   # Helpers
   terramar.sales.helper.invoice:
