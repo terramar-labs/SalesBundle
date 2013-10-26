@@ -48,7 +48,8 @@ class PaymentType extends AbstractType
                     return $profile->getAccounts();
                 }
             ))
-            ->add('amount');
+            ->add('amount')
+            ->add('referenceNumber', null, array('required' => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

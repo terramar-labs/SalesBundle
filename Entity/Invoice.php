@@ -98,6 +98,14 @@ class Invoice extends AbstractEntity
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return 'Invoice #' . $this->getId() . ' - ' . $this->getBalance();
+    }
+
+    /**
      * Returns true if the invoice has been paid
      *
      * @return bool

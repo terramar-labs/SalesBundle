@@ -33,6 +33,11 @@ class Payment
     protected $transaction;
 
     /**
+     * @var string
+     */
+    protected $referenceNumber;
+
+    /**
      * @param \Orkestra\Transactor\Entity\AbstractAccount $account
      */
     public function setAccount(AbstractAccount $account)
@@ -99,4 +104,22 @@ class Payment
 
         return $this->transaction = $transaction;
     }
+
+    /**
+     * @param string $referenceNumber
+     */
+    public function setReferenceNumber($referenceNumber)
+    {
+        $this->referenceNumber = $referenceNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReferenceNumber()
+    {
+        return $this->referenceNumber;
+    }
+
+
 }
