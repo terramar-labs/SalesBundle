@@ -3,6 +3,7 @@
 namespace Terramar\Bundle\SalesBundle\Helper;
 
 use Terramar\Bundle\SalesBundle\Entity\Invoice;
+use Terramar\Bundle\SalesBundle\Entity\Invoice\InvoiceItem;
 use Terramar\Bundle\SalesBundle\Entity\Office;
 use Orkestra\Transactor\Entity\Transaction\TransactionType;
 use Orkestra\Transactor\Entity\Transaction;
@@ -211,6 +212,73 @@ class InvoiceHelper
 
         $invoice->setStatus(new InvoiceStatus(InvoiceStatus::CANCELLED));
         $invoice->setBalance(0);
+
+        return true;
+    }
+
+    /**
+     * Updates the price of an invoice item, ensuring the invoice is updated properly
+     *
+     * @param InvoiceItem $item
+     * @param float       $newPrice
+     */
+    public function updateInvoiceItem(InvoiceItem $item, $newPrice)
+    {
+        $newTotalPrice = $newPrice;
+        $diff = $newTotalPrice - $item->getPrice();
+
+        if (abs($diff) > 0.001) {
+            $invoice = $item->getInvoice();
+
+            // TODO: Perhaps encapsulate this within the InvoiceItem?
+            $invoice->setAmountDue($invoice->getAmountDue() + $diff, false);
+            $invoice->setBalance($invoice->getBalance() + $diff);
+
+            if ($invoice->getBalance() < 0) {
+                $diff = 0 - $invoice->getBalance();
+                $profile = $invoice->getContract()->getProfile();
+                $this->accountHelper->addCredit($profile, abs($diff));
+                $invoice->addItem('Credit applied for overpayment', abs($diff), 0);
+            }
+
+            $this->updateInvoiceStatus($invoice);
+
+            $item->setPrice($newPrice);
+        }
+    }
+
+    /**
+     * Updates the invoice status
+     *
+     * @param Invoice $invoice
+     *
+     * @return bool
+     */
+    public function updateInvoiceStatus(Invoice $invoice)
+    {
+        if (InvoiceStatus::CANCELLED == $invoice->getStatus()) {
+            return false;
+        }
+
+        if ($invoice->getBalance() <= 0) {
+            // 0 balance -- paid
+            $invoice->setStatus(new InvoiceStatus(InvoiceStatus::PAID));
+
+        } elseif ($invoice->getDateDue() <= ($today = new \DateTime())
+            && InvoiceStatus::COLLECTIONS != $invoice->getStatus()
+        ) {
+            // Due or worse
+            $diffDays = $today->diff($invoice->getDateDue())->days;
+            if ($diffDays > 28) {
+                $invoice->setStatus(new InvoiceStatus(InvoiceStatus::PAST_DUE));
+            } else {
+                $invoice->setStatus(new InvoiceStatus(InvoiceStatus::DUE));
+            }
+
+        } elseif (!in_array($invoice->getStatus(), array(InvoiceStatus::NOT_SENT, InvoiceStatus::SENT))) {
+            // Not yet due
+            $invoice->setStatus(new InvoiceStatus(InvoiceStatus::NOT_SENT));
+        }
 
         return true;
     }

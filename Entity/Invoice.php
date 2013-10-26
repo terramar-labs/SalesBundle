@@ -136,14 +136,16 @@ class Invoice extends AbstractEntity
     }
 
     /**
-     * @param float $amountDue
+     * @param $amountDue
+     * @param bool $addLineItem
      */
-    public function setAmountDue($amountDue)
+    public function setAmountDue($amountDue, $addLineItem = true)
     {
         $difference = $amountDue - $this->amountDue;
-
-        if (abs($difference - 0.00) > 0.001) {
+        if (true === $addLineItem && abs($difference) > 0.001) {
             $this->addItem('Price adjustment', $difference);
+        } else {
+            $this->amountDue = (float) $amountDue;
         }
     }
 
@@ -311,6 +313,29 @@ class Invoice extends AbstractEntity
         $this->items->add($item);
         $this->amountDue += $price;
         $this->balance += $price;
+
+        return $item;
+    }
+
+    /**
+     * Adds an existing InvoiceItem to this Invoice
+     *
+     * @param InvoiceItem $item
+     *
+     * @return InvoiceItem
+     */
+    public function addInvoiceItem(InvoiceItem $item)
+    {
+        if ($this->items->contains($item)) {
+            return false;
+        }
+
+        $item->setInvoice($this);
+
+        $this->items->add($item);
+
+        $this->amountDue += $item->getPrice();
+        $this->balance   += $item->getPrice();
 
         return $item;
     }
