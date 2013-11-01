@@ -53,7 +53,7 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     /**
      * @var \Terramar\Bundle\CustomerBundle\Entity\Customer
      *
-     * @ORM\OneToOne(targetEntity="Terramar\Bundle\CustomerBundle\Model\CustomerInterface")
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\CustomerBundle\Model\CustomerInterface", cascade={"persist"})
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     protected $customer;
