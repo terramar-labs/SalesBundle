@@ -121,7 +121,7 @@ class OfficeConfiguration extends AbstractEntity implements OfficeConfigurationI
     /**
      * @param \Orkestra\Transactor\Entity\Credentials $achCredentials
      */
-    public function setAchCredentials(Credentials $achCredentials)
+    public function setAchCredentials(Credentials $achCredentials = null)
     {
         $this->achCredentials = $achCredentials;
     }
@@ -137,7 +137,7 @@ class OfficeConfiguration extends AbstractEntity implements OfficeConfigurationI
     /**
      * @param \Orkestra\Transactor\Entity\Credentials $cardCredentials
      */
-    public function setCardCredentials(Credentials $cardCredentials)
+    public function setCardCredentials(Credentials $cardCredentials = null)
     {
         $this->cardCredentials = $cardCredentials;
     }
@@ -153,7 +153,7 @@ class OfficeConfiguration extends AbstractEntity implements OfficeConfigurationI
     /**
      * @param \Orkestra\Transactor\Entity\Credentials $cashCredentials
      */
-    public function setCashCredentials(Credentials $cashCredentials)
+    public function setCashCredentials(Credentials $cashCredentials = null)
     {
         $this->cashCredentials = $cashCredentials;
     }
@@ -169,7 +169,7 @@ class OfficeConfiguration extends AbstractEntity implements OfficeConfigurationI
     /**
      * @param \Orkestra\Transactor\Entity\Credentials $checkCredentials
      */
-    public function setCheckCredentials(Credentials $checkCredentials)
+    public function setCheckCredentials(Credentials $checkCredentials = null)
     {
         $this->checkCredentials = $checkCredentials;
     }
