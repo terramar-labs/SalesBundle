@@ -10,7 +10,6 @@ use Terramar\Bundle\SalesBundle\Model\ContractSalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Model\CustomerSalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
-use Terramar\Bundle\CustomerBundle\Entity\Customer;
 use Orkestra\Transactor\Entity\Account\SimpleAccount;
 use Orkestra\Transactor\Entity\Account\CardAccount;
 use Orkestra\Transactor\Entity\Account\BankAccount;
@@ -52,7 +51,7 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     protected $autopayAccount;
 
     /**
-     * @var \Terramar\Bundle\CustomerBundle\Entity\Customer
+     * @var \Terramar\Bundle\CustomerBundle\Model\CustomerInterface
      *
      * @ORM\OneToOne(targetEntity="Terramar\Bundle\CustomerBundle\Model\CustomerInterface", cascade={"persist"})
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
@@ -166,7 +165,7 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     }
 
     /**
-     * @param \Terramar\Bundle\CustomerBundle\Entity\Customer $customer
+     * @param \Terramar\Bundle\CustomerBundle\Model\CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer)
     {
@@ -174,7 +173,7 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     }
 
     /**
-     * @return \Terramar\Bundle\CustomerBundle\Entity\Customer
+     * @return \Terramar\Bundle\CustomerBundle\Model\CustomerInterface
      */
     public function getCustomer()
     {
