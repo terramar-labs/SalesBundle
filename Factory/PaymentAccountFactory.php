@@ -3,18 +3,19 @@
 namespace Terramar\Bundle\SalesBundle\Factory;
 
 use Terramar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\CustomerBundle\Model\CustomerInterface;
 use Terramar\Bundle\SalesBundle\Entity\Office;
 use Orkestra\Transactor\Entity\AbstractAccount;
 
 class PaymentAccountFactory implements PaymentAccountFactoryInterface
 {
     /**
-     * @param \Orkestra\Transactor\Entity\AbstractAccount $account
-     * @param \Terramar\Bundle\CustomerBundle\Entity\Customer $customer
+     * @param \Orkestra\Transactor\Entity\AbstractAccount             $account
+     * @param \Terramar\Bundle\CustomerBundle\Model\CustomerInterface $customer
      *
      * @return \Orkestra\Transactor\Entity\AbstractAccount
      */
-    public function buildAccountFromCustomer(AbstractAccount $account, Customer $customer)
+    public function buildAccountFromCustomer(AbstractAccount $account, CustomerInterface $customer)
     {
         $address = $customer->getBillingAddress();
 
@@ -31,7 +32,7 @@ class PaymentAccountFactory implements PaymentAccountFactoryInterface
             $account->setPhoneNumber($address->getPhone());
         }
 
-        $account->setName($customer->__toString());
+        $account->setName(sprintf('%s %s', $customer->getFirstName(), $customer->getLastName()));
 
         return $account;
     }

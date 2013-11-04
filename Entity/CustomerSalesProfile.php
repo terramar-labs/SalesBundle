@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Terramar\Bundle\CustomerBundle\Model\CustomerInterface;
 use Terramar\Bundle\SalesBundle\Model\ContractInterface;
 use Terramar\Bundle\SalesBundle\Model\ContractSalesProfileInterface;
-use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
+use Terramar\Bundle\SalesBundle\Model\CustomerSalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
 use Terramar\Bundle\CustomerBundle\Entity\Customer;
@@ -24,7 +24,7 @@ use Orkestra\Common\Entity\AbstractEntity;
  * @ORM\Table(name="terramar_customer_sales_profiles")
  */
 class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface,
-                                                             SalesProfileInterface,
+                                                             CustomerSalesProfileInterface,
                                                              ContractSalesProfileInterface
 {
     /**

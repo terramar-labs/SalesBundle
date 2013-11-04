@@ -2,7 +2,8 @@
 
 namespace Terramar\Bundle\SalesBundle\Factory;
 
-use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use Orkestra\Bundle\ApplicationBundle\Model\UserInterface;
+use Terramar\Bundle\SalesBundle\Model\CustomerSalesProfileInterface;
 
 /**
  * Defines the contract any CustomerUserFactory must follow
@@ -10,22 +11,22 @@ use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 interface CustomerUserFactoryInterface
 {
     /**
-     * Creates a new CustomerUser entity
+     * Creates a new User for the given CustomerSalesProfile entity
      *
-     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param CustomerSalesProfileInterface $profile
      * @param string|null $password
      *
-     * @return \Terramar\Bundle\SalesBundle\Entity\CustomerUser
+     * @return UserInterface
      */
-    function create(CustomerSalesProfile $profile, $password = null);
+    public function create(CustomerSalesProfileInterface $profile, $password = null);
 
     /**
      * Updates a CustomerUser's email address
      *
-     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param CustomerSalesProfileInterface $profile
      * @param string $email
      *
      * @return void
      */
-    function updateCustomerEmail(CustomerSalesProfile $profile, $email);
+    public function updateCustomerEmail(CustomerSalesProfileInterface $profile, $email);
 }

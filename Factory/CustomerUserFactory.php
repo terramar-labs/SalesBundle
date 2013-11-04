@@ -9,6 +9,7 @@ use Terramar\Bundle\SalesBundle\Factory\CustomerUser\DuplicateEmailException;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
+use Terramar\Bundle\SalesBundle\Model\CustomerSalesProfileInterface;
 
 class CustomerUserFactory implements CustomerUserFactoryInterface
 {
@@ -35,17 +36,16 @@ class CustomerUserFactory implements CustomerUserFactoryInterface
     }
 
     /**
-     * Creates a new CustomerUser entity
+     * Creates a new User assigned to the CustomerSalesProfile entity
      *
-     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
-     * @param string|null $password
+     * @param \Terramar\Bundle\SalesBundle\Model\CustomerSalesProfileInterface $profile
+     * @param string|null                                                                                                               $password
      *
      * @throws \RuntimeException
      * @return \Terramar\Bundle\SalesBundle\Entity\CustomerUser
      */
-    public function create(CustomerSalesProfile $profile, $password = null)
+    public function create(CustomerSalesProfileInterface $profile, $password = null)
     {
-        $office = $profile->getOffice();
         $customer = $profile->getCustomer();
         $customerEmail = $customer->getEmailAddress();
 
@@ -71,9 +71,7 @@ class CustomerUserFactory implements CustomerUserFactoryInterface
         $encoder = $this->encoderFactory->getEncoder($user);
         $user->setPassword($encoder->encodePassword($password, $user->getSalt()));
 
-        $customerUser = new CustomerUser($office, $customer, $user);
-
-        return $customerUser;
+        return $user;
     }
 
     /**
@@ -84,12 +82,12 @@ class CustomerUserFactory implements CustomerUserFactoryInterface
      *
      * @return void
      */
-    public function updateCustomerEmail(CustomerSalesProfile $profile, $email)
+    public function updateCustomerEmail(CustomerSalesProfileInterface $profile, $email)
     {
         $this->checkForDuplicateEmail($email);
 
-        $profile->getUser()->getUser()->setEmail($email);
-        $profile->getUser()->getUser()->setUsername($email);
+        $profile->getUser()->setEmail($email);
+        $profile->getUser()->setUsername($email);
     }
 
     /**

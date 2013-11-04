@@ -3,10 +3,11 @@
 namespace Terramar\Bundle\SalesBundle\Factory;
 
 use Terramar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 use Terramar\Bundle\SalesBundle\Factory\CustomerUserFactoryInterface;
 use Orkestra\Transactor\Entity\Account\SimpleAccount;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
-use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
+use Terramar\Bundle\SalesBundle\Model\CustomerSalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Entity\Office;
 
 class CustomerSalesProfileFactory implements CustomerSalesProfileFactoryInterface
@@ -56,12 +57,12 @@ class CustomerSalesProfileFactory implements CustomerSalesProfileFactoryInterfac
      *
      * This method is called when a new CustomerSalesProfile is created.
      *
-     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile $profile
+     * @param \Terramar\Bundle\SalesBundle\Model\CustomerSalesProfileInterface $profile
      * @param string|null $password
      *
      * @return \Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile
      */
-    public function buildProfile(CustomerSalesProfile $profile, $password = null)
+    public function buildProfile(CustomerSalesProfileInterface $profile, $password = null)
     {
         $pointsAccount = new PointsAccount();
         $pointsAccount->setName('Points');

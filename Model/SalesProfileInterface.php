@@ -2,8 +2,17 @@
 
 namespace Terramar\Bundle\SalesBundle\Model;
 
+use Orkestra\Transactor\Entity\AbstractAccount;
+
 interface SalesProfileInterface extends PersistentModelInterface
 {
+    /**
+     * Add an account to the sales profile
+     *
+     * @param AbstractAccount $account
+     */
+    public function addAccount(AbstractAccount $account);
+
     /**
      * Gets all of a SalesProfile's Transactor accounts
      *

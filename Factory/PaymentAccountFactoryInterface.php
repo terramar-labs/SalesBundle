@@ -3,6 +3,7 @@
 namespace Terramar\Bundle\SalesBundle\Factory;
 
 use Terramar\Bundle\CustomerBundle\Entity\Customer;
+use Terramar\Bundle\CustomerBundle\Model\CustomerInterface;
 use Terramar\Bundle\SalesBundle\Entity\Office;
 use Orkestra\Transactor\Entity\AbstractAccount;
 
@@ -11,12 +12,12 @@ interface PaymentAccountFactoryInterface
     /**
      * Fills an Orkestra Account with personal details of the given Customer
      *
-     * @param \Orkestra\Transactor\Entity\AbstractAccount $account
-     * @param \Terramar\Bundle\CustomerBundle\Entity\Customer $customer
+     * @param \Orkestra\Transactor\Entity\AbstractAccount             $account
+     * @param \Terramar\Bundle\CustomerBundle\Model\CustomerInterface $customer
      *
      * @return \Orkestra\Transactor\Entity\AbstractAccount
      */
-    function buildAccountFromCustomer(AbstractAccount $account, Customer $customer);
+    public function buildAccountFromCustomer(AbstractAccount $account, CustomerInterface $customer);
 
     /**
      * Fills an Orkestra Account with personal details of the given Office
@@ -26,5 +27,5 @@ interface PaymentAccountFactoryInterface
      *
      * @return \Orkestra\Transactor\Entity\AbstractAccount
      */
-    function buildAccountFromOffice(AbstractAccount $account, Office $office);
+    public function buildAccountFromOffice(AbstractAccount $account, Office $office);
 }
