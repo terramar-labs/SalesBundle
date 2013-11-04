@@ -3,6 +3,7 @@
 namespace Terramar\Bundle\SalesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Orkestra\Bundle\ApplicationBundle\Model\UserInterface;
 use Terramar\Bundle\CustomerBundle\Model\CustomerInterface;
 use Terramar\Bundle\SalesBundle\Model\ContractInterface;
 use Terramar\Bundle\SalesBundle\Model\ContractSalesProfileInterface;
@@ -96,10 +97,10 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     protected $alerts;
 
     /**
-     * @var \Terramar\Bundle\SalesBundle\Entity\CustomerUser
+     * @var \Orkestra\Bundle\ApplicationBundle\Model\UserInterface
      *
-     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\CustomerUser", cascade={"persist"})
-     * @ORM\JoinColumn(name="customer_user_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Model\UserInterface", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     protected $user;
 
@@ -197,15 +198,15 @@ class CustomerSalesProfile extends AbstractEntity implements AssignedToInterface
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\CustomerUser $user
+     * @param \Orkestra\Bundle\ApplicationBundle\Model\UserInterface $user
      */
-    public function setUser($user)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
     }
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\CustomerUser
+     * @return \Orkestra\Bundle\ApplicationBundle\Model\UserInterface
      */
     public function getUser()
     {
