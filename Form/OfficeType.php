@@ -15,7 +15,7 @@ class OfficeType extends AbstractType
             ->add('fax', 'tel', array('required' => false))
             ->add('contactName', null, array('label' => 'Contact Name'))
             ->add('contactAddress', new AddressType())
-            ->add('emailAddress', null, array('required' => false))
+            ->add('emailAddress', 'email', array('required' => false))
             ->add('logo', 'file', array('mapped' => false, 'required' => false))
             ->add('parent', 'hidden', array('required' => false));
     }
