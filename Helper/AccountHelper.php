@@ -53,7 +53,7 @@ class AccountHelper
         if ($amount >= 0) {
             throw new \RuntimeException('Amount must be less than 0');
         }
-//        $amount *= -1;
+        $amount *= -1;
         return $this->processCreditTransaction($profile, $amount, TransactionType::SALE);
     }
 
@@ -91,7 +91,7 @@ class AccountHelper
         $transaction = new Transaction();
         $transaction->setAmount($amount);
         $transaction->setNetwork(new NetworkType(NetworkType::POINTS));
-        $transaction->setType(new TransactionType($transactionType));
+        $transaction->setType($transactionType);
         $transaction->setAccount($profile->getPointsAccount());
         $transaction->setCredentials($credentials);
 
