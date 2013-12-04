@@ -35,14 +35,43 @@ class AccountHelper
         $this->repository = $repository;
     }
 
-    public function addCredit(SalesProfileInterface $profile, $amount)
+    public function affectCredit(SalesProfileInterface $profile, $amount)
     {
-        if (!$profile->getPointsAccount()) {
-            throw new \RuntimeException('The given CustomerSalesProfile has no associated PointsAccount');
+        if($amount == 0) {
+            throw new \RuntimeException('Amount must be non zero');
         }
 
+        if($amount > 0){
+            return $this->addCredit($profile,$amount);
+        }
+        else
+            return $this->removeCredit($profile,$amount);
+    }
+
+    public function removeCredit(SalesProfileInterface $profile, $amount)
+    {
+        if ($amount >= 0) {
+            throw new \RuntimeException('Amount must be less than 0');
+        }
+//        $amount *= -1;
+        return $this->processCreditTransaction($profile, $amount, TransactionType::SALE);
+    }
+
+    public function addCredit(SalesProfileInterface $profile, $amount)
+    {
         if ($amount <= 0) {
             throw new \RuntimeException('Amount must be greater than 0');
+        }
+
+        return $this->processCreditTransaction($profile, $amount, TransactionType::CREDIT);
+    }
+
+    public function processCreditTransaction(SalesProfileInterface $profile, $amount, $transactionType)
+    {
+        $transactionType = new TransactionType($transactionType);
+
+        if (!$profile->getPointsAccount()) {
+            throw new \RuntimeException('The given CustomerSalesProfile has no associated PointsAccount');
         }
 
         $configuration = $this->repository->findOneByOffice($profile->getOffice());
@@ -62,7 +91,7 @@ class AccountHelper
         $transaction = new Transaction();
         $transaction->setAmount($amount);
         $transaction->setNetwork(new NetworkType(NetworkType::POINTS));
-        $transaction->setType(new TransactionType(TransactionType::CREDIT));
+        $transaction->setType(new TransactionType($transactionType));
         $transaction->setAccount($profile->getPointsAccount());
         $transaction->setCredentials($credentials);
 
