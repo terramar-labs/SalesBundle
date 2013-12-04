@@ -68,8 +68,6 @@ class AccountHelper
 
     public function processCreditTransaction(SalesProfileInterface $profile, $amount, $transactionType)
     {
-        $transactionType = new TransactionType($transactionType);
-
         if (!$profile->getPointsAccount()) {
             throw new \RuntimeException('The given CustomerSalesProfile has no associated PointsAccount');
         }
@@ -91,7 +89,7 @@ class AccountHelper
         $transaction = new Transaction();
         $transaction->setAmount($amount);
         $transaction->setNetwork(new NetworkType(NetworkType::POINTS));
-        $transaction->setType($transactionType);
+        $transaction->setType(new TransactionType($transactionType));
         $transaction->setAccount($profile->getPointsAccount());
         $transaction->setCredentials($credentials);
 
