@@ -43,9 +43,9 @@ class AccountHelper
 
         if($amount > 0){
             return $this->addCredit($profile,$amount);
-        }
-        else
+        } else {
             return $this->removeCredit($profile,$amount);
+        }
     }
 
     public function removeCredit(SalesProfileInterface $profile, $amount)
@@ -54,6 +54,7 @@ class AccountHelper
             throw new \RuntimeException('Amount must be less than 0');
         }
         $amount *= -1;
+        
         return $this->processCreditTransaction($profile, $amount, TransactionType::SALE);
     }
 
@@ -66,7 +67,7 @@ class AccountHelper
         return $this->processCreditTransaction($profile, $amount, TransactionType::CREDIT);
     }
 
-    public function processCreditTransaction(SalesProfileInterface $profile, $amount, $transactionType)
+    private function processCreditTransaction(SalesProfileInterface $profile, $amount, $transactionType)
     {
         if (!$profile->getPointsAccount()) {
             throw new \RuntimeException('The given CustomerSalesProfile has no associated PointsAccount');
