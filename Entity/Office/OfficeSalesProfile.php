@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 use Terramar\Bundle\SalesBundle\Model\ContractInterface;
 use Terramar\Bundle\SalesBundle\Model\ContractSalesProfileInterface;
-use Terramar\Bundle\SalesBundle\Model\SalesProfileInterface;
+use Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface;
 use Terramar\Bundle\SalesBundle\Entity\Contract;
 use Orkestra\Transactor\Entity\Account\BankAccount;
 use Orkestra\Transactor\Entity\Account\CardAccount;
@@ -23,7 +23,7 @@ use Orkestra\Common\Entity\AbstractEntity;
  * @ORM\Entity
  * @ORM\Table(name="terramar_office_sales_profiles")
  */
-class OfficeSalesProfile extends AbstractEntity implements SalesProfileInterface, ContractSalesProfileInterface
+class OfficeSalesProfile extends AbstractEntity implements OfficeSalesProfileInterface, ContractSalesProfileInterface
 {
     /**
      * @var bool

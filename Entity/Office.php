@@ -10,6 +10,7 @@ use Terramar\Bundle\CustomerBundle\Model\NoteInterface;
 use Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
 use Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
 use Orkestra\Common\Entity\AbstractEntity;
+use Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface;
 
 /**
  * A physical location of a company
@@ -86,9 +87,9 @@ class Office extends AbstractEntity
     protected $configuration;
 
     /**
-     * @var \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     * @var \Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface
      *
-     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile", mappedBy="office", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface", mappedBy="office", cascade={"persist"})
      */
     protected $profile;
 
@@ -273,16 +274,16 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile $profile
+     * @param OfficeSalesProfileInterface $profile
      */
-    public function setProfile(OfficeSalesProfile $profile)
+    public function setProfile(OfficeSalesProfileInterface $profile)
     {
         $profile->setOffice($this);
         $this->profile = $profile;
     }
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     * @return OfficeSalesProfileInterface
      */
     public function getProfile()
     {
