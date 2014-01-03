@@ -5,6 +5,7 @@ namespace Terramar\Bundle\SalesBundle\Factory;
 use Terramar\Bundle\CustomerBundle\Entity\Customer;
 use Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
 use Terramar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface;
 
 /**
  * Defines the contract any OfficeSalesProfileFactory must follow
@@ -16,7 +17,7 @@ interface OfficeSalesProfileFactoryInterface
      *
      * @param \Terramar\Bundle\SalesBundle\Entity\Office $office
      *
-     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     * @return \Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface
      */
     function create(Office $office);
 
@@ -25,9 +26,9 @@ interface OfficeSalesProfileFactoryInterface
      *
      * This method is called when a new OfficeSalesProfile is created.
      *
-     * @param \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile $profile
+     * @param \Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface $profile
      *
-     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     * @return \Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface
      */
-    function buildProfile(OfficeSalesProfile $profile);
+    function buildProfile(OfficeSalesProfileInterface $profile);
 }

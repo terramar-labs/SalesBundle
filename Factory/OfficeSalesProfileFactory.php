@@ -9,6 +9,7 @@ use Orkestra\Transactor\Entity\Account\SimpleAccount;
 use Orkestra\Transactor\Entity\Account\PointsAccount;
 use Terramar\Bundle\SalesBundle\Entity\CustomerSalesProfile;
 use Terramar\Bundle\SalesBundle\Entity\Office;
+use Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface;
 
 class OfficeSalesProfileFactory implements OfficeSalesProfileFactoryInterface
 {
@@ -47,12 +48,11 @@ class OfficeSalesProfileFactory implements OfficeSalesProfileFactoryInterface
      *
      * This method is called when a new OfficeSalesProfile is created.
      *
-     * @param \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile $profile
+     * @param \Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface $profile
      *
-     * @throws \RuntimeException
-     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile
+     * @return \Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface
      */
-    public function buildProfile(OfficeSalesProfile $profile)
+    public function buildProfile(OfficeSalesProfileInterface $profile)
     {
         $office = $profile->getOffice();
         if (!$office) {
@@ -61,7 +61,7 @@ class OfficeSalesProfileFactory implements OfficeSalesProfileFactoryInterface
 
         $pointsAccount = new PointsAccount();
         $pointsAccount->setAlias('Points');
-        $profile->setPointsAccount($pointsAccount);
+        $profile->addAccount($pointsAccount);
 
         $defaultAccount = new SimpleAccount();
         $defaultAccount->setAlias('Cash or check');
