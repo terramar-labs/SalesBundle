@@ -10,6 +10,7 @@ use Terramar\Bundle\CustomerBundle\Model\NoteInterface;
 use Terramar\Bundle\SalesBundle\Entity\Office\OfficeSalesProfile;
 use Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration;
 use Orkestra\Common\Entity\AbstractEntity;
+use Terramar\Bundle\SalesBundle\Model\Office\OfficeConfigurationInterface;
 use Terramar\Bundle\SalesBundle\Model\OfficeSalesProfileInterface;
 
 /**
@@ -257,16 +258,16 @@ class Office extends AbstractEntity
     }
 
     /**
-     * @param \Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration $configuration
+     * @param \Terramar\Bundle\SalesBundle\Model\Office\OfficeConfigurationInterface $configuration
      */
-    public function setConfiguration(OfficeConfiguration $configuration)
+    public function setConfiguration(OfficeConfigurationInterface $configuration)
     {
         $configuration->setOffice($this);
         $this->configuration = $configuration;
     }
 
     /**
-     * @return \Terramar\Bundle\SalesBundle\Entity\Office\OfficeConfiguration
+     * @return \Terramar\Bundle\SalesBundle\Model\Office\OfficeConfigurationInterface
      */
     public function getConfiguration()
     {
