@@ -38,6 +38,8 @@ class InitialOfficeData extends AbstractFixture implements OrderedFixtureInterfa
         $office->setName('Default Company');
         $office->setContactName('Technical Support');
 
+        $this->setReference('default-office', $office);
+        
         $address = new Address();
         $address->setPhone('(555) 555-1234');
         $address->setStreet('55 Main St');
