@@ -128,4 +128,26 @@ abstract class AbstractController extends Controller
 
         return $preso;
     }
+
+    /**
+     * Locates an entity by its id, or throws a 404 if not found
+     * 
+     * @param string $className
+     * @param int $id
+     *
+     * @return object
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    protected function getEntityOr404($className, $id)
+    {
+        $entity = $this->getRepository($className)->find($id);
+        
+        if (!$entity) {
+            $entityName = end(explode(':', end(explode('\\', $className))));
+            
+            throw $this->createNotFoundException(sprintf('Unable to locate %s', $entityName));
+        }
+        
+        return $entity;
+    }
 }
