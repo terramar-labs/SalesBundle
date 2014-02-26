@@ -69,7 +69,7 @@ class FileHelper
         return $this->generateFilename($file->getExtension() ?: ($file->guessExtension() ?: 'file'));
     }
 
-    private function generateFilename($extension)
+    public function generateFilename($extension)
     {
         return md5(uniqid(uniqid(), true)) . '.' . $extension;
     }
