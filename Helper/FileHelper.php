@@ -63,7 +63,7 @@ class FileHelper
      *
      * @return string
      */
-    private function generateUploadFilename(UploadedFile $file)
+    public function generateUploadFilename(UploadedFile $file)
     {
         return $this->generateFilename($file->getExtension() ?: ($file->guessExtension() ?: 'file'));
     }
