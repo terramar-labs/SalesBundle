@@ -2,8 +2,9 @@
 
 namespace Terramar\Bundle\SalesBundle\Helper;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Orkestra\Bundle\ApplicationBundle\Entity\File as OrkestraFile;
 use Terramar\Bundle\SalesBundle\Model\ContractInterface;
-use Orkestra\Bundle\ApplicationBundle\Entity\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Terramar\Bundle\SalesBundle\Entity\Invoice;
 use Terramar\Bundle\CustomerBundle\Entity\Customer;
@@ -53,7 +54,7 @@ class FileHelper
             $path = $this->internalPath;
         }
 
-        return File::createFromUploadedFile($file, $path, $this->generateUploadFilename($file));
+        return OrkestraFile::createFromUploadedFile($file, $path, $this->generateUploadFilename($file));
     }
 
     /**
@@ -63,7 +64,7 @@ class FileHelper
      *
      * @return string
      */
-    public function generateUploadFilename(UploadedFile $file)
+    public function generateUploadFilename(File $file)
     {
         return $this->generateFilename($file->getExtension() ?: ($file->guessExtension() ?: 'file'));
     }
