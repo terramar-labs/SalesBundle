@@ -3,12 +3,13 @@
 namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Orkestra\Bundle\ApplicationBundle\Model\UserInterface;
 use Terramar\Bundle\SalesBundle\Entity\Office;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
 
 class OfficeRepository extends EntityRepository
 {
-    public function findOfficeByUser(User $user)
+    public function findOfficeByUser(UserInterface $user)
     {
         $qb = $this->_em->createQueryBuilder()
             ->select('ou')

@@ -26,8 +26,12 @@ class OfficeSelectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $roles = $this->user->getUser()->getRoles();
-        $roles = array_map(function (Group $group) {
-            return $group->getRole();
+        $roles = array_map(function ($group) {
+            if ($group instanceof Group) {
+                return $group->getRole();
+            } else {
+                return $group;
+            }
         }, $roles);
         $office = $this->user->getOffice();
 
