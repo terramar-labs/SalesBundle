@@ -15,15 +15,15 @@ class OfficeType extends AbstractType
             ->add('fax', 'tel', array('required' => false))
             ->add('contactName', null, array('label' => 'Contact Name'))
             ->add('contactAddress', new AddressType())
-            ->add('emailAddress', 'email', array('required' => false))
+            ->add('emailAddress', 'email', array('required' => true))
             ->add('logo', 'file', array('mapped' => false, 'required' => false))
-            ->add('parent', 'hidden', array('required' => false));
+            ->add('parent', 'entity', array('class' => 'TerramarSalesBundle:Office','required' => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Terramar\Bundle\SalesBundle\Entity\Office'
+            'data_class' => 'Terramar\Bundle\SalesBundle\Entity\Office',
         ));
     }
 
