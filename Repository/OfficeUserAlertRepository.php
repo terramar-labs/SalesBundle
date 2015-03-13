@@ -9,6 +9,22 @@ use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
 
 class OfficeUserAlertRepository extends EntityRepository
 {
+    public function findOneByIdAndAssignedTo($id, OfficeUser $assignedTo)
+    {
+        $qb = $this->_em->createQueryBuilder()
+                        ->select('oua, a')
+                        ->from('Terramar\Bundle\SalesBundle\Entity\Alert\OfficeUserAlert', 'oua')
+                        ->join('oua.alert', 'a')
+                        ->where('oua.assignedTo = :assignedTo')
+                        ->andWhere('oua.id = :id')
+                        ->setParameters(array(
+                            'assignedTo' => $assignedTo,
+                            'id' => $id,
+                        ));
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function findToDosByAssignedTo(OfficeUser $assignedTo)
     {
         $qb = $this->_em->createQueryBuilder()
