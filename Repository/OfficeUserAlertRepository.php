@@ -3,9 +3,9 @@
 namespace Terramar\Bundle\SalesBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertType;
 use Terramar\Bundle\SalesBundle\Entity\OfficeUser;
+use Terramar\Bundle\SalesBundle\Model\Alert\AlertStatus;
+use Terramar\Bundle\SalesBundle\Model\Alert\AlertType;
 
 class OfficeUserAlertRepository extends EntityRepository
 {
