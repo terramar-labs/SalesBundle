@@ -4,7 +4,6 @@ namespace Terramar\Bundle\SalesBundle\Controller\OfficeUser;
 
 use Symfony\Component\HttpFoundation\Request;
 use Terramar\Bundle\SalesBundle\Http\JsonReloadResponse;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
 use Terramar\Bundle\SalesBundle\Form\OfficeUser\ToDoType;
 use Terramar\Bundle\SalesBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Terramar\Bundle\SalesBundle\Model\Alert\AlertStatus;
 
 
 /**
