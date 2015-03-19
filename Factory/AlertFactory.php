@@ -4,10 +4,10 @@ namespace Terramar\Bundle\SalesBundle\Factory;
 
 use Terramar\Bundle\SalesBundle\Factory\AlertFactoryInterface;
 use Terramar\Bundle\SalesBundle\Factory\AssignedAlert\AssignedAlertFactoryInterface;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertType;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertStatus;
+use Terramar\Bundle\SalesBundle\Model\Alert\AlertType;
+use Terramar\Bundle\SalesBundle\Model\Alert\AlertStatus;
 use Terramar\Bundle\SalesBundle\Entity\Alert;
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
+use Terramar\Bundle\SalesBundle\Model\Alert\AlertPriority;
 use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 

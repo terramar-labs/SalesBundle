@@ -2,7 +2,7 @@
 
 namespace Terramar\Bundle\SalesBundle\Factory;
 
-use Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority;
+use Terramar\Bundle\SalesBundle\Model\Alert\AlertPriority;
 use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 
@@ -13,7 +13,7 @@ interface AlertFactoryInterface
      * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
      * @param string $name
      * @param string $description
-     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Model\Alert\AlertPriority $priority
      *
      * @return \Terramar\Bundle\SalesBundle\Model\AssignedAlertInterface
      */
@@ -24,7 +24,7 @@ interface AlertFactoryInterface
      * @param \Terramar\Bundle\SalesBundle\Model\AssignedToInterface $assignedTo
      * @param string $name
      * @param string $description
-     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Model\Alert\AlertPriority $priority
      * @param \DateTime $dateDue
      *
      * @return \Terramar\Bundle\SalesBundle\Model\AssignedAlertInterface
@@ -34,7 +34,7 @@ interface AlertFactoryInterface
     /**
      * @param string $name
      * @param string $description
-     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Model\Alert\AlertPriority $priority
      *
      * @return \Terramar\Bundle\SalesBundle\Entity\Alert
      */
@@ -43,7 +43,7 @@ interface AlertFactoryInterface
     /**
      * @param string $name
      * @param string $description
-     * @param \Terramar\Bundle\SalesBundle\Entity\Alert\AlertPriority $priority
+     * @param \Terramar\Bundle\SalesBundle\Model\Alert\AlertPriority $priority
      * @param \DateTime $dateDue
      *
      * @return \Terramar\Bundle\SalesBundle\Entity\Alert
