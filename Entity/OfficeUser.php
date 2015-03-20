@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Orkestra\Bundle\ApplicationBundle\Model\UserInterface;
 use Terramar\Bundle\CustomerBundle\Entity\Note;
 use Doctrine\Common\Collections\ArrayCollection;
+use Terramar\Bundle\SalesBundle\Entity\OfficeUser\OfficeUserProfile;
 use Terramar\Bundle\SalesBundle\Model\AssignedToInterface;
 use Terramar\Bundle\SalesBundle\Model\AssignedByInterface;
 use Orkestra\Bundle\ApplicationBundle\Entity\User;
@@ -52,6 +53,14 @@ class OfficeUser extends AbstractEntity implements AssignedByInterface, Assigned
      * )
      */
     protected $notes;
+
+    /**
+     * @var \Terramar\Bundle\SalesBundle\Entity\OfficeUser\OfficeUserProfile
+     *
+     * @ORM\ManyToOne(targetEntity="Terramar\Bundle\SalesBundle\Entity\OfficeUser\OfficeUserProfile", inversedBy="officeUsers", cascade={"persist"})
+     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
+     */
+    protected $profile;
 
     /**
      * @param Office $office
@@ -128,4 +137,21 @@ class OfficeUser extends AbstractEntity implements AssignedByInterface, Assigned
     {
         return $this->notes;
     }
+
+    /**
+     * @return OfficeUserProfile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * @param OfficeUserProfile $profile
+     */
+    public function setProfile(OfficeUserProfile $profile)
+    {
+        $this->profile = $profile;
+    }
+
 }
