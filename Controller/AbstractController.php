@@ -10,9 +10,17 @@ use Terramar\Bundle\SalesBundle\Entity\Office;
 abstract class AbstractController extends Controller
 {
     const CURRENT_OFFICE_KEY = '__currentOfficeKey';
+    const CURRENT_OFFICE_USER_KEY = '__current_office_user_id';
 
+
+    /**
+     * @var \Terramar\Bundle\SalesBundle\Entity\Office
+     */
     private $currentOffice;
 
+    /**
+     * @var \Terramar\Bundle\SalesBundle\Entity\OfficeUser
+     */
     private $currentUser;
 
     /**
@@ -24,6 +32,7 @@ abstract class AbstractController extends Controller
     {
         $session = $this->getSession();
         $session->set(self::CURRENT_OFFICE_KEY, $office->getId());
+        $session->remove(self::CURRENT_OFFICE_USER_KEY);
         $this->currentOffice = null;
     }
 
@@ -42,13 +51,7 @@ abstract class AbstractController extends Controller
         if ($this->getSession()->has(self::CURRENT_OFFICE_KEY)) {
             $this->currentOffice = $this->getDoctrine()->getManager()->find('TerramarSalesBundle:Office', $this->getSession()->get(self::CURRENT_OFFICE_KEY));
         } else {
-            $user = $this->getUser();
-
-            if ($user) {
-                $officeRepository = $this->get('terramar.sales.repository.office');
-
-                $this->currentOffice = $officeRepository->findOfficeByUser($user);
-            }
+            $this->currentOffice = $this->getCurrentOfficeUser()->getOffice();
         }
 
         if (!$this->currentOffice) {
@@ -69,17 +72,32 @@ abstract class AbstractController extends Controller
             return $this->currentUser;
         }
 
-        $user = $this->getUser();
+        if ($this->getSession()->has(self::CURRENT_OFFICE_USER_KEY)) {
+            $this->currentUser = $this->getDoctrine()->getManager()->find('TerramarSalesBundle:OfficeUser', $this->getSession()->get(self::CURRENT_OFFICE_USER_KEY));
+        } else {
+            $currentUser = $this->getCurrentOfficeUserProfile()->getDefaultOfficeUser();
+            if (!$this->container->get('security.context')->isGranted('ROLE_ADMIN')
+                && $this->container->get('session')->has(self::CURRENT_OFFICE_KEY)
+            ) {
+                $currentOffice = $this->getCurrentOffice();
 
-        if (!$user) {
-            return null;
+                if (!$currentUser->getOffice() !== $currentOffice) {
+                    $otherUsers = $currentUser->getProfile()->getOfficeUsers();
+                    $currentUser = null;
+                    foreach ($otherUsers as $officeUser) {
+                        if ($officeUser->getOffice() === $currentOffice) {
+                            $currentUser = $officeUser;
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $this->currentUser = $currentUser;
         }
 
-        $userRepository = $this->getDoctrine()->getManager()->getRepository('TerramarSalesBundle:OfficeUser');
-
-        $this->currentUser = $userRepository->findOneBy(array('user' => $user->getId()));
-
-        if (!$this->currentUser) {
+        if (!$this->currentUser || !$this->currentUser->isActive()) {
             throw new \RuntimeException('This action requires that the current user be assigned to a company');
         }
 
@@ -97,6 +115,33 @@ abstract class AbstractController extends Controller
         if (!$this->getCurrentOffice()) {
             throw new \RuntimeException('This action requires that the current user be assigned to a company');
         }
+    }
+
+    /**
+     * Gets the current Office User Profile
+     *
+     * @throws \RuntimeException                                                         if unable to locate an office user entity
+     * @return \Terramar\Bundle\SalesBundle\Entity\OfficeUser\OfficeUserProfile
+     */
+    public function getCurrentOfficeUserProfile()
+    {
+        if (! ($token = $this->container->get('security.context')->getToken())) {
+            throw new \RuntimeException('User is not logged in');
+        }
+
+        $profile = $this->getDoctrine()->getManager()
+                                   ->getRepository('TerramarSalesBundle:OfficeUser\OfficeUserProfile')
+                                   ->createQueryBuilder('oup')
+                                   ->where('oup.user = :user')
+                                   ->setParameter('user', $token->getUser())
+                                   ->getQuery()
+                                   ->getOneOrNullResult();
+
+        if (!$profile) {
+            throw new \RuntimeException('Unable to locate office user profile');
+        }
+
+        return $profile;
     }
 
     /**

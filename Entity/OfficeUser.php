@@ -31,7 +31,7 @@ class OfficeUser extends AbstractEntity implements AssignedByInterface, Assigned
     /**
      * @var \Orkestra\Bundle\ApplicationBundle\Model\UserInterface
      *
-     * @ORM\OneToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Model\UserInterface", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Orkestra\Bundle\ApplicationBundle\Model\UserInterface", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
