@@ -188,8 +188,13 @@ abstract class AbstractController extends Controller
         $entity = $this->getRepository($className)->find($id);
         
         if (!$entity) {
-            $entityName = end(explode(':', end(explode('\\', $className))));
-            
+            $delims = array('\\', ':');
+            $entityName = $className;
+            foreach ($delims as $delim) {
+                $entityName = explode($delim,$entityName);
+                $entityName = end($entityName);
+            }
+
             throw $this->createNotFoundException(sprintf('Unable to locate %s', $entityName));
         }
         
